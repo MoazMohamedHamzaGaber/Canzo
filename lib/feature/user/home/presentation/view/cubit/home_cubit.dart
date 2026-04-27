@@ -28,4 +28,9 @@ class HomeCubit extends Cubit<HomeState> {
       state.copyWith(selectedMaterialType: value),
     );
   }
+  void changeSelectedActive(value) {
+    emit(
+      state.copyWith(selectedActiveType: value),
+    );
+  }
 }

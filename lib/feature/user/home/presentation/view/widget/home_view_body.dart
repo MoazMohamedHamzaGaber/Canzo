@@ -1,5 +1,6 @@
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/active_requests.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/baskets_section.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/custom_card_home.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/pickup_request.dart';
@@ -30,6 +31,8 @@ class HomeViewBody extends StatelessWidget {
               QuickStatsSection(),
               sizeBox(),
               BasketsSection(),
+              sizeBox(),
+              ActiveRequests(),
               sizeBox(),
             ],
           ),
