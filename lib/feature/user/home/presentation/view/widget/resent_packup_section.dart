@@ -1,7 +1,6 @@
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/core/widget/build_item_card.dart';
-import 'package:canzo_app/feature/user/home/presentation/view/widget/build_item_baskets.dart';
 import 'package:flutter/material.dart';
 
 class ResentPickupSection extends StatelessWidget {
