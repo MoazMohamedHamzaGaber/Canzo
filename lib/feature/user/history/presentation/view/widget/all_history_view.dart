@@ -1,3 +1,5 @@
+import 'package:canzo_app/core/utils/const.dart';
+import 'package:canzo_app/feature/user/history/presentation/view/widget/build_item_history.dart';
 import 'package:flutter/material.dart';
 
 class AllHistoryView extends StatelessWidget {
@@ -5,10 +7,10 @@ class AllHistoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text('All'),
-      ],
+    return ListView.separated(
+      itemBuilder: (context,index)=>BuildItemHistory(),
+      separatorBuilder: (context,index)=>sizeBox(),
+      itemCount: 20,
     );
   }
 }

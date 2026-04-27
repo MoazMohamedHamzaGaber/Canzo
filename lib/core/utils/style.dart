@@ -34,6 +34,11 @@ class StyleText
   fontWeight: FontWeight.bold,
     color: AppColors.green,
   );
+  static TextStyle style19 = TextStyle(
+  fontSize: 19,
+  fontWeight: FontWeight.bold,
+    color: AppColors.green,
+  );
   static TextStyle style18=const TextStyle(
   fontSize: 16,
   );
