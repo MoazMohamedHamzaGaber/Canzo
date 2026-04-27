@@ -18,7 +18,7 @@ class QuickStatsSection extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        sizeBox(),
+        sizeBox(height: 10),
         Row(
           children: [
             buildContainer('TOTALS', 4,'pickups'),
