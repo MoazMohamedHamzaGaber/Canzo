@@ -22,4 +22,10 @@ class HomeCubit extends Cubit<HomeState> {
     const WalletView(),
     const Text('profile'),
   ];
+
+  void changeSelectedMaterial(value) {
+    emit(
+      state.copyWith(selectedMaterialType: value),
+    );
+  }
 }
