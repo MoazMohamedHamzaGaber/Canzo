@@ -13,7 +13,7 @@ class Style
       cardColor: isDark?const Color.fromARGB(255, 13, 6, 37):AppColors.lightCardColor,
       appBarTheme: AppBarTheme(
         elevation: 0,
-        color: isDark?AppColors.darkScaffoldColor:AppColors.lightScaffoldColor,
+        backgroundColor: isDark?AppColors.darkScaffoldColor:AppColors.lightScaffoldColor,
         titleTextStyle: TextStyle(
           color: isDark?AppColors.lightScaffoldColor:AppColors.darkScaffoldColor,
         ),
@@ -29,11 +29,21 @@ class StyleText
   fontWeight: FontWeight.bold,
     color: color,
   );
+  static TextStyle style26 = TextStyle(
+  fontSize: 26,
+  fontWeight: FontWeight.bold,
+    color: AppColors.green,
+  );
   static TextStyle style18=const TextStyle(
   fontSize: 16,
   );
   static TextStyle style16= const TextStyle(
     fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: Colors.grey,
+  );
+  static TextStyle style13= const TextStyle(
+    fontSize: 13,
     fontWeight: FontWeight.normal,
     color: Colors.grey,
   );

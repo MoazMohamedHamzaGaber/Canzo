@@ -1,3 +1,4 @@
+import 'package:canzo_app/feature/user/history/presentation/view/history_view.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +17,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   List<Widget>screens=[
     const HomeView(),
-    const Text('History'),
+    const HistoryView(),
     const Text('Wallet'),
     const Text('profile'),
   ];

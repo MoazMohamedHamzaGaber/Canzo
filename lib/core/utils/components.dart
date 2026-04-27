@@ -1,42 +1,31 @@
+import 'package:canzo_app/core/utils/color.dart';
+import 'package:canzo_app/core/utils/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 AppBar appBar({
   context,
-  String? text,
-  IconData? iconData,
-  bool centerTitle = false,
-  required Function function,
+  required String text,
+  required String body,
 }) =>
     AppBar(
-      centerTitle: centerTitle,
-      // leading: IconButton(
-      //   onPressed: () {
-      //     function();
-      //   },
-      //   icon: Icon(
-      //     IconlyLight.arrowLeft2,
-      //     color:
-      //         DashboardCubit.get(context).isDark ? Colors.white : Colors.black,
-      //   ),
-      // ),
-      title: Text(
-        text!,
-        textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 20.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: Icon(
-            iconData,
-            color: Colors.red,
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            text,
+            textAlign: TextAlign.center,
+            style: StyleText.style20(
+              color: AppColors.green,
+            ),
           ),
-        ),
-      ],
+          Text(
+            body,
+            textAlign: TextAlign.center,
+            style: StyleText.style16,
+          ),
+        ],
+      ),
     );
 
 Widget buildTextField({
