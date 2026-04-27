@@ -2,6 +2,7 @@ import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'feature/authentication/presentation/view/login_view.dart';
+import 'feature/user/home/presentation/view/cubit/home_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthCubit(),)
+        BlocProvider(create: (context) => AuthCubit(),),
+        BlocProvider(create: (context) => HomeCubit(),),
       ],
       child: MaterialApp(
         title: 'Canzo',

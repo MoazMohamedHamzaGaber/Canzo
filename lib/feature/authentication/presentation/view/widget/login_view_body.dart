@@ -1,5 +1,6 @@
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/color.dart';
@@ -55,7 +56,9 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           sizeBox(),
           buildMaterialButton(
             text: 'Sign in',
-            function: () {},
+            function: () {
+              navigateTo(context, BottomNavBar());
+            },
             color: AppColors.green,
           ),
         ],

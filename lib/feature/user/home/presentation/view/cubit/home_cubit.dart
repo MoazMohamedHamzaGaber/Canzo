@@ -1,0 +1,23 @@
+import 'package:canzo_app/feature/user/home/presentation/view/home_view.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'home_state.dart';
+
+class HomeCubit extends Cubit<HomeState> {
+  HomeCubit() : super(const HomeState());
+
+  void changeCurrentIndex(index)
+  {
+    emit(
+      state.copyWith(currentIndex: index),
+    );
+  }
+
+  List<Widget>screens=[
+    const HomeView(),
+    const Text('History'),
+    const Text('Wallet'),
+    const Text('profile'),
+  ];
+}
