@@ -5,6 +5,7 @@ import 'package:canzo_app/feature/user/home/presentation/view/widget/baskets_sec
 import 'package:canzo_app/feature/user/home/presentation/view/widget/custom_card_home.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/pickup_request.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/quick_stats_section.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/resent_packup_section.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -34,6 +35,7 @@ class HomeViewBody extends StatelessWidget {
               sizeBox(),
               ActiveRequests(),
               sizeBox(),
+              ResentPickupSection(),
             ],
           ),
         ),

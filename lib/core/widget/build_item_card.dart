@@ -2,9 +2,9 @@ import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:flutter/material.dart';
 
-class BuildItemHistory extends StatelessWidget {
-  const BuildItemHistory({super.key});
-
+class BuildItemCard extends StatelessWidget {
+  const BuildItemCard({super.key, this.body = true});
+  final bool? body;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,8 +34,10 @@ class BuildItemHistory extends StatelessWidget {
                   Text('Haram, Giza',
                     style: StyleText.style13,
                   ),
-                  Text('27 Api 2026 - 07:09',
-                    style: StyleText.style13,),
+                  if(body ==true)
+                    Text('27 Api 2026 - 07:09',
+                      style: StyleText.style13,),
+
                 ],
               ),
               Spacer(),
@@ -53,7 +55,7 @@ class BuildItemHistory extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.black45),
                     ),
-                    child: Text('Preparing',
+                    child: Text('Completed',
                       style: StyleText.style13.copyWith(
                           color: AppColors.green,
                           fontWeight: FontWeight.bold
