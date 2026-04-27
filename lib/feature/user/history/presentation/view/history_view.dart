@@ -1,4 +1,4 @@
-import 'package:canzo_app/feature/user/history/presentation/view/widget/history_view_body.dart' show HistoryViewBody;
+import 'package:canzo_app/feature/user/history/presentation/view/widget/history_view_body.dart';
 import 'package:flutter/material.dart';
 
 class HistoryView extends StatelessWidget {
