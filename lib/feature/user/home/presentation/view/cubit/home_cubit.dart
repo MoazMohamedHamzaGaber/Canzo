@@ -1,3 +1,4 @@
+import 'package:canzo_app/feature/profile/presentation/view/profile_view.dart';
 import 'package:canzo_app/feature/user/history/presentation/view/history_view.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/home_view.dart';
 import 'package:canzo_app/feature/user/wallet/presentation/view/wallet_view.dart';
@@ -20,7 +21,7 @@ class HomeCubit extends Cubit<HomeState> {
     const HomeView(),
     const HistoryView(),
     const WalletView(),
-    const Text('profile'),
+    const ProfileView(),
   ];
 
   void changeSelectedMaterial(value) {
