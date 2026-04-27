@@ -4,6 +4,7 @@ import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/custom_text_field.dart';
+import 'package:canzo_app/feature/authentication/presentation/view/widget/register_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -87,20 +88,5 @@ class _RegisterViewState extends State<RegisterView> {
         );
       },
     );
-  }
-}
-
-String getActivityLabel(String type) {
-  switch (type) {
-    case 'مطعم':
-      return 'اسم المطعم';
-    case 'كافية':
-      return 'اسم الكافيه';
-    case 'قاعة افراح':
-      return 'اسم قاعة الافراح';
-    case 'نادي':
-      return 'اسم النادي';
-    default:
-      return 'اسم النشاط';
   }
 }

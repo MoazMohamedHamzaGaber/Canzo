@@ -99,3 +99,18 @@ Widget buildMaterialButton({
         ),
       ),
     );
+
+String getActivityLabel(String type) {
+  switch (type) {
+    case 'مطعم':
+      return 'اسم المطعم';
+    case 'كافية':
+      return 'اسم الكافيه';
+    case 'قاعة افراح':
+      return 'اسم قاعة الافراح';
+    case 'نادي':
+      return 'اسم النادي';
+    default:
+      return 'اسم النشاط';
+  }
+}
