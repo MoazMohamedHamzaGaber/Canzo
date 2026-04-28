@@ -1,7 +1,7 @@
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/style.dart';
-import 'package:canzo_app/feature/user/home/presentation/view/cubit/home_cubit.dart';
-import 'package:canzo_app/feature/user/home/presentation/view/cubit/home_state.dart';
+import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
+import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
