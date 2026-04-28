@@ -1,4 +1,5 @@
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:canzo_app/feature/authentication/presentation/view/widget/role_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'feature/authentication/presentation/view/login_view.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Canzo',
         debugShowCheckedModeBanner: false,
-        home: const LoginView(),
+        home: const SelectRoleView(),
       ),
     );
   }
