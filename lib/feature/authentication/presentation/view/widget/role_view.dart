@@ -1,6 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/login_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,16 +12,16 @@ class SelectRoleView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Select Role")),
+      appBar: AppBar(title:  Text(AppStrings.selectRole.tr())),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildButton(context, "User", AppRole.user),
-              _buildButton(context, "Admin", AppRole.admin),
-              _buildButton(context, "Delivery", AppRole.delivery),
+              _buildButton(context, AppStrings.user.tr(), AppRole.user),
+              _buildButton(context, AppStrings.admin.tr(), AppRole.admin),
+              _buildButton(context, AppStrings.delivery.tr(), AppRole.delivery),
             ],
           ),
         ),

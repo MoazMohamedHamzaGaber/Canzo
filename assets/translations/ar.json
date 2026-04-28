@@ -1,0 +1,13 @@
+{
+  "login": "تسجيل الدخول",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "change_language": "اللغة",
+  "preferences": "التفضيلات",
+  "settings": "الإعدادات",
+  "account_preferences": "الحساب والتفضيلات",
+  "user": "مستخدم",
+  "admin": "ادمن",
+  "delivery": "مندوب",
+  "select_role": "اختر الدور"
+}

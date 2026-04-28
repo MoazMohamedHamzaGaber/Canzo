@@ -1,0 +1,13 @@
+{
+  "login": "Login",
+  "email": "Email",
+  "password": "Password",
+  "change_language": "Language",
+  "preferences": "PREFERENCES",
+  "settings": "Settings",
+  "account_preferences": "Account & Preferences",
+  "user": "USER",
+  "admin": "ADMIN",
+  "delivery": "DELIVERY",
+  "select_role": "Select Role"
+}

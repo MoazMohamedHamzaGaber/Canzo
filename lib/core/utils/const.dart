@@ -24,3 +24,5 @@ Widget sizeBox({double? height,double? width})=>SizedBox(
   width: width ?? 20,
 );
 
+String lang = 'en';
+

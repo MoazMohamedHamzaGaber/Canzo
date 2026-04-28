@@ -1,7 +1,9 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
 import 'package:canzo_app/feature/profile/presentation/view/widget/build_card_profile_info.dart';
 import 'package:canzo_app/feature/profile/presentation/view/widget/prefernces_section.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ProfileViewBody extends StatelessWidget {
@@ -9,6 +11,7 @@ class ProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.locale;
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -17,8 +20,8 @@ class ProfileViewBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppBar(
-                title: 'Settings',
-                body: 'Account & Preferences',
+                title: AppStrings.settings.tr(),
+                body: AppStrings.accountPreferences.tr(),
               ),
               sizeBox(),
               BuildCardProfileInfo(),
