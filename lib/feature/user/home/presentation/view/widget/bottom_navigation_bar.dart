@@ -1,10 +1,9 @@
 import 'package:canzo_app/core/config/role_config.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
+import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
+import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../cubit/home_cubit.dart';
-import '../cubit/home_state.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
