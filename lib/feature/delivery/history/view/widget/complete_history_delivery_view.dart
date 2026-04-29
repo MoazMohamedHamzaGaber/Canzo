@@ -4,16 +4,17 @@ import 'package:canzo_app/core/widget/build_item_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class BiddingHistoryView extends StatelessWidget {
-  const BiddingHistoryView({super.key});
+class CompleteHistoryDeliveryView extends StatelessWidget {
+  const CompleteHistoryDeliveryView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder: (context, index) => BuildItemCard(
-        title: '3 packages - plastic',
-        subtitle: 'Haram, Giza',
-        state: AppStrings.bidding.tr(),
+        title: 'Moaz Mohamed',
+        subtitle: '3pk - plastic',
+        state: AppStrings.complete.tr(),
+        image: false,
       ),
       separatorBuilder: (context,index)=>sizeBox(),
       itemCount: 20,

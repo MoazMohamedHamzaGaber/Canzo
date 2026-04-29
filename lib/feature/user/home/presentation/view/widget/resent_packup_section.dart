@@ -24,7 +24,12 @@ class ResentPickupSection extends StatelessWidget {
         ListView.separated(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context,index)=>BuildItemCard(body: false,),
+          itemBuilder: (context, index) => BuildItemCard(
+            title: '3 packages - plastic',
+            subtitle: 'Haram, Giza',
+            state: AppStrings.completed.tr(),
+            body: false,
+          ),
           separatorBuilder: (context,index)=>sizeBox(),
           itemCount: 2,
         ),

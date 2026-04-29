@@ -1,4 +1,5 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
+import 'package:canzo_app/feature/delivery/history/view/history_delivery_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
@@ -31,7 +32,7 @@ class RoleConfig {
       case AppRole.delivery:
         return const [
           Center(child: Text("Pickups")),
-          Center(child: Text("History")),
+          HistoryDeliveryView(),
           ProfileView(),
         ];
     }

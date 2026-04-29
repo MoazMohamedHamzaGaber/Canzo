@@ -1,0 +1,62 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
+import 'package:canzo_app/core/utils/color.dart';
+import 'package:canzo_app/core/utils/style.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+
+
+class TabBarItemHistoryDelivery extends StatefulWidget {
+  const TabBarItemHistoryDelivery({super.key});
+
+  @override
+  State<TabBarItemHistoryDelivery> createState() => _TabBarItemHistoryDeliveryState();
+}
+
+class _TabBarItemHistoryDeliveryState extends State<TabBarItemHistoryDelivery> {
+  @override
+  Widget build(BuildContext context) {
+    final controller = DefaultTabController.of(context);
+
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, _) {
+        return TabBar(
+          isScrollable: true,
+          indicatorColor: Colors.transparent,
+          dividerColor: Colors.transparent,
+          tabAlignment: TabAlignment.start,
+          labelPadding: const EdgeInsets.symmetric(horizontal: 5),
+          tabs: [
+            _buildTab(AppStrings.all.tr(), 0, controller),
+            _buildTab(AppStrings.inProgress.tr(), 1, controller),
+            _buildTab(AppStrings.complete.tr(), 2, controller),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildTab(String text, int index, TabController controller) {
+    final isSelected = controller.index == index;
+
+    return Tab(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: isSelected ? AppColors.green : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
+          border: isSelected
+              ? null
+              : Border.all(),
+        ),
+        child: Text(
+          text,
+          style: StyleText.style13.copyWith(
+            color: isSelected ? Colors.white : Colors.black54,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+}
