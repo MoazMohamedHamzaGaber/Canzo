@@ -1,5 +1,7 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BuildItemCard extends StatelessWidget {
@@ -55,7 +57,7 @@ class BuildItemCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.black45),
                     ),
-                    child: Text('Completed',
+                    child: Text(AppStrings.completed.tr(),
                       style: StyleText.style13.copyWith(
                           color: AppColors.green,
                           fontWeight: FontWeight.bold
@@ -63,7 +65,7 @@ class BuildItemCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10,),
-                  Text('EGP 300',
+                  Text('${AppStrings.egp.tr()} 300',
                     style: StyleText.style19,
                   ),
                 ],

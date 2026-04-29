@@ -1,12 +1,15 @@
 class AppStrings {
+  // Profile
   static const changeLanguage = "change_language";
   static const preferences = "preferences";
   static const settings = "settings";
   static const accountPreferences = "account_preferences";
 
+  // Authentication
   static const user = "user";
   static const admin = "admin";
   static const delivery = "delivery";
+
 
   static const selectRole = "select_role";
   static const canzo = "canzo";
@@ -48,4 +51,13 @@ class AppStrings {
   static const overview = "overview";
   static const analytics = "analytics";
   static const pickups = "pickups";
+
+  // History
+  static const allPickup = "all_pickup";
+  static const all = "all";
+  static const bidding = "bidding";
+  static const inProgress = "in_progress";
+  static const complete = "complete";
+  static const completed = "completed";
+  static const egp = "egp";
 }

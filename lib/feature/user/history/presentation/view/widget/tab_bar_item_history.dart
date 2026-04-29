@@ -1,4 +1,6 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../core/utils/style.dart';
@@ -25,10 +27,10 @@ class _TabBarItemHistoryState extends State<TabBarItemHistory> {
           tabAlignment: TabAlignment.start,
           labelPadding: const EdgeInsets.symmetric(horizontal: 5),
           tabs: [
-            _buildTab("All", 0, controller),
-            _buildTab("Bidding", 1, controller),
-            _buildTab("In Progress", 2, controller),
-            _buildTab("Complete", 3, controller),
+            _buildTab(AppStrings.all.tr(), 0, controller),
+            _buildTab(AppStrings.bidding.tr(), 1, controller),
+            _buildTab(AppStrings.inProgress.tr(), 2, controller),
+            _buildTab(AppStrings.complete.tr(), 3, controller),
           ],
         );
       },

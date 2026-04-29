@@ -37,5 +37,14 @@
   "profile": "Profile",
   "overview": "Overview",
   "analytics": "Analytics",
-  "pickups": "Pickups"
+  "pickups": "Pickups",
+
+
+  "all_pickup": "All your pickup requests",
+  "all": "All",
+  "bidding": "Bidding",
+  "in_progress": "In Progress",
+  "complete": "Complete",
+  "completed": "Completed",
+  "egp": "EGP"
 }
