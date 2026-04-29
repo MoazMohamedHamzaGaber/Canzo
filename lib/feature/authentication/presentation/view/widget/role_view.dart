@@ -11,8 +11,23 @@ class SelectRoleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = context.locale;
+    final isEnglish = locale.languageCode == 'en';
+
     return Scaffold(
-      appBar: AppBar(title:  Text(AppStrings.selectRole.tr())),
+      appBar: AppBar(
+        title: Text(AppStrings.selectRole.tr()),
+        actions: [
+          TextButton(
+            onPressed: () {
+              context.setLocale(
+                isEnglish ? const Locale('ar') : const Locale('en'),
+              );
+            },
+            child: Text(isEnglish ? "AR" : "EN"),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Center(
