@@ -22,4 +22,21 @@ class HomeCubit extends Cubit<HomeState> {
       state.copyWith(selectedActiveType: value),
     );
   }
+
+  void increment(String key) {
+    final newCounters = Map<String, int>.from(state.counters);
+    newCounters[key] = newCounters[key]! + 1;
+
+    emit(state.copyWith(counters: newCounters));
+  }
+
+  void decrement(String key) {
+    final newCounters = Map<String, int>.from(state.counters);
+
+    if (newCounters[key]! > 0) {
+      newCounters[key] = newCounters[key]! - 1;
+    }
+
+    emit(state.copyWith(counters: newCounters));
+  }
 }

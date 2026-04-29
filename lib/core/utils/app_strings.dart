@@ -119,5 +119,16 @@ class AppStrings {
   static const plastic = "plastic";
   static const cans = "cans";
 
+  static const chooseTheBaskets = "choose_the_baskets";
+  static const choseTypeBasket = "chose_type_basket";
+  static const basketType = "basket_type";
+  static const confirmYourChoice = "confirm_your_choice";
+  static const forSmallWaste = "for_small_waste";
+  static const forMediumWaste = "for_medium_waste";
+  static const forLargeWaste = "for_large_waste";
+  static const twoKgBasket = "2_kg_basket";
+  static const fiveKgBasket = "5_kg_basket";
+  static const tenKgBasket = "10_kg_basket";
+
 
 }

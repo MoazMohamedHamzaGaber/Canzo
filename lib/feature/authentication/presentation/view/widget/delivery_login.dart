@@ -49,7 +49,7 @@ class _DeliveryLoginState extends State<DeliveryLogin> {
         buildMaterialButton(
           text: AppStrings.login.tr(),
           function: () {
-            navigateTo(context, BottomNavBar());
+            navigateAndFinish(context, BottomNavBar());
           },
           color: AppColors.green,
         ),

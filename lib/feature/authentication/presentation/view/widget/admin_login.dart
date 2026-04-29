@@ -41,7 +41,7 @@ class _AdminLoginState extends State<AdminLogin> {
         buildMaterialButton(
           text: AppStrings.signIn.tr(),
           function: () {
-            navigateTo(context, BottomNavBar());
+            navigateAndFinish(context, BottomNavBar());
           },
           color: AppColors.green,
         ),

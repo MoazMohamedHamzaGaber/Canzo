@@ -49,7 +49,7 @@ class _DeliveryRegisterState extends State<DeliveryRegister> {
         buildMaterialButton(
           text: AppStrings.createAccount.tr(),
           function: (){
-            navigateTo(context, BottomNavBar());
+            navigateAndFinish(context, BottomNavBar());
           },
           color: AppColors.green,
         ),

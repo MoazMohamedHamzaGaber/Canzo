@@ -15,15 +15,12 @@ class RegisterView extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (BuildContext context, state) {},
       builder: (BuildContext context, state) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildRegisterForm(state.appRole, state),
-              ],
-            ),
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildRegisterForm(state.appRole, state),
+            ],
           ),
         );
       },

@@ -50,7 +50,7 @@ class _AdminRegisterState extends State<AdminRegister> {
         buildMaterialButton(
           text: AppStrings.createAccount.tr(),
           function: (){
-            navigateTo(context, BottomNavBar());
+            navigateAndFinish(context, BottomNavBar());
           },
           color: AppColors.green,
         ),

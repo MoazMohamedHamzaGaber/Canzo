@@ -3,7 +3,7 @@ import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/custom_text_field.dart';
-import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/select_basket_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'dropdown_button_section.dart';
@@ -72,7 +72,7 @@ class _UserRegisterState extends State<UserRegister> {
         buildMaterialButton(
           text: AppStrings.createAccount.tr(),
           function: (){
-            navigateTo(context, BottomNavBar());
+            navigateAndFinish(context, SelectBasketView());
           },
           color: AppColors.green,
         ),

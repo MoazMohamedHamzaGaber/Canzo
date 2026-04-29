@@ -61,7 +61,7 @@ class _UserLoginState extends State<UserLogin> {
         buildMaterialButton(
           text: AppStrings.login.tr(),
           function: () {
-            navigateTo(context, BottomNavBar());
+            navigateAndFinish(context, BottomNavBar());
           },
           color: AppColors.green,
         ),

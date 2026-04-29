@@ -1,15 +1,11 @@
-import 'package:canzo_app/core/utils/app_strings.dart';
+import 'package:canzo_app/core/widget/logo_and_name_app.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/register_view.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/tab_bar_item.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../../core/utils/color.dart';
-import '../../../../../core/utils/style.dart';
 import 'login_view_body.dart';
 
 class LoginAndRegisterViewBody extends StatelessWidget {
-  const LoginAndRegisterViewBody({Key? key}) : super(key: key);
+  const LoginAndRegisterViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,59 +18,13 @@ class LoginAndRegisterViewBody extends StatelessWidget {
             SliverFillRemaining(
               hasScrollBody: false,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
+                padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 20),
                 child: Column(
                   children: [
                     Expanded(
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * .1,
-                            child: Flex(
-                              direction: Axis.vertical,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 80,
-                                          height: 80,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                'assets/images/logo.jpg',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              AppStrings.canzo.tr(),
-                                              style: StyleText.style20(
-                                                color: AppColors.green,
-                                              ),
-                                            ),
-                                            Text(
-                                              AppStrings.recycle.tr(),
-                                              style: StyleText.style16,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                          LogoAndNameApp(),
                           const TabBarItem(),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .7,

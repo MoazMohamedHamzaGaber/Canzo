@@ -90,10 +90,21 @@
   "material": "Material",
   "select_material": "Select material",
   "plastic": "Plastic",
-  "cans": "Cans",
+  "cans": "Canz",
 
   "support": "Support",
   "whats": "WhatsApp",
   "terms": "Terms & Privacy",
-  "sign_out": "Sign_out"
+  "sign_out": "Sign out",
+
+  "choose_the_baskets": "Choose the baskets",
+  "chose_type_basket": "Choose the type of baskets and the number of each size.",
+  "basket_type": "Basket type",
+  "confirm_your_choice": "Confirm your choice",
+  "for_small_waste": "For small waste",
+  "for_medium_waste": "For medium waste",
+  "for_large_waste": "For large waste",
+  "2_kg_basket": "2 kg basket",
+  "5_kg_basket": "5 kg basket",
+  "10_kg_basket": "10 kg basket"
 }

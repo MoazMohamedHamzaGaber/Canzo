@@ -39,7 +39,7 @@ class DropdownButtonSection extends StatelessWidget {
               child: DropdownButtonFormField<ActivityType>(
                 hint:  Text(AppStrings.selectActivityType.tr(),
                   style: TextStyle(
-                    color: Colors.black
+                    color: Colors.black54
                   )
                 ),
                 icon: const Icon(

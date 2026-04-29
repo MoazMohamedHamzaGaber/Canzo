@@ -94,5 +94,16 @@
   "support": "الدعم",
   "whats": "واتساب",
   "terms": "الشروط والخصوصية",
-  "sign_out": "تسجيل الخروج"
+  "sign_out": "تسجيل الخروج",
+
+  "choose_the_baskets": "اختر السلال",
+  "chose_type_basket": "اختر نوع السلال وعدد كل حجم",
+  "basket_type": "نوع السلة",
+  "confirm_your_choice": "تأكيد اختيارك",
+  "for_small_waste": "للنفايات الصغيرة",
+  "for_medium_waste": "للنفايات المتوسطة",
+  "for_large_waste": "للنفايات الكبيرة",
+  "2_kg_basket": "سلة 2 كجم",
+  "5_kg_basket": "سلة 5 كجم",
+  "10_kg_basket": "سلة 10 كجم"
 }
