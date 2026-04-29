@@ -1,9 +1,11 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/custom_text_field.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/dropdown_button_pickup.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CreatePickup extends StatefulWidget {
@@ -34,9 +36,9 @@ class _CreatePickupState extends State<CreatePickup> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Create pickup', style: StyleText.style19),
+                        Text(AppStrings.createPickup.tr(), style: StyleText.style19),
                         Text(
-                          'Register a new recyclable package request.',
+                          AppStrings.registerPickup.tr(),
                           style: StyleText.style16,
                         ),
                       ],
@@ -55,14 +57,14 @@ class _CreatePickupState extends State<CreatePickup> {
                         borderRadius: BorderRadius.circular(30),
                         border: Border.all(),
                       ),
-                      child: Text('Back', style: StyleText.style19),
+                      child: Text(AppStrings.back.tr(), style: StyleText.style19),
                     ),
                   ),
                 ],
               ),
               CustomTextField(
                 controller: locationController,
-                title: 'Location',
+                title: AppStrings.location.tr(),
                 name: '',
                 validate: '',
                 type: TextInputType.text,
@@ -72,7 +74,7 @@ class _CreatePickupState extends State<CreatePickup> {
               sizeBox(),
               CustomTextField(
                 controller: packagesController,
-                title: 'Packages',
+                title: AppStrings.packages.tr(),
                 name: '',
                 validate: '',
                 type: TextInputType.number,
@@ -80,7 +82,7 @@ class _CreatePickupState extends State<CreatePickup> {
               sizeBox(),
               CustomTextField(
                 controller: packagesController,
-                title: 'Notes',
+                title: AppStrings.note.tr(),
                 name: '',
                 validate: '',
                 type: TextInputType.text,
@@ -94,7 +96,7 @@ class _CreatePickupState extends State<CreatePickup> {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
-                  'Estimated payout: EGP 100',
+                  '${AppStrings.estimatePayout.tr()} 100',
                   textAlign: TextAlign.center,
                   style: StyleText.style18.copyWith(
                     color: Colors.green.shade500,
@@ -103,7 +105,7 @@ class _CreatePickupState extends State<CreatePickup> {
               ),
               sizeBox(),
               buildMaterialButton(
-                text: 'Submit pickup',
+                text: AppStrings.submitPickup.tr(),
                 function: () {},
                 color: AppColors.green,
               ),

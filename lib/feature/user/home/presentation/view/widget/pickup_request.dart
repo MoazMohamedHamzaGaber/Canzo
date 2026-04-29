@@ -1,7 +1,9 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/create_pickup.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PickupRequestView extends StatelessWidget {
@@ -46,13 +48,13 @@ class PickupRequestView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'New pickup request',
+                        AppStrings.newPickupRequest.tr(),
                         style: StyleText.style19.copyWith(
                           color: AppColors.green,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text('100 EGP per filled package', style: StyleText.style13),
+                      Text('100 ${AppStrings.filledPackage.tr()}', style: StyleText.style13),
                     ],
                   ),
                   Spacer(),

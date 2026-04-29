@@ -1,6 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class QuickStatsSection extends StatelessWidget {
@@ -12,7 +14,7 @@ class QuickStatsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'QUICK STATS',
+          AppStrings.quickStats.tr(),
           style: StyleText.style18.copyWith(
             color: Colors.green.shade500,
             fontWeight: FontWeight.bold,
@@ -21,11 +23,11 @@ class QuickStatsSection extends StatelessWidget {
         sizeBox(height: 10),
         Row(
           children: [
-            buildContainer('TOTALS', 4,'pickups'),
+            buildContainer(AppStrings.totals.tr(), 4,AppStrings.pickups.tr()),
             sizeBox(width: 10),
-            buildContainer('ACTIVE', 2, 'ongoing'),
+            buildContainer(AppStrings.active.tr(), 2, AppStrings.ongoing.tr()),
             sizeBox(width: 10),
-            buildContainer('DONE', 2, 'completed'),
+            buildContainer(AppStrings.done.tr(), 2, AppStrings.completed.tr()),
           ],
         ),
       ],

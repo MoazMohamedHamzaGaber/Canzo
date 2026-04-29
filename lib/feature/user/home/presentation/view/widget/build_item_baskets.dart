@@ -1,5 +1,7 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BuildItemBaskets extends StatelessWidget {
@@ -32,7 +34,7 @@ class BuildItemBaskets extends StatelessWidget {
                     Text('بلاستيك - kgباسكت 2',
                       style: StyleText.style19,
                     ),
-                    Text('فاضي',
+                    Text(AppStrings.empty.tr(),
                       style: StyleText.style13,
                     ),
                   ],
@@ -49,7 +51,7 @@ class BuildItemBaskets extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(color: Colors.black45),
                   ),
-                  child: Text('فاضي',
+                  child: Text(AppStrings.empty.tr(),
                     style: StyleText.style13.copyWith(
                         color: AppColors.green,
                         fontWeight: FontWeight.bold

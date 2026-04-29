@@ -1,3 +1,4 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/active_requests.dart';
@@ -6,6 +7,7 @@ import 'package:canzo_app/feature/user/home/presentation/view/widget/custom_card
 import 'package:canzo_app/feature/user/home/presentation/view/widget/pickup_request.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/quick_stats_section.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/resent_packup_section.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -21,8 +23,8 @@ class HomeViewBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppBar(
-                title: 'Hi, Moaz',
-                body: 'Lets\'s recycle something today',
+                title: '${AppStrings.hi.tr()}, Moaz',
+                body: AppStrings.letsRecycle.tr(),
               ),
               sizeBox(),
               CustomCardHome(),

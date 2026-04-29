@@ -1,6 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardHome extends StatelessWidget {
@@ -20,14 +22,14 @@ class CustomCardHome extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'WALLET BALANCE',
+              AppStrings.walletBalance.tr(),
               style: StyleText.style13.copyWith(
                 color: Colors.white70,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              'EGP 250',
+              '${AppStrings.egp.tr()} 250',
               style: StyleText.style40.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -41,14 +43,14 @@ class CustomCardHome extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        'Total earned ',
+                        '${AppStrings.totalEarned.tr()} ',
                         style: StyleText.style13.copyWith(
                           color: Colors.white70,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        'EGP 600',
+                        '${AppStrings.egp.tr()} 600',
                         style: StyleText.style13.copyWith(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -71,7 +73,7 @@ class CustomCardHome extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'View',
+                            AppStrings.view.tr(),
                             textAlign: TextAlign.center,
                             style: StyleText.style19.copyWith(
                               color: Colors.white,

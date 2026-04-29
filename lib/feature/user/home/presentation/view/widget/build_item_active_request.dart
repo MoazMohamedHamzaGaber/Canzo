@@ -1,7 +1,9 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,9 +48,9 @@ class BuildItemActiveRequest extends StatelessWidget {
                       cubit.changeSelectedActive(value);
                     },
                     itemBuilder: (context) => [
-                      _buildItem('In Progress', AppColors.green),
-                      _buildItem('Preparing', Colors.orange),
-                      _buildItem('Complete', AppColors.green),
+                      _buildItem(AppStrings.inProgress.tr(), AppColors.green,'in_progress'),
+                      _buildItem(AppStrings.preparing.tr(), Colors.orange, 'preparing'),
+                      _buildItem(AppStrings.complete.tr(), AppColors.green, 'complete'),
                     ],
                     child: Container(
                       padding: EdgeInsets.symmetric(
@@ -57,9 +59,10 @@ class BuildItemActiveRequest extends StatelessWidget {
                       ),
                       margin: EdgeInsets.only(top: 5),
                       decoration: BoxDecoration(
-                        color: state.selectedActiveType == 'Preparing'
+                        color: state.selectedActiveType == 'preparing'
                             ? Colors.orange.shade50
                             : Colors.green.shade50,
+
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(color: Colors.black45),
                       ),
@@ -67,9 +70,9 @@ class BuildItemActiveRequest extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            state.selectedActiveType ?? 'Completed',
-                            style: StyleText.style16.copyWith(
-                              color: state.selectedActiveType == 'Preparing'
+                            _getLabel(state.selectedActiveType),
+                            style: StyleText.style13.copyWith(
+                              color: state.selectedActiveType =='preparing'
                                   ? Colors.orange
                                   : AppColors.green,
                               fontWeight: FontWeight.bold,
@@ -80,7 +83,7 @@ class BuildItemActiveRequest extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text('EGP 300', style: StyleText.style19),
+                  Text('${AppStrings.egp.tr()} 300', style: StyleText.style19),
                 ],
               ),
             ],
@@ -90,9 +93,13 @@ class BuildItemActiveRequest extends StatelessWidget {
     );
   }
 
-  PopupMenuItem<String> _buildItem(String text, Color color) {
+  PopupMenuItem<String> _buildItem(
+      String text,
+      Color color,
+      String value,
+      ) {
     return PopupMenuItem(
-      value: text,
+      value: value,
       child: Row(
         children: [
           Icon(Icons.circle, size: 10, color: color),
@@ -101,5 +108,18 @@ class BuildItemActiveRequest extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _getLabel(String? key) {
+    switch (key) {
+      case "in_progress":
+        return AppStrings.inProgress.tr();
+      case "preparing":
+        return AppStrings.preparing.tr();
+      case "complete":
+        return AppStrings.complete.tr();
+      default:
+        return AppStrings.complete.tr();
+    }
   }
 }

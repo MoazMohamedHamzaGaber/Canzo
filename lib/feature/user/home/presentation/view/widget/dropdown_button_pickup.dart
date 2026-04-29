@@ -1,5 +1,7 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +21,7 @@ class DropdownButtonPickup extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Material',
+              AppStrings.material.tr(),
             ),
             const SizedBox(
               height: 8,
@@ -34,7 +36,7 @@ class DropdownButtonPickup extends StatelessWidget {
                 border: Border.all(),
               ),
               child: DropdownButtonFormField(
-                hint:  Text('Select material'),
+                hint:  Text(AppStrings.selectMaterial.tr()),
                 icon: const Icon(
                   Icons.keyboard_arrow_down_outlined,
                   size: 30,
@@ -44,14 +46,14 @@ class DropdownButtonPickup extends StatelessWidget {
                   border: InputBorder.none,
                 ),
                 initialValue: cubit.state.selectedMaterialType,
-                items: const [
+                items:  [
                   DropdownMenuItem(
                     value: 'Plastic',
-                    child: Text('Plastic'),
+                    child: Text(AppStrings.plastic.tr()),
                   ),
                   DropdownMenuItem(
                     value: 'Canz',
-                    child: Text('Canz'),
+                    child: Text(AppStrings.cans.tr()),
                   ),
                 ],
                 onChanged: (value) {
