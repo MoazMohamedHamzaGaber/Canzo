@@ -4,6 +4,10 @@ class AppStrings {
   static const preferences = "preferences";
   static const settings = "settings";
   static const accountPreferences = "account_preferences";
+  static const support = "support";
+  static const whats = "whats";
+  static const terms = "terms";
+  static const signOut = "sign_out";
 
   // Authentication
   static const user = "user";
@@ -114,4 +118,6 @@ class AppStrings {
   static const selectMaterial = "select_material";
   static const plastic = "plastic";
   static const cans = "cans";
+
+
 }

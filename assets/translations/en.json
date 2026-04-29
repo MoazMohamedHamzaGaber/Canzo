@@ -90,5 +90,10 @@
   "material": "Material",
   "select_material": "Select material",
   "plastic": "Plastic",
-  "cans": "Cans"
+  "cans": "Cans",
+
+  "support": "Support",
+  "whats": "WhatsApp",
+  "terms": "Terms & Privacy",
+  "sign_out": "Sign_out"
 }
