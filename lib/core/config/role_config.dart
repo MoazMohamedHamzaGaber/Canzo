@@ -1,3 +1,5 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:canzo_app/core/utils/color.dart';
@@ -40,24 +42,24 @@ class RoleConfig {
     switch (role) {
       case AppRole.user:
         return [
-          _item(Icons.home, "Home"),
-          _item(Icons.history, "History"),
-          _item(Icons.wallet, "Wallet"),
-          _item(Icons.person, "Profile"),
+          _item(Icons.home, AppStrings.home.tr()),
+          _item(Icons.history, AppStrings.history.tr()),
+          _item(Icons.wallet, AppStrings.wallet.tr()),
+          _item(Icons.person, AppStrings.profile.tr()),
         ];
 
       case AppRole.admin:
         return [
-          _item(Icons.dashboard, "Overview"),
-          _item(Icons.analytics, "Analytics"),
-          _item(Icons.person, "Profile"),
+          _item(Icons.dashboard, AppStrings.overview.tr()),
+          _item(Icons.analytics, AppStrings.analytics.tr()),
+          _item(Icons.person, AppStrings.profile.tr()),
         ];
 
       case AppRole.delivery:
         return [
-          _item(Icons.local_shipping, "Pickups"),
-          _item(Icons.history, "History"),
-          _item(Icons.person, "Profile"),
+          _item(Icons.local_shipping, AppStrings.pickups.tr()),
+          _item(Icons.history, AppStrings.history.tr()),
+          _item(Icons.person, AppStrings.profile.tr()),
         ];
     }
   }

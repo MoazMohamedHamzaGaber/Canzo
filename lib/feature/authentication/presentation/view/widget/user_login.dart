@@ -1,6 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/dropdown_button_section.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/color.dart';
 import '../../../../../core/utils/components.dart';
@@ -25,15 +27,14 @@ class _UserLoginState extends State<UserLogin> {
       children: [
         CustomTextField(
           controller: phoneController,
-          title: 'رقم الهاتف',
-          name: 'رقم الهاتف',
+          title: AppStrings.phoneNumber.tr(),
+          name: AppStrings.phoneNumber.tr(),
           validate: '',
           type: TextInputType.phone,
         ),
         sizeBox(height: 10),
         DropdownButtonSection(),
-        if (widget.state != null &&
-            widget.state.isNotEmpty)
+        if (widget.state != null)
           CustomTextField(
             controller: activityNameController,
             title: getActivityLabel(widget.state!),
@@ -43,7 +44,7 @@ class _UserLoginState extends State<UserLogin> {
           ),
         CustomTextField(
           controller: passwordController,
-          title: 'Password',
+          title: AppStrings.password.tr(),
           name: '**********',
           validate: '',
           obscureText: true,
@@ -52,13 +53,13 @@ class _UserLoginState extends State<UserLogin> {
         TextButton(
           onPressed: () {},
           child: Text(
-            'Forget Password?',
+            AppStrings.forgetPassword.tr(),
             style: TextStyle(color: AppColors.green),
           ),
         ),
         sizeBox(),
         buildMaterialButton(
-          text: 'Sign in',
+          text: AppStrings.login.tr(),
           function: () {
             navigateTo(context, BottomNavBar());
           },

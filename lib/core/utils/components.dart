@@ -1,5 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -100,17 +103,18 @@ Widget buildMaterialButton({
       ),
     );
 
-String getActivityLabel(String type) {
+String getActivityLabel(ActivityType type) {
   switch (type) {
-    case 'مطعم':
-      return 'اسم المطعم';
-    case 'كافية':
-      return 'اسم الكافيه';
-    case 'قاعة افراح':
-      return 'اسم قاعة الافراح';
-    case 'نادي':
-      return 'اسم النادي';
-    default:
-      return 'اسم النشاط';
+    case ActivityType.restaurant:
+      return AppStrings.nameRestaurant.tr();
+
+    case ActivityType.cafe:
+      return AppStrings.nameCafe.tr();
+
+    case ActivityType.weddingHall:
+      return AppStrings.nameWeddingHall.tr();
+
+    case ActivityType.club:
+      return AppStrings.nameClub.tr();
   }
 }

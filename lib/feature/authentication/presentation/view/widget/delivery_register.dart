@@ -1,7 +1,10 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/custom_text_field.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class DeliveryRegister extends StatefulWidget {
@@ -23,29 +26,31 @@ class _DeliveryRegisterState extends State<DeliveryRegister> {
       children: [
         CustomTextField(
           controller: nameController,
-          title: 'Full Name',
-          name: 'Full Name',
+          title: AppStrings.fullName.tr(),
+          name: AppStrings.fullName.tr(),
           validate: '',
           type: TextInputType.name,
         ),
         CustomTextField(
           controller: phoneController,
-          title: 'رقم الهاتف',
-          name: 'رقم الهاتف',
+          title: AppStrings.phoneNumber.tr(),
+          name: AppStrings.phoneNumber.tr(),
           validate: '',
           type: TextInputType.phone,
         ),
         CustomTextField(
           controller: phoneController,
-          title: 'Access Number',
-          name: 'Access Number',
+          title: AppStrings.accessNumber.tr(),
+          name: AppStrings.accessNumber.tr(),
           validate: '',
           type: TextInputType.phone,
         ),
         sizeBox(),
         buildMaterialButton(
-          text: 'Create Account',
-          function: (){},
+          text: AppStrings.createAccount.tr(),
+          function: (){
+            navigateTo(context, BottomNavBar());
+          },
           color: AppColors.green,
         ),
       ],

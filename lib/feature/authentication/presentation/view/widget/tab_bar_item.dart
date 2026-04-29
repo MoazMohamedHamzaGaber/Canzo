@@ -1,4 +1,6 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/style.dart';
@@ -30,9 +32,9 @@ class TabBarItem extends StatelessWidget {
         ),
         unselectedLabelStyle: StyleText.style16,
         dividerColor: Colors.transparent,
-        tabs: const [
-          Tab(text: 'Sign in'),
-          Tab(text: 'Create Account'),
+        tabs:  [
+          Tab(text: AppStrings.login.tr()),
+          Tab(text: AppStrings.createAccount.tr()),
         ],
       ),
     );

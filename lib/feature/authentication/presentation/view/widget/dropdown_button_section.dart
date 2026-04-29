@@ -1,5 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
+import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,7 +22,7 @@ class DropdownButtonSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'نوع النشاط',
+              AppStrings.activityType.tr(),
             ),
             const SizedBox(
               height: 8,
@@ -33,8 +36,8 @@ class DropdownButtonSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(),
               ),
-              child: DropdownButtonFormField(
-                hint:  Text('اختر نوع النشاط',
+              child: DropdownButtonFormField<ActivityType>(
+                hint:  Text(AppStrings.selectActivityType.tr(),
                   style: TextStyle(
                     color: Colors.black
                   )
@@ -48,26 +51,28 @@ class DropdownButtonSection extends StatelessWidget {
                   border: InputBorder.none,
                 ),
                 initialValue: cubit.state.selectedActivityType,
-                items: const [
+                items:  [
                   DropdownMenuItem(
-                    value: 'مطعم',
-                    child: Text('مطعم'),
+                    value:ActivityType.restaurant,
+                    child: Text(AppStrings.restaurant.tr()),
                   ),
                   DropdownMenuItem(
-                    value: 'كافية',
-                    child: Text('كافية'),
+                    value: ActivityType.cafe,
+                    child: Text(AppStrings.cafe.tr()),
                   ),
                   DropdownMenuItem(
-                    value: 'قاعة افراح',
-                    child: Text('قاعة افراح'),
+                    value: ActivityType.weddingHall,
+                    child: Text(AppStrings.weddingHall.tr()),
                   ),
                   DropdownMenuItem(
-                    value: 'نادي',
-                    child: Text('نادي'),
+                    value: ActivityType.club,
+                    child: Text(AppStrings.club.tr()),
                   ),
                 ],
                 onChanged: (value) {
-                  cubit.changeSelectedActivity(value);
+                  if (value != null) {
+                    cubit.changeSelectedActivity(value);
+                  }
                 },
               ),
             ),

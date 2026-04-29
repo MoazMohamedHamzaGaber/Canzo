@@ -1,7 +1,10 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/custom_text_field.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AdminRegister extends StatefulWidget {
@@ -23,14 +26,14 @@ class _AdminRegisterState extends State<AdminRegister> {
       children: [
         CustomTextField(
           controller: nameController,
-          title: 'Full Name',
-          name: 'Full Name',
+          title: AppStrings.fullName.tr(),
+          name: AppStrings.fullName.tr(),
           validate: '',
           type: TextInputType.name,
         ),
         CustomTextField(
           controller: passwordController,
-          title: 'Password',
+          title: AppStrings.password.tr(),
           name: '**********',
           validate: '',
           obscureText: true,
@@ -38,15 +41,17 @@ class _AdminRegisterState extends State<AdminRegister> {
         ),
         CustomTextField(
           controller: snnNumberController,
-          title: 'الرقم القومي',
-          name: 'الرقم القومي',
+          title: AppStrings.nationalIdNumber.tr(),
+          name: AppStrings.nationalIdNumber.tr(),
           validate: '',
           type: TextInputType.number,
         ),
         sizeBox(),
         buildMaterialButton(
-          text: 'Create Account',
-          function: (){},
+          text: AppStrings.createAccount.tr(),
+          function: (){
+            navigateTo(context, BottomNavBar());
+          },
           color: AppColors.green,
         ),
       ],

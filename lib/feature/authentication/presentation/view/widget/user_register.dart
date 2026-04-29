@@ -1,7 +1,10 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/custom_text_field.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'dropdown_button_section.dart';
 
@@ -27,15 +30,15 @@ class _UserRegisterState extends State<UserRegister> {
       children: [
         CustomTextField(
           controller: nameController,
-          title: 'Full Name',
-          name: 'Full Name',
+          title: AppStrings.fullName.tr(),
+          name: AppStrings.fullName.tr(),
           validate: '',
           type: TextInputType.name,
         ),
         CustomTextField(
           controller: passwordController,
-          title: 'Password',
-          name: '**********',
+          title: AppStrings.password.tr(),
+          name: '***********',
           validate: '',
           obscureText: true,
           type: TextInputType.visiblePassword,
@@ -44,8 +47,8 @@ class _UserRegisterState extends State<UserRegister> {
         DropdownButtonSection(),
         CustomTextField(
           controller: phoneController,
-          title: 'رقم الهاتف',
-          name: 'رقم الهاتف',
+          title: AppStrings.phoneNumber.tr(),
+          name: AppStrings.phoneNumber.tr(),
           validate: '',
           type: TextInputType.phone,
         ),
@@ -60,15 +63,17 @@ class _UserRegisterState extends State<UserRegister> {
           ),
         CustomTextField(
           controller: addressController,
-          title: 'العنوان',
-          name: 'العنوان',
+          title: AppStrings.address.tr(),
+          name: AppStrings.address.tr(),
           validate: '',
           type: TextInputType.text,
         ),
         sizeBox(),
         buildMaterialButton(
-          text: 'Create Account',
-          function: (){},
+          text: AppStrings.createAccount.tr(),
+          function: (){
+            navigateTo(context, BottomNavBar());
+          },
           color: AppColors.green,
         ),
       ],

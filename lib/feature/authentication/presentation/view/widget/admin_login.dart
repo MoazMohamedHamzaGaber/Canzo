@@ -1,5 +1,7 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/color.dart';
 import '../../../../../core/utils/components.dart';
@@ -23,21 +25,21 @@ class _AdminLoginState extends State<AdminLogin> {
       children: [
         CustomTextField(
           controller: nameController,
-          title: 'Full Name',
-          name: 'Full Name',
+          title: AppStrings.fullName.tr(),
+          name: AppStrings.fullName.tr(),
           validate: '',
           type: TextInputType.name,
         ),
         CustomTextField(
           controller: snnNumberController,
-          title: 'الرقم القومي',
-          name: 'الرقم القومي',
+          title: AppStrings.nationalIdNumber.tr(),
+          name: AppStrings.nationalIdNumber.tr(),
           validate: '',
           type: TextInputType.number,
         ),
         sizeBox(),
         buildMaterialButton(
-          text: 'Sign in',
+          text: AppStrings.signIn.tr(),
           function: () {
             navigateTo(context, BottomNavBar());
           },

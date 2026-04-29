@@ -1,5 +1,7 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/color.dart';
 import '../../../../../core/utils/components.dart';
@@ -24,28 +26,28 @@ class _DeliveryLoginState extends State<DeliveryLogin> {
       children: [
         CustomTextField(
           controller: nameController,
-          title: 'Full Name',
-          name: 'Full Name',
+          title: AppStrings.fullName.tr(),
+          name: AppStrings.fullName.tr(),
           validate: '',
           type: TextInputType.name,
         ),
         CustomTextField(
           controller: phoneController,
-          title: 'رقم الهاتف',
-          name: 'رقم الهاتف',
+          title: AppStrings.phoneNumber.tr(),
+          name: AppStrings.phoneNumber.tr(),
           validate: '',
           type: TextInputType.phone,
         ),
         CustomTextField(
           controller: accessNumberController,
-          title: 'Access Number',
-          name: 'Access Number',
+          title: AppStrings.accessNumber.tr(),
+          name: AppStrings.accessNumber.tr(),
           validate: '',
           type: TextInputType.number,
         ),
         sizeBox(),
         buildMaterialButton(
-          text: 'Sign in',
+          text: AppStrings.login.tr(),
           function: () {
             navigateTo(context, BottomNavBar());
           },

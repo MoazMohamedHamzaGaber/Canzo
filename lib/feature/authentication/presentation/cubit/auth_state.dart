@@ -1,3 +1,4 @@
+import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 
 enum AuthStates { loading, initial, error }
@@ -5,7 +6,7 @@ enum AuthStates { loading, initial, error }
 class AuthState {
   final AuthStates status;
   //final Failure? failure;
-  final String? selectedActivityType;
+  final ActivityType? selectedActivityType;
   final AppRole? appRole;
 
   const AuthState({
@@ -17,7 +18,7 @@ class AuthState {
   AuthState copyWith({
     AuthStates? status,
     //Failure? failure,
-    String? selectedActivityType,
+    ActivityType? selectedActivityType,
     AppRole? appRole
   }) {
     return AuthState(
