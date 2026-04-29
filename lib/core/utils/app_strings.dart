@@ -60,4 +60,17 @@ class AppStrings {
   static const complete = "complete";
   static const completed = "completed";
   static const egp = "egp";
+
+
+  // Wallet
+  static const yourEarn = "your_earn";
+  static const availableBalance = "available_balance";
+  static const withdraw = "withdraw";
+  static const send = "send";
+  static const earning = "earning";
+  static const today = "today";
+  static const thisWeek = "this_week";
+  static const thisMonth = "this_month";
+  static const transaction = "transaction";
+  static const sentTo = "sent_to";
 }

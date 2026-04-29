@@ -39,11 +39,24 @@
   "analytics": "التحليلات",
   "pickups": "عمليات الجمع",
 
+
   "all_pickup": "كل طلبات الاستلام الخاصة بك",
   "all": "الكل",
   "bidding": "قيد المزايدة",
   "in_progress": "قيد التنفيذ",
   "complete": "مكتمل",
   "completed": "تم الانتهاء",
-  "egp": "ج.م"
+  "egp": "ج.م",
+
+
+  "your_earn": "أرباحك والسجل",
+  "available_balance": "الرصيد المتاح",
+  "withdraw": "سحب",
+  "send": "إرسال",
+  "earning": "الأرباح",
+  "today": "اليوم",
+  "this_week": "هذا الأسبوع",
+  "this_month": "هذا الشهر",
+  "transaction": "المعاملات",
+  "sent_to": "تم الإرسال إلى"
 }

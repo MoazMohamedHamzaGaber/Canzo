@@ -1,6 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class EarningSection extends StatelessWidget {
@@ -12,7 +14,7 @@ class EarningSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'EARNINGS',
+          AppStrings.earning.tr(),
           style: StyleText.style18.copyWith(
             color: Colors.green.shade500,
             fontWeight: FontWeight.bold,
@@ -21,11 +23,11 @@ class EarningSection extends StatelessWidget {
         sizeBox(),
         Row(
           children: [
-            buildContainer('TODAY', 0),
+            buildContainer(AppStrings.today.tr(), 0),
             sizeBox(width: 10),
-            buildContainer('THIS WEEK', 600),
+            buildContainer(AppStrings.thisWeek.tr(), 600),
             sizeBox(width: 10),
-            buildContainer('THIS MONTH', 600),
+            buildContainer(AppStrings.thisMonth.tr(), 600),
           ],
         ),
       ],
@@ -51,7 +53,7 @@ class EarningSection extends StatelessWidget {
           ),
           sizeBox(height: 10),
           Text(
-            'EGP $price',
+            '${AppStrings.egp.tr()} $price',
             style: StyleText.style20().copyWith(
               color: AppColors.green,
               fontWeight: FontWeight.bold,

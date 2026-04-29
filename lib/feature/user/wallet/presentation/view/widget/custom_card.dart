@@ -1,6 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
@@ -20,14 +22,14 @@ class CustomCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'AVAILABLE BALANCE',
+              AppStrings.availableBalance.tr(),
               style: StyleText.style13.copyWith(
                 color: Colors.white70,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              'EGP 250',
+              '${AppStrings.egp.tr()} 250',
               style: StyleText.style40.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -46,7 +48,7 @@ class CustomCard extends StatelessWidget {
                         color: Colors.green.shade300,
                       ),
                       child: Text(
-                        'Withdraw',
+                        AppStrings.withdraw.tr(),
                         textAlign: TextAlign.center,
                         style: StyleText.style19.copyWith(
                           color: Colors.white,
@@ -66,7 +68,7 @@ class CustomCard extends StatelessWidget {
                         color: Colors.black54,
                       ),
                       child: Text(
-                        'Send',
+                        AppStrings.send.tr(),
                         textAlign: TextAlign.center,
                         style: StyleText.style19.copyWith(
                           color: Colors.white,

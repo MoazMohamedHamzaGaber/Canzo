@@ -46,5 +46,18 @@
   "in_progress": "In Progress",
   "complete": "Complete",
   "completed": "Completed",
-  "egp": "EGP"
+  "egp": "EGP",
+
+
+
+  "your_earn": "Your earnings & history",
+  "available_balance": "AVAILABLE BALANCE",
+  "withdraw": "Withdraw",
+  "send": "Send",
+  "earning": "EARNINGS",
+  "today": "TODAY",
+  "this_week": "THIS WEEK",
+  "this_month": "THIS MONTH",
+  "transaction": "TRANSACTIONS",
+  "sent_to": "Sent to"
 }
