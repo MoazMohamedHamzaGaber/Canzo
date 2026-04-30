@@ -55,7 +55,11 @@ class SelectRoleView extends StatelessWidget {
             MaterialPageRoute(builder: (_) => const LoginView()),
           );
         },
-        child: Text(title),
+        child: Text(title,
+        style: TextStyle(
+          fontSize: 30,
+        ),
+        ),
       ),
     );
   }
