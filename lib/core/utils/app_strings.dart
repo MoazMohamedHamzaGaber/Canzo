@@ -167,6 +167,13 @@ class AppStrings {
   static const String assignAgent = "assign_agent";
   static const String activeInField = "active_in_field";
   static const String allRequests = "all_requests";
+  static const String requestNumber = "request_number";
+  static const String owner = "owner";
+  static const String basketNumber = "basket_number";
+  static const String price = "price";
+  static const String date = "date";
+  static const String details = "details";
+  static const String close = "close";
 
 
 }

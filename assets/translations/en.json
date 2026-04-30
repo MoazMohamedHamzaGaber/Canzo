@@ -140,5 +140,13 @@
   "new": "new",
   "assign_agent": "Assign agent",
   "active_in_field": "ACTIVE IN FIELD",
-  "all_requests": "ALL REQUESTS"
+  "all_requests": "ALL REQUESTS",
+
+  "request_number": "Request number",
+  "owner": "Owner",
+  "basket_number": "Basket Number",
+  "price": "Price",
+  "date": "Date",
+  "details": "Details",
+  "close": "Close"
 }

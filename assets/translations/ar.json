@@ -137,5 +137,13 @@
   "new": "جديد",
   "assign_agent": "تعيين مندوب",
   "active_in_field": "نشط في الميدان",
-  "all_requests": "كل الطلبات"
+  "all_requests": "كل الطلبات",
+
+  "request_number": "رقم الطلب",
+  "owner": "صاحب المحل",
+  "basket_number": "عدد الباسكت",
+  "price": "السعر",
+  "date": "التاريخ",
+  "details": "التفاصيل",
+  "close": "إغلاق"
 }

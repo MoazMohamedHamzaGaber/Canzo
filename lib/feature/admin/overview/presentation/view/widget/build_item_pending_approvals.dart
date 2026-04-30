@@ -3,6 +3,7 @@ import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:canzo_app/feature/admin/overview/presentation/view/widget/show_diaglog.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +44,18 @@ class BuildItemPendingApprovals extends StatelessWidget {
           sizeBox(),
           buildMaterialButton(
             text: AppStrings.assignAgent.tr(),
-            function: () {},
+            function: () {
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  insetPadding: EdgeInsets.all(4),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: AssignAgentDialog(),
+                  ),
+                ),
+              );
+            },
             color: AppColors.green,
           ),
         ],
@@ -51,3 +63,4 @@ class BuildItemPendingApprovals extends StatelessWidget {
     );
   }
 }
+
