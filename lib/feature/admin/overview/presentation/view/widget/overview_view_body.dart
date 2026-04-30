@@ -2,6 +2,7 @@ import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/active_in_field_section.dart';
+import 'package:canzo_app/feature/admin/overview/presentation/view/widget/all_requests_overview_section.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/custom_card_overview_admin.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/pending_approvals.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -30,6 +31,7 @@ class OverviewViewBody extends StatelessWidget {
               sizeBox(),
               ActiveInFieldSection(),
               sizeBox(),
+              AllRequestsOverviewSection(),
             ],
           ),
         ),
