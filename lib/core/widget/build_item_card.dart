@@ -25,7 +25,7 @@ class BuildItemCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(top: 12, bottom: 20, right: 12, left: 12),
+          padding: EdgeInsets.symmetric(horizontal: 12,vertical: 20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.black45),
@@ -50,7 +50,7 @@ class BuildItemCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                     margin: EdgeInsets.only(top: 5),
                     decoration: BoxDecoration(
                       color: Colors.green.shade50,
@@ -67,6 +67,7 @@ class BuildItemCard extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text('${AppStrings.egp.tr()} 300', style: StyleText.style19),
+                  SizedBox(height: 10),
                 ],
               ),
             ],
