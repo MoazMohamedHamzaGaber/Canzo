@@ -1,5 +1,6 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/feature/admin/analytics/presentation/view/analytics_view.dart';
+import 'package:canzo_app/feature/admin/overview/presentation/view/overview_view.dart';
 import 'package:canzo_app/feature/delivery/history/view/history_delivery_view.dart';
 import 'package:canzo_app/feature/delivery/home/presentation/view/home_delivery_view.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -26,7 +27,7 @@ class RoleConfig {
 
       case AppRole.admin:
         return const [
-          Center(child: Text("Overview")),
+          OverviewView(),
           AnalyticsView(),
           ProfileView(),
         ];
