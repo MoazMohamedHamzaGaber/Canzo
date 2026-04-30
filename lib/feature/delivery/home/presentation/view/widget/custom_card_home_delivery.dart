@@ -1,6 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardHomeDelivery extends StatelessWidget {
@@ -18,7 +20,7 @@ class CustomCardHomeDelivery extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'TODAY\'S OVERVIEW',
+              AppStrings.todayOverview.tr(),
               style: StyleText.style13.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -29,64 +31,13 @@ class CustomCardHomeDelivery extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Assigned',
-                        style: StyleText.style13.copyWith(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      sizeBox(height: 10),
-                      Text('2',
-                      style: StyleText.style26.copyWith(
-                        fontSize: 40,
-                        color: AppColors.lightScaffoldColor,
-                      ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Completed today',
-                        style: StyleText.style13.copyWith(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      sizeBox(height: 10),
-                      Text('1',
-                        style: StyleText.style26.copyWith(
-                          fontSize: 40,
-                          color: AppColors.lightScaffoldColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Volume',
-                        style: StyleText.style13.copyWith(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      sizeBox(),
-                      Text('EGP 900',
-                        style: StyleText.style26.copyWith(
-                          color: AppColors.lightScaffoldColor,
-                        ),
-                      ),
-                    ],
-                  ),
+                buildItem(AppStrings.assigned.tr(), '2'),
+                buildItem(AppStrings.completedToday.tr(), '1'),
+                buildItem(
+                  AppStrings.volume.tr(),
+                  '${AppStrings.egp.tr()} 900',
+                  height: 20,
+                  fontSize: 26,
                 ),
               ],
             ),
@@ -95,4 +46,31 @@ class CustomCardHomeDelivery extends StatelessWidget {
       ),
     );
   }
+
+  Widget buildItem(
+    String title,
+    String num, {
+    double? height,
+    double? fontSize,
+  }) => Expanded(
+    child: Column(
+      children: [
+        Text(
+          title,
+          style: StyleText.style13.copyWith(
+            color: Colors.white70,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        sizeBox(height: height ?? 10),
+        Text(
+          num,
+          style: StyleText.style26.copyWith(
+            fontSize: fontSize ?? 40,
+            color: AppColors.lightScaffoldColor,
+          ),
+        ),
+      ],
+    ),
+  );
 }

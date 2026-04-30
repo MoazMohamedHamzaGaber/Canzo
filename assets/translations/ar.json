@@ -105,5 +105,13 @@
   "for_large_waste": "للنفايات الكبيرة",
   "2_kg_basket": "سلة 2 كجم",
   "5_kg_basket": "سلة 5 كجم",
-  "10_kg_basket": "سلة 10 كجم"
+  "10_kg_basket": "سلة 10 كجم",
+
+  "today_pickups": "طلبات اليوم بانتظارك",
+  "today_overview": "نظرة عامة على اليوم",
+  "assigned": "تم التعيين",
+  "completed_today": "تم إنجازه اليوم",
+  "volume": "الحجم",
+  "active_pickups": "الطلبات النشطة",
+  "complete_pickups": "الطلبات المكتملة"
 }

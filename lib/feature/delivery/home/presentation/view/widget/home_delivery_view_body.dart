@@ -21,7 +21,7 @@ class HomeDeliveryViewBody extends StatelessWidget {
             children: [
               CustomAppBar(
                 title: '${AppStrings.hi.tr()}, Moaz',
-                body: 'Today\'s pickups await',
+                body: AppStrings.todayPickups.tr(),
               ),
               sizeBox(),
               CustomCardHomeDelivery(),

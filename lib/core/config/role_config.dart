@@ -59,7 +59,7 @@ class RoleConfig {
 
       case AppRole.delivery:
         return [
-          _item(Icons.local_shipping, AppStrings.pickups.tr()),
+          _item(Icons.local_shipping_outlined, AppStrings.pickups.tr()),
           _item(Icons.history, AppStrings.history.tr()),
           _item(Icons.person, AppStrings.profile.tr()),
         ];

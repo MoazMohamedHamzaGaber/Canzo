@@ -131,4 +131,14 @@ class AppStrings {
   static const tenKgBasket = "10_kg_basket";
 
 
+  // Home Delivery
+  static const todayPickups = "today_pickups";
+  static const todayOverview = "today_overview";
+  static const assigned = "assigned";
+  static const completedToday = "completed_today";
+  static const volume = "volume";
+  static const activePickups = "active_pickups";
+  static const completePickups = "complete_pickups";
+
+
 }

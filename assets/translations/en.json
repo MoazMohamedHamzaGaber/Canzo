@@ -106,5 +106,13 @@
   "for_large_waste": "For large waste",
   "2_kg_basket": "2 kg basket",
   "5_kg_basket": "5 kg basket",
-  "10_kg_basket": "10 kg basket"
+  "10_kg_basket": "10 kg basket",
+
+  "today_pickups": "Today\\'s pickups await",
+  "today_overview": "TODAY\\'S OVERVIEW",
+  "assigned": "Assigned",
+  "completed_today": "Completed today",
+  "volume": "Volume",
+  "active_pickups": "ACTIVE PICKUPS",
+  "complete_pickups": "COMPLETED PICKUPS"
 }
