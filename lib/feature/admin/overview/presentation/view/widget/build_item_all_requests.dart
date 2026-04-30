@@ -1,5 +1,7 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BuildItemAllRequests extends StatelessWidget {
@@ -15,7 +17,7 @@ class BuildItemAllRequests extends StatelessWidget {
           sizeBox(width: 10),
           Text('Moaz Mohamed -req-1001',),
           Spacer(),
-          Text('EGP 300',
+          Text('${AppStrings.egp.tr()} 300',
           style: TextStyle(
             color: AppColors.green,
             fontWeight: FontWeight.bold

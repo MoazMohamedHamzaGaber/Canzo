@@ -21,8 +21,8 @@ class OverviewViewBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppBar(
-                title: AppStrings.admin.tr(),
-                body: 'System overview & approvals',
+                title: AppStrings.adminApp.tr(),
+                body: AppStrings.systemOverview.tr(),
               ),
               sizeBox(),
               CustomCardOverviewAdmin(),

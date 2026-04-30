@@ -20,7 +20,7 @@ class CustomCardOverviewAdmin extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'ADMIN BALANCE',
+              AppStrings.adminBalance.tr(),
               style: StyleText.style13.copyWith(
                 color: AppColors.grey,
                 fontWeight: FontWeight.bold,
@@ -30,7 +30,7 @@ class CustomCardOverviewAdmin extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'EGP 10,000',
+                    '${AppStrings.egp.tr()} 10,000',
                     style: StyleText.style40.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -40,14 +40,14 @@ class CustomCardOverviewAdmin extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      'Total paid out',
+                      AppStrings.totalPaidOut.tr(),
                       style: StyleText.style16.copyWith(
                         color: Colors.grey,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      'EGP 400',
+                      '${AppStrings.egp.tr()} 400',
                       style: StyleText.style20().copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -62,9 +62,9 @@ class CustomCardOverviewAdmin extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildItem(AppStrings.user.tr(), '1'),
+                buildItem(AppStrings.userA.tr(), '1'),
                 sizeBox(width: 10),
-                buildItem('agent', '1'),
+                buildItem(AppStrings.agent.tr(), '1'),
                 sizeBox(width: 10),
                 buildItem(AppStrings.pickups.tr(), '4'),
               ],

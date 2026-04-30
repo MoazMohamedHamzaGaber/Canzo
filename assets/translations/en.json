@@ -127,5 +127,18 @@
   "tue": "Tue",
   "wed": "Wed",
   "thu": "Thu",
-  "fri": "Fri"
+  "fri": "Fri",
+
+
+  "system_overview": "System overview & approvals",
+  "admin_balance": "ADMIN BALANCE",
+  "admin_app": "Admin",
+  "total_paid_out": "Total paid out",
+  "agent": "Agent",
+  "userA": "User",
+  "pending_approval": "PENDING APPROVAL",
+  "new": "new",
+  "assign_agent": "Assign agent",
+  "active_in_field": "ACTIVE IN FIELD",
+  "all_requests": "ALL REQUESTS"
 }

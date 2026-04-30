@@ -1,6 +1,8 @@
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/build_item_pending_approvals.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class PendingApprovals extends StatelessWidget {
@@ -14,7 +16,7 @@ class PendingApprovals extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-               'PENDING APPROVAL',
+                AppStrings.pendingApproval.tr(),
                 style: StyleText.style18.copyWith(
                   color: Colors.green.shade500,
                   fontWeight: FontWeight.bold,
@@ -22,7 +24,7 @@ class PendingApprovals extends StatelessWidget {
               ),
             ),
             Text(
-             '2 new',
+             '2 ${AppStrings.newItem.tr()}',
               style: StyleText.style13.copyWith(
                 color: Colors.green.shade500,
                 fontWeight: FontWeight.bold,

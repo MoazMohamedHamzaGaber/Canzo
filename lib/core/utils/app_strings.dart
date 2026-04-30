@@ -154,4 +154,19 @@ class AppStrings {
   static const fri = "fri";
 
 
+  // Overview admin
+
+  static const String systemOverview = "system_overview";
+  static const String adminBalance = "admin_balance";
+  static const String adminApp = "admin_app";
+  static const String totalPaidOut = "total_paid_out";
+  static const String agent = "agent";
+  static const String userA = "userA";
+  static const String pendingApproval = "pending_approval";
+  static const String newItem = "new";
+  static const String assignAgent = "assign_agent";
+  static const String activeInField = "active_in_field";
+  static const String allRequests = "all_requests";
+
+
 }

@@ -42,7 +42,7 @@ class BuildItemPendingApprovals extends StatelessWidget {
           ),
           sizeBox(),
           buildMaterialButton(
-            text: 'Assign agent',
+            text: AppStrings.assignAgent.tr(),
             function: () {},
             color: AppColors.green,
           ),

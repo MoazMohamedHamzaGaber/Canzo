@@ -125,5 +125,17 @@
   "tue": "الثلاثاء",
   "wed": "الأربعاء",
   "thu": "الخميس",
-  "fri": "الجمعة"
+  "fri": "الجمعة",
+
+  "system_overview": "نظرة عامة على النظام والموافقات",
+  "admin_balance": "رصيد الأدمن",
+  "admin_app": "الأدمن",
+  "total_paid_out": "إجمالي المدفوع",
+  "agent": "مندوب",
+  "userA": "مستخدم",
+  "pending_approval": "قيد الموافقة",
+  "new": "جديد",
+  "assign_agent": "تعيين مندوب",
+  "active_in_field": "نشط في الميدان",
+  "all_requests": "كل الطلبات"
 }
