@@ -113,5 +113,17 @@
   "completed_today": "تم إنجازه اليوم",
   "volume": "الحجم",
   "active_pickups": "الطلبات النشطة",
-  "complete_pickups": "الطلبات المكتملة"
+  "complete_pickups": "الطلبات المكتملة",
+
+  "system_insights": "إحصائيات النظام",
+  "revenue": "الإيرادات - آخر 7 أيام",
+  "total_this_week": "إجمالي هذا الأسبوع",
+  "most_collection": "أكثر المواد جمعًا",
+  "sat": "السبت",
+  "sun": "الأحد",
+  "mon": "الإثنين",
+  "tue": "الثلاثاء",
+  "wed": "الأربعاء",
+  "thu": "الخميس",
+  "fri": "الجمعة"
 }

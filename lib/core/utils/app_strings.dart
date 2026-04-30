@@ -140,5 +140,18 @@ class AppStrings {
   static const activePickups = "active_pickups";
   static const completePickups = "complete_pickups";
 
+  // Analytic admin
+  static const systemInsights = "system_insights";
+  static const revenue = "revenue";
+  static const totalThisWeek = "total_this_week";
+  static const mostCollection = "most_collection";
+  static const sat = "sat";
+  static const sun = "sun";
+  static const mon = "mon";
+  static const tue = "tue";
+  static const wed = "wed";
+  static const thu = "thu";
+  static const fri = "fri";
+
 
 }

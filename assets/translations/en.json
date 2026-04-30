@@ -114,5 +114,18 @@
   "completed_today": "Completed today",
   "volume": "Volume",
   "active_pickups": "ACTIVE PICKUPS",
-  "complete_pickups": "COMPLETED PICKUPS"
+  "complete_pickups": "COMPLETED PICKUPS",
+
+
+  "system_insights": "System insights",
+  "revenue": "REVENUE - LAST 7 DAYS",
+  "total_this_week": "Total this week",
+  "most_collection": "MOST COLLECTED MATERIALS",
+  "sat": "Sat",
+  "sun": "Sun",
+  "mon": "Mon",
+  "tue": "Tue",
+  "wed": "Wed",
+  "thu": "Thu",
+  "fri": "Fri"
 }
