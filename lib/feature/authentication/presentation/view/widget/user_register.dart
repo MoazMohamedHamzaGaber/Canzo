@@ -52,8 +52,7 @@ class _UserRegisterState extends State<UserRegister> {
           validate: '',
           type: TextInputType.phone,
         ),
-        if (widget.state != null &&
-            widget.state!.isNotEmpty)
+        if (widget.state != null)
           CustomTextField(
             controller: activityNameController,
             title: getActivityLabel(widget.state!),
