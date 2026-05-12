@@ -18,7 +18,10 @@ class BuildItemActiveRequest extends StatelessWidget {
         builder: (BuildContext context, state) {
           var cubit = context.read<HomeCubit>();
           return Container(
-            padding: EdgeInsets.only(top: 12, bottom: 20, right: 12, left: 12),
+            padding: EdgeInsets.symmetric(
+              vertical: 12,
+              horizontal: 12
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: Colors.black45),
