@@ -22,6 +22,7 @@ class _UserLoginState extends State<UserLogin> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,12 +51,14 @@ class _UserLoginState extends State<UserLogin> {
           obscureText: true,
           type: TextInputType.visiblePassword,
         ),
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            AppStrings.forgetPassword.tr(),
-            style: TextStyle(color: AppColors.green),
-          ),
+        Row(
+          children: [
+            Spacer(),
+            Text(
+              AppStrings.forgetPassword.tr(),
+              style: TextStyle(color: AppColors.green),
+            ),
+          ],
         ),
         sizeBox(),
         buildMaterialButton(

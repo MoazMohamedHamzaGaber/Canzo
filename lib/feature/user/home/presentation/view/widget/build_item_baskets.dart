@@ -1,5 +1,4 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
-import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -40,23 +39,10 @@ class BuildItemBaskets extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: 5,
-                      horizontal: 10
-                  ),
-                  margin: EdgeInsets.only(top: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade50,
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.black45),
-                  ),
-                  child: Text(AppStrings.empty.tr(),
-                    style: StyleText.style13.copyWith(
-                        color: AppColors.green,
-                        fontWeight: FontWeight.bold
-                    ),
-                  ),
+                Switch(
+                    value: false,
+                    activeThumbColor: Colors.green,
+                    onChanged: (value) async {}
                 ),
               ],
             ),

@@ -20,7 +20,7 @@ Future navigateAndFinish(context,Widget)
 }
 
 Widget sizeBox({double? height,double? width})=>SizedBox(
-  height: height ?? 20,
+  height: height ?? 25,
   width: width ?? 20,
 );
 
