@@ -122,9 +122,7 @@ class SelectBasketView extends StatelessWidget {
 
         return Row(
           children: [
-            Image.asset('assets/images/basket.jpg', width: 40, height: 40),
-            const SizedBox(width: 10),
-
+            Image.asset('assets/images/basket.png', width: 45, height: 45),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

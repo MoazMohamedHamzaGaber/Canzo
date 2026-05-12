@@ -22,8 +22,7 @@ class BuildItemBaskets extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset('assets/images/basket.jpg', width: 50, height: 50,),
-          SizedBox(width: 10,),
+          Image.asset('assets/images/basket.png', width: 50, height: 50,),
           Expanded(
             child: Row(
               children: [
