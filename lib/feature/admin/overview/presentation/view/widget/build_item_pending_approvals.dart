@@ -43,7 +43,7 @@ class BuildItemPendingApprovals extends StatelessWidget {
           ),
           sizeBox(),
           buildMaterialButton(
-            text: AppStrings.assignAgent.tr(),
+            text: AppStrings.check.tr(),
             function: () {
               showDialog(
                 context: context,

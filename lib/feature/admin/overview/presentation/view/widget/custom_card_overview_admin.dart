@@ -64,8 +64,8 @@ class CustomCardOverviewAdmin extends StatelessWidget {
               children: [
                 buildItem(AppStrings.userA.tr(), '1'),
                 sizeBox(width: 10),
-                buildItem(AppStrings.agent.tr(), '1'),
-                sizeBox(width: 10),
+                // buildItem(AppStrings.agent.tr(), '1'),
+                // sizeBox(width: 10),
                 buildItem(AppStrings.pickups.tr(), '4'),
               ],
             ),

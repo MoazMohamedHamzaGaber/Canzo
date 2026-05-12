@@ -174,6 +174,7 @@ class AppStrings {
   static const String date = "date";
   static const String details = "details";
   static const String close = "close";
+  static const String check = "check";
 
 
 }
