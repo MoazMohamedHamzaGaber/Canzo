@@ -175,6 +175,7 @@ class AppStrings {
   static const String details = "details";
   static const String close = "close";
   static const String check = "check";
+  static const String addBaskets = "add_baskets";
 
 
 }

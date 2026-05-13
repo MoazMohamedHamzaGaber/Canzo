@@ -2,7 +2,7 @@ import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
-import 'package:canzo_app/feature/user/home/presentation/view/widget/create_pickup.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/select_basket_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class PickupRequestView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        navigateTo(context, CreatePickup());
+        navigateTo(context, SelectBasketView());
       },
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -40,7 +40,7 @@ class PickupRequestView extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            sizeBox(),
+            sizeBox(width: 10),
             Expanded(
               child: Row(
                 children: [
@@ -48,13 +48,13 @@ class PickupRequestView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        AppStrings.newPickupRequest.tr(),
+                        AppStrings.addBaskets.tr(),
                         style: StyleText.style19.copyWith(
                           color: AppColors.green,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Text('100 ${AppStrings.filledPackage.tr()}', style: StyleText.style13),
+                     // Text('100 ${AppStrings.filledPackage.tr()}', style: StyleText.style13),
                     ],
                   ),
                   Spacer(),
