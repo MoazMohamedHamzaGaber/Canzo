@@ -30,6 +30,10 @@ class AppStrings {
   static const  email = "email";
   static const forgetPassword = "forget_password";
   static const signIn = "sign_in";
+  static const or = "or";
+  static const google = "google";
+  static const facebook = "facebook";
+  static const apple = "apple";
 
   static const activityType = "activity_type";
   static const selectActivityType = "select_activity_type";
