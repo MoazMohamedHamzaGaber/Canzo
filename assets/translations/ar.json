@@ -15,6 +15,7 @@
   "your_credentials": "أدخل بياناتك للوصول إلى حسابك",
   "phone_number": "رقم الهاتف",
   "password": "كلمة المرور",
+  "confirm_password": "تاكيد كلمة المرور",
   "forget_password": "نسيت كلمة المرور؟",
   "sign_in": "تسجيل الدخول",
   "activity_type": "نوع النشاط",
@@ -147,5 +148,6 @@
   "details": "التفاصيل",
   "close": "إغلاق",
   "check": "فحص",
-  "add_baskets": "اضافة باسكات"
+  "add_baskets": "اضافة باسكات",
+  "email": "الايميل"
 }

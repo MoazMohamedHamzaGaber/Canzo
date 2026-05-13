@@ -45,7 +45,7 @@ class LoginViewBody extends StatelessWidget {
 Widget _buildLoginForm(AppRole? role, AuthState state) {
   switch (role) {
     case AppRole.user:
-      return UserLogin(state: state.selectedActivityType);
+      return UserLogin();
 
     case AppRole.admin:
       return const AdminLogin();

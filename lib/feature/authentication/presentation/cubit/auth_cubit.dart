@@ -18,4 +18,29 @@ class AuthCubit extends Cubit<AuthState> {
       state.copyWith(appRole: role),
     );
   }
+
+  bool obscurePassword = true;
+  bool obscureConfirmPassword = true;
+
+  void changePasswordObscure() {
+    obscurePassword = !obscurePassword;
+
+    emit(
+      state.copyWith(
+        obscurePassword: obscurePassword,
+        obscureConfirmPassword: obscureConfirmPassword,
+      ),
+    );
+  }
+
+  void changeConfirmPasswordObscure() {
+    obscureConfirmPassword = !obscureConfirmPassword;
+
+    emit(
+      state.copyWith(
+        obscurePassword: obscurePassword,
+        obscureConfirmPassword: obscureConfirmPassword,
+      ),
+    );
+  }
 }

@@ -26,6 +26,8 @@ class AppStrings {
 
   static const phoneNumber = "phone_number";
   static const password = "password";
+  static const confirmPassword = "confirm_password";
+  static const  email = "email";
   static const forgetPassword = "forget_password";
   static const signIn = "sign_in";
 

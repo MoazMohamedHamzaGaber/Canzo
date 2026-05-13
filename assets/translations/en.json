@@ -15,6 +15,7 @@
   "your_credentials": "Enter your credentials to access your account",
   "phone_number": "Phone number",
   "password": "Password",
+  "confirm_password": "Confirm Password",
   "forget_password": "Forget password?",
   "sign_in": "Sign in",
   "activity_type": "Activity type",
@@ -63,7 +64,7 @@
 
 
   "hi": "Hi",
-  "lets_recycle": "Lets\\'s recycle something today",
+  "lets_recycle": "Lets's recycle something today",
   "wallet_balance": "WALLET BALANCE",
   "total_earned": "Total earned",
   "view": "View",
@@ -108,8 +109,8 @@
   "5_kg_basket": "5 kg basket",
   "10_kg_basket": "10 kg basket",
 
-  "today_pickups": "Today\\'s pickups await",
-  "today_overview": "TODAY\\'S OVERVIEW",
+  "today_pickups": "Today's pickups await",
+  "today_overview": "TODAY'S OVERVIEW",
   "assigned": "Assigned",
   "completed_today": "Completed today",
   "volume": "Volume",
@@ -150,5 +151,6 @@
   "details": "Details",
   "close": "Close",
   "check": "Check",
-  "add_baskets": "Add baskets"
+  "add_baskets": "Add baskets",
+  "email": "Email"
 }

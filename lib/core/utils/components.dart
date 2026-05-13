@@ -37,6 +37,7 @@ Widget buildTextField({
   required String title,
   required TextInputType keyboardType,
   String? validate,
+  IconButton? icon,
   int? maxLength,
   int? minLines,
   int? maxLines,
@@ -67,6 +68,7 @@ Widget buildTextField({
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
         ),
+        suffixIcon: icon,
       ),
     );
 
