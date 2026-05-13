@@ -58,10 +58,7 @@ class BuildItemActiveRequest extends StatelessWidget {
                         _buildItem(AppStrings.complete.tr(), AppColors.green, 'complete'),
                       ],
                       child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 25,
-                        ),
+                        padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                         margin: EdgeInsets.only(top: 5),
                         decoration: BoxDecoration(
                           color: state.selectedActiveType == 'preparing'
