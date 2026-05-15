@@ -1,0 +1,32 @@
+import 'package:canzo_app/service_locator/login_service_locator.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:get_it/get_it.dart';
+import '../api/api_consumer.dart';
+import '../api/end_points.dart';
+
+final serviceLocator = GetIt.instance;
+
+class DI {
+
+  static Future<void> execute() async {
+    serviceLocator.registerLazySingleton<Dio>(
+          () => Dio(
+        BaseOptions(
+          baseUrl: kReleaseMode ? EndPoints.baseUrl : EndPoints.baseUrl,
+          connectTimeout: const Duration(seconds: 60),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+        ),
+      ),
+    );
+    serviceLocator.registerLazySingleton<ApiConsumer>(
+          () => BaseApiConsumer(
+        serviceLocator(),
+      ),
+    );
+    LoginServiceLocator.execute(serviceLocator);
+  }
+}

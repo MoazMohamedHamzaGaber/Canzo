@@ -1,3 +1,4 @@
+import 'package:canzo_app/core/service/service_locator.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/role_view.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await DI.execute();
   await EasyLocalization.ensureInitialized();
 
   runApp(
