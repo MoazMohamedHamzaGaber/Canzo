@@ -26,3 +26,4 @@ Widget sizeBox({double? height,double? width})=>SizedBox(
 
 String lang = 'en';
 
+String token = '';

@@ -41,6 +41,9 @@ dependencies:
   easy_localization: ^3.0.8
   url_launcher: ^6.3.2
   fl_chart: ^1.2.0
+  dio: ^5.9.2
+  dartz: ^0.10.1
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:
