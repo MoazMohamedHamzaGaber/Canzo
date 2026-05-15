@@ -2,6 +2,9 @@ import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
+import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
+import 'package:canzo_app/feature/authentication/domain/repository/auth_repository.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/custom_text_field.dart';
@@ -29,101 +32,140 @@ class _UserRegisterState extends State<UserRegister> {
   var phoneController = TextEditingController();
   var activityNameController = TextEditingController();
   var addressController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthState>(
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (BuildContext context, AuthState state) {
+        if (state.status == AuthStates.success) {
+          showSnackBar(
+            context: context,
+            message: 'Account created successfully',
+          );
+          navigateAndFinish(context, SelectBasketView());
+        }
+        if (state.status == AuthStates.error) {
+          Text('state');
+        }
+      },
       builder: (BuildContext context, state) {
         var cubit = context.read<AuthCubit>();
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextField(
-              controller: nameController,
-              title: AppStrings.fullName.tr(),
-              name: AppStrings.fullName.tr(),
-              validate: '',
-              type: TextInputType.name,
-            ),
-            CustomTextField(
-              controller: emailController,
-              title: AppStrings.email.tr(),
-              name: AppStrings.email.tr(),
-              validate: '',
-              type: TextInputType.emailAddress,
-            ),
-            CustomTextField(
-              controller: phoneController,
-              title: AppStrings.phoneNumber.tr(),
-              name: AppStrings.phoneNumber.tr(),
-              validate: '',
-              type: TextInputType.phone,
-            ),
-            CustomTextField(
-              controller: passwordController,
-              title: AppStrings.password.tr(),
-              name: '***********',
-              validate: '',
-              obscureText: cubit.obscurePassword,
-              type: TextInputType.visiblePassword,
-              icon: IconButton(
-                onPressed: () {
-                  cubit.changePasswordObscure();
-                },
-                icon: Icon(
-                  cubit.obscurePassword
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                  color: AppColors.grey,
-                ),
-              ),
-            ),
-            CustomTextField(
-              controller: confirmPasswordController,
-              title: AppStrings.confirmPassword.tr(),
-              name: '***********',
-              validate: '',
-              obscureText: cubit.obscureConfirmPassword,
-              type: TextInputType.visiblePassword,
-              icon: IconButton(
-                onPressed: () {
-                  cubit.changeConfirmPasswordObscure();
-                },
-                icon: Icon(
-                  cubit.obscureConfirmPassword
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                  color: AppColors.grey,
-                ),
-              ),
-            ),
-            CustomTextField(
-              controller: addressController,
-              title: AppStrings.address.tr(),
-              name: AppStrings.address.tr(),
-              validate: '',
-              type: TextInputType.text,
-            ),
-            sizeBox(height: 10),
-            DropdownButtonSection(),
-            if (widget.state != null)
+        return Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               CustomTextField(
-                controller: activityNameController,
-                title: getActivityLabel(widget.state!),
-                name: getActivityLabel(widget.state!),
+                controller: nameController,
+                title: AppStrings.fullName.tr(),
+                name: AppStrings.fullName.tr(),
+                validate: '',
+                type: TextInputType.name,
+              ),
+              CustomTextField(
+                controller: emailController,
+                title: AppStrings.email.tr(),
+                name: AppStrings.email.tr(),
+                validate: '',
+                type: TextInputType.emailAddress,
+              ),
+              CustomTextField(
+                controller: phoneController,
+                title: AppStrings.phoneNumber.tr(),
+                name: AppStrings.phoneNumber.tr(),
+                validate: '',
+                type: TextInputType.phone,
+              ),
+              CustomTextField(
+                controller: passwordController,
+                title: AppStrings.password.tr(),
+                name: '***********',
+                validate: '',
+                obscureText: cubit.obscurePassword,
+                type: TextInputType.visiblePassword,
+                icon: IconButton(
+                  onPressed: () {
+                    cubit.changePasswordObscure();
+                  },
+                  icon: Icon(
+                    cubit.obscurePassword
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: AppColors.grey,
+                  ),
+                ),
+              ),
+              CustomTextField(
+                controller: confirmPasswordController,
+                title: AppStrings.confirmPassword.tr(),
+                name: '***********',
+                validate: '',
+                obscureText: cubit.obscureConfirmPassword,
+                type: TextInputType.visiblePassword,
+                icon: IconButton(
+                  onPressed: () {
+                    cubit.changeConfirmPasswordObscure();
+                  },
+                  icon: Icon(
+                    cubit.obscureConfirmPassword
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: AppColors.grey,
+                  ),
+                ),
+              ),
+              CustomTextField(
+                controller: addressController,
+                title: AppStrings.address.tr(),
+                name: AppStrings.address.tr(),
                 validate: '',
                 type: TextInputType.text,
               ),
-            sizeBox(),
-            buildMaterialButton(
-              text: AppStrings.createAccount.tr(),
-              function: () {
-                navigateAndFinish(context, SelectBasketView());
-              },
-              color: AppColors.green,
-            ),
-            SocialLoginView(),
-          ],
+              sizeBox(height: 10),
+              DropdownButtonSection(),
+              if (widget.state != null)
+                CustomTextField(
+                  controller: activityNameController,
+                  title: getActivityLabel(widget.state!),
+                  name: getActivityLabel(widget.state!),
+                  validate: '',
+                  type: TextInputType.text,
+                ),
+              sizeBox(),
+              buildMaterialButton(
+                text: AppStrings.createAccount.tr(),
+                loading:state.status == AuthStates.loading? true : false,
+                function: () {
+                  if (formKey.currentState!.validate()) {
+                    if (state.selectedActivityType?.apiValue == null) {
+                      showSnackBar(
+                        context: context,
+                        message: 'Please select activity type',
+                        backgroundColor: Colors.red,
+                      );
+                    } else {
+                      cubit.signUp(
+                        context,
+                        SignUpParams(
+                          username: nameController.text,
+                          email: emailController.text,
+                          password: passwordController.text,
+                          confirmPassword: confirmPasswordController.text,
+                          phoneNumber: phoneController.text,
+                          address: addressController.text,
+                          activityType: state.selectedActivityType!.apiValue,
+                          activityName: activityNameController.text,
+                        ),
+                      );
+                    }
+                  }
+                },
+                color: AppColors.green,
+              ),
+              SocialLoginView(),
+            ],
+          ),
         );
       },
     );

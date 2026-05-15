@@ -32,9 +32,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthCubit(),),
-        BlocProvider(create: (context) => HomeCubit(),),
-        BlocProvider(create: (context) => ProfileCubit(),),
+        BlocProvider(create: (context) => serviceLocator<AuthCubit>(),),
+        BlocProvider(create: (context) => serviceLocator<HomeCubit>()),
+        BlocProvider(create: (context) => serviceLocator<ProfileCubit>(),),
       ],
       child: MaterialApp(
         title: 'Canzo',
