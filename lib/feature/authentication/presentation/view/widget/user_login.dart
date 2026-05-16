@@ -1,5 +1,7 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
+import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/social_login_view.dart';
@@ -20,61 +22,87 @@ class UserLogin extends StatefulWidget {
 class _UserLoginState extends State<UserLogin> {
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
 
-    return BlocBuilder<AuthCubit,AuthState>(
+    return BlocConsumer<AuthCubit,AuthState>(
+      listener: (BuildContext context, AuthState state) async{
+        if (state.status == AuthStates.success) {
+          showSnackBar(
+            context: context,
+            message: state.user!.message,
+          );
+          await Future.delayed(const Duration(seconds: 2));
+
+          if(context.mounted){
+            navigateAndFinish(context, BottomNavBar());
+          }
+        }
+      },
       builder: (BuildContext context, state) {
         var cubit = context.read<AuthCubit>();
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomTextField(
-              controller: emailController,
-              title: AppStrings.email.tr(),
-              name: AppStrings.email.tr(),
-              validate: '',
-              type: TextInputType.emailAddress,
-            ),
-            CustomTextField(
-              controller: passwordController,
-              title: AppStrings.password.tr(),
-              name: '***********',
-              validate: '',
-              obscureText: cubit.obscurePassword,
-              type: TextInputType.visiblePassword,
-              icon: IconButton(
-                onPressed: () {
-                  cubit.changePasswordObscure();
-                },
-                icon: Icon(
-                  cubit.obscurePassword
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                  color: AppColors.grey,
+        return Form(
+          key: formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextField(
+                controller: emailController,
+                title: AppStrings.email.tr(),
+                name: AppStrings.email.tr(),
+                validate: '',
+                type: TextInputType.emailAddress,
+              ),
+              CustomTextField(
+                controller: passwordController,
+                title: AppStrings.password.tr(),
+                name: '***********',
+                validate: '',
+                obscureText: cubit.obscurePassword,
+                type: TextInputType.visiblePassword,
+                icon: IconButton(
+                  onPressed: () {
+                    cubit.changePasswordObscure();
+                  },
+                  icon: Icon(
+                    cubit.obscurePassword
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: AppColors.grey,
+                  ),
                 ),
               ),
-            ),
-            Row(
-              children: [
-                Spacer(),
-                Text(
-                  AppStrings.forgetPassword.tr(),
-                  style: TextStyle(color: AppColors.green),
-                ),
-              ],
-            ),
-            sizeBox(),
-            buildMaterialButton(
-              text: AppStrings.login.tr(),
-              function: () {
-                navigateAndFinish(context, BottomNavBar());
-              },
-              color: AppColors.green,
-            ),
-            SocialLoginView(),
-          ],
+              Row(
+                children: [
+                  Spacer(),
+                  Text(
+                    AppStrings.forgetPassword.tr(),
+                    style: TextStyle(color: AppColors.green),
+                  ),
+                ],
+              ),
+              sizeBox(),
+              buildMaterialButton(
+                text: AppStrings.signIn.tr(),
+                loading:state.status == AuthStates.loading? true : false,
+                function: () {
+                  if (formKey.currentState!.validate()) {
+                    cubit.signIn(
+                      context,
+                      SignInParams(
+                        identifier: emailController.text,
+                        password: passwordController.text,
+                      ),
+                    );
+                  }
+                },
+                color: AppColors.green,
+              ),
+              SocialLoginView(),
+            ],
+          ),
         );
       },
     );

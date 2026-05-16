@@ -1,10 +1,10 @@
 import 'package:canzo_app/core/api/print_helper.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/sign_in_use_case.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/sign_up_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
-import 'package:canzo_app/feature/authentication/domain/repository/auth_repository.dart';
-import 'package:canzo_app/feature/authentication/domain/useCases/sign_up_use_case.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,8 +12,9 @@ import 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   final SignUpUseCases _signUpUseCases;
+  final SignInUseCases _signInUseCases;
 
-  AuthCubit(this._signUpUseCases) : super(const AuthState());
+  AuthCubit(this._signUpUseCases, this._signInUseCases) : super(const AuthState());
 
 
   void changeSelectedActivity(ActivityType value) {
@@ -67,6 +68,23 @@ class AuthCubit extends Cubit<AuthState> {
     }, (data) {
       emit(state.copyWith(status: AuthStates.success));
       pr(data);
+    });
+  }
+
+  Future<void> signIn(BuildContext context,SignInParams params) async {
+    emit(state.copyWith(status: AuthStates.loading));
+
+    final response = await _signInUseCases(params);
+    response.fold((l) {
+      emit(state.copyWith(failure: l, status: AuthStates.error));
+      showSnackBar(
+        context: context,
+        message: l.errMessage,
+        backgroundColor: Colors.red
+      );
+    }, (data) {
+      emit(state.copyWith(user: data,status: AuthStates.success));
+      pr(data.message);
     });
   }
 }

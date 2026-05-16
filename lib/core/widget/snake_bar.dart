@@ -14,8 +14,8 @@ void showSnackBar({
     transitionDuration: const Duration(milliseconds: 400),
     pageBuilder: (context, animation, secondaryAnimation) {
       Future.delayed(const Duration(seconds: 2), () {
-        if (context.mounted) {
-          Navigator.pop(context);
+        if (Navigator.canPop(context)) {
+          Navigator.of(context, rootNavigator: true).pop();
         }
       });
 

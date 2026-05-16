@@ -1,18 +1,12 @@
-import 'package:schoolix_app/feature/Login/domain/entities/login.dart';
+import 'package:canzo_app/feature/authentication/domain/entity/login_entity.dart';
 
-class LoginModel extends LoginEntity{
-  const LoginModel({required super.authToken,super.refreshToken});
+class LoginModel extends LoginEntity {
+  LoginModel({required super.message, required super.token});
 
   factory LoginModel.fromJson(Map<String,dynamic> json){
-   return LoginModel(
-       authToken:  json['auth_token'] ??'',
-     refreshToken: json['refresh_token'],
-   );
+    return LoginModel(
+      message:  json['message'] ??'',
+      token: json['token'],
+    );
   }
-
-  // Map<String,dynamic> toJson(){
-  //   return {
-  //     'auth_token': authToken
-  //   };
-  // }
 }

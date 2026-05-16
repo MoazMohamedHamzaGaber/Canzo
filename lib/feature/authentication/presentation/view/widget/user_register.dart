@@ -3,8 +3,8 @@ import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
-import 'package:canzo_app/feature/authentication/domain/repository/auth_repository.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/custom_text_field.dart';
@@ -44,9 +44,6 @@ class _UserRegisterState extends State<UserRegister> {
             message: 'Account created successfully',
           );
           navigateAndFinish(context, SelectBasketView());
-        }
-        if (state.status == AuthStates.error) {
-          Text('state');
         }
       },
       builder: (BuildContext context, state) {

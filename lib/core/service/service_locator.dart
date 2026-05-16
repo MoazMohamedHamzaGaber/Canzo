@@ -1,4 +1,5 @@
 import 'package:canzo_app/service_locator/auth_service_locator.dart';
+import 'package:canzo_app/service_locator/home_service_locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
@@ -28,5 +29,6 @@ class DI {
       ),
     );
     AuthServiceLocator.execute(serviceLocator);
+    HomeServiceLocator.execute(serviceLocator);
   }
 }

@@ -1,6 +1,7 @@
 import 'package:canzo_app/core/error/failure.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
+import 'package:canzo_app/feature/authentication/domain/entity/login_entity.dart';
 
 enum AuthStates { loading, initial, error, success }
 
@@ -11,6 +12,7 @@ class AuthState {
   final AppRole? appRole;
   final bool? obscurePassword;
   final bool? obscureConfirmPassword;
+  final LoginEntity? user;
 
   const AuthState({
     this.status = AuthStates.initial,
@@ -19,6 +21,7 @@ class AuthState {
     this.appRole,
     this.obscurePassword,
     this.obscureConfirmPassword,
+    this.user,
   });
   AuthState copyWith({
     AuthStates? status,
@@ -28,6 +31,7 @@ class AuthState {
     bool? obscureText,
     bool? obscurePassword,
     bool? obscureConfirmPassword,
+    LoginEntity? user,
   }) {
     return AuthState(
       status: status ?? this.status,
@@ -36,6 +40,7 @@ class AuthState {
       appRole: appRole ?? this.appRole,
       obscurePassword: obscurePassword ?? this.obscurePassword,
       obscureConfirmPassword: obscureConfirmPassword ?? this.obscureConfirmPassword,
+      user: user ?? this.user,
     );
   }
 }
