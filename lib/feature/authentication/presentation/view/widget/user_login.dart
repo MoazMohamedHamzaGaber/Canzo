@@ -4,6 +4,7 @@ import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
+import 'package:canzo_app/feature/authentication/presentation/view/widget/forget_password.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/social_login_view.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -77,9 +78,14 @@ class _UserLoginState extends State<UserLogin> {
               Row(
                 children: [
                   Spacer(),
-                  Text(
-                    AppStrings.forgetPassword.tr(),
-                    style: TextStyle(color: AppColors.green),
+                  GestureDetector(
+                    onTap: (){
+                      navigateTo(context, ForgetPassword());
+                    },
+                    child: Text(
+                      AppStrings.forgetPassword.tr(),
+                      style: TextStyle(color: AppColors.green),
+                    ),
                   ),
                 ],
               ),

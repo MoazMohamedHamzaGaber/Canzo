@@ -11,6 +11,9 @@ abstract class AuthRemoteDataSource {
   Future<Either<Failure, bool>> signUp(SignUpParams params);
 
   Future<Either<Failure, LoginEntity>> signIn(SignInParams params);
+  Future<Either<Failure,bool>> forgetPassword(ForgetPasswordParams params);
+  Future<Either<Failure,bool>> verifyOtp(VerifyOtpParams params);
+  Future<Either<Failure,bool>> resetPasswordPassword(ResetPasswordParams params);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -52,6 +55,45 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       // }
 
       return Right(LoginModel.fromJson(response));
+    });
+  }
+
+  @override
+  Future<Either<Failure, bool>> forgetPassword(ForgetPasswordParams params) async {
+    var result = await _apiConsumer.post(
+      EndPoints.forgetPassword,
+      options: Options(),
+      data: params.toJson(),
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      return Right(true);
+    });
+  }
+
+  @override
+  Future<Either<Failure, bool>> resetPasswordPassword(ResetPasswordParams params) async {
+    var result = await _apiConsumer.post(
+      EndPoints.resetPassword,
+      options: Options(),
+      data: params.toJson(),
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      return Right(true);
+    });
+  }
+
+  @override
+  Future<Either<Failure, bool>> verifyOtp(VerifyOtpParams params) async {
+    var result = await _apiConsumer.post(
+      EndPoints.verifyOtp,
+      options: Options(),
+      data: params.toJson(),
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      return Right(true);
     });
   }
 }

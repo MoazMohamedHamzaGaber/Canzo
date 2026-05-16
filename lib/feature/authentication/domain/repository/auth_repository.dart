@@ -6,4 +6,7 @@ import 'package:dartz/dartz.dart';
 abstract class AuthRepository{
   Future<Either<Failure,bool>> signUp(SignUpParams params);
   Future<Either<Failure,LoginEntity>> signIn(SignInParams params);
+  Future<Either<Failure,bool>> forgetPassword(ForgetPasswordParams params);
+  Future<Either<Failure,bool>> verifyOtp(VerifyOtpParams params);
+  Future<Either<Failure,bool>> resetPasswordPassword(ResetPasswordParams params);
 }

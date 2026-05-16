@@ -22,4 +22,19 @@ class AuthRepositoryImpl implements AuthRepository{
   Future<Either<Failure, LoginEntity>> signIn(SignInParams params) {
     return _remoteDataSource.signIn(params);
   }
+
+  @override
+  Future<Either<Failure, bool>> forgetPassword(ForgetPasswordParams params) {
+    return _remoteDataSource.forgetPassword(params);
+  }
+
+  @override
+  Future<Either<Failure, bool>> resetPasswordPassword(ResetPasswordParams params) {
+    return _remoteDataSource.resetPasswordPassword(params);
+  }
+
+  @override
+  Future<Either<Failure, bool>> verifyOtp(VerifyOtpParams params) {
+    return _remoteDataSource.verifyOtp(params);
+  }
 }

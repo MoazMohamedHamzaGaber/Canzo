@@ -45,3 +45,47 @@ class SignUpParams {
     "activityName": activityName,
   };
 }
+
+class ForgetPasswordParams {
+  final String email;
+
+  ForgetPasswordParams({
+    required this.email,
+  });
+
+  Map<String, dynamic> toJson() => {
+    "email": email,
+  };
+}
+
+class VerifyOtpParams {
+  final String email;
+  final String otp;
+
+  VerifyOtpParams({
+    required this.email,
+    required this.otp,
+  });
+
+  Map<String, dynamic> toJson() => {
+    "otp": otp,
+  };
+}
+
+class ResetPasswordParams {
+  final String email;
+  final String password;
+  final String resetToken;
+
+  ResetPasswordParams({
+    required this.email,
+    required this.password,
+    required this.resetToken,
+  });
+
+  Map<String, dynamic> toJson() => {
+    "email": email,
+    "password": password,
+    "resetToken": resetToken,
+  };
+}

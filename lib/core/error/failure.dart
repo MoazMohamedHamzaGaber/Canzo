@@ -81,7 +81,7 @@ abstract class Failure {
 
       case 404:
         return const ServerFailure(
-          'Your request was not found',
+          'User not found',
         );
 
       case 500:
