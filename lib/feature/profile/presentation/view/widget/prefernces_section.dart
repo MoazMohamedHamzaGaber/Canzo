@@ -1,3 +1,4 @@
+import 'package:canzo_app/core/shared/shared_preference.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
@@ -49,7 +50,9 @@ class PreferencesSection extends StatelessWidget {
         sizeBox(height: 30),
         GestureDetector(
           onTap: () {
-            navigateAndFinish(context, LoginView());
+            SharedPreference.removeData(key: 'token').then((value) {
+              navigateAndFinish(context, LoginView());
+            });
           },
           child: Container(
             width: double.infinity,

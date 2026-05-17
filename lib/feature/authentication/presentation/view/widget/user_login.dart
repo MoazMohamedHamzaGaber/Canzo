@@ -1,3 +1,4 @@
+import 'package:canzo_app/core/shared/shared_preference.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
@@ -38,7 +39,13 @@ class _UserLoginState extends State<UserLogin> {
           await Future.delayed(const Duration(seconds: 2));
 
           if(context.mounted){
-            navigateAndFinish(context, BottomNavBar());
+            SharedPreference.saveData(
+              key: 'token',
+              value: state.user!.token,
+            ).then((value) {
+              token = state.user!.token;
+              navigateAndFinish(context, const BottomNavBar());
+            });
           }
         }
       },
