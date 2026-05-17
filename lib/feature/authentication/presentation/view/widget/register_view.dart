@@ -1,8 +1,5 @@
-import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
-import 'package:canzo_app/feature/authentication/presentation/view/widget/admin_register.dart';
-import 'package:canzo_app/feature/authentication/presentation/view/widget/delivery_register.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/user_register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
