@@ -26,24 +26,27 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   @override
   Widget build(BuildContext context) {
+    var cubit = context.read<AuthCubit>();
+
     return Scaffold(
       appBar: AppBar(title: Text('Forget Password')),
       body: BlocConsumer<AuthCubit,AuthState>(
-         listener: (BuildContext context, state) async{
-           if (state.status ==AuthStates.success) {
-             showSnackBar(
-               context: context,
-               message: 'OTP sent successfully',
-             );
-             await Future.delayed(const Duration(seconds: 2));
+        listener: (BuildContext context, state) async{
+          if (state.status == AuthStates.success) {
+            showSnackBar(
+              context: context,
+              message: 'OTP sent successfully',
+            );
+            await Future.delayed(const Duration(seconds: 2));
 
-             if(context.mounted){
-               navigateAndFinish(context, OtpView(email: emailController.text));
-             }
-           }
-         },
+            if(context.mounted){
+              navigateAndFinish(context, OtpView(
+                email: emailController.text,
+              ));
+            }
+          }
+        },
         builder: (BuildContext context, state) {
-          var cubit = context.read<AuthCubit>();
            return Form(
              key: formKey,
              child: Padding(
@@ -60,7 +63,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                    sizeBox(),
                    buildMaterialButton(
                      text: 'Confirm',
-                     loading:state.status == AuthStates.loading? true : false,
+                    loading:state.status == AuthStates.loading? true : false,
                      function: () {
                        if (formKey.currentState!.validate()) {
                          cubit.forgetPassword(

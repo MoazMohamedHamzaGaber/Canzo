@@ -1,12 +1,23 @@
+import 'dart:async';
+
+import 'package:canzo_app/core/utils/color.dart';
+import 'package:canzo_app/core/utils/components.dart';
+import 'package:canzo_app/core/utils/const.dart';
+import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
+import 'package:canzo_app/feature/authentication/presentation/view/widget/update_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OtpView extends StatefulWidget {
   final String email;
 
-  const OtpView({super.key, required this.email});
+  const OtpView({
+    super.key,
+    required this.email,
+  });
 
   @override
   State<OtpView> createState() => _OtpViewState();
@@ -14,6 +25,10 @@ class OtpView extends StatefulWidget {
 
 class _OtpViewState extends State<OtpView> {
   final TextEditingController otpController = TextEditingController();
+
+  final formKey = GlobalKey<FormState>();
+
+  Timer? timer;
   int seconds = 60;
 
   @override
@@ -23,83 +38,243 @@ class _OtpViewState extends State<OtpView> {
   }
 
   void startTimer() {
-    Future.doWhile(() async {
-      await Future.delayed(const Duration(seconds: 1));
-      if (seconds > 0) {
-        setState(() => seconds--);
-        return true;
-      }
-      return false;
-    });
+    timer?.cancel();
+
+    timer = Timer.periodic(
+      const Duration(seconds: 1),
+          (timer) {
+        if (seconds > 0) {
+          setState(() {
+            seconds--;
+          });
+        } else {
+          timer.cancel();
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    otpController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Verify Code")),
-      body: BlocConsumer<AuthCubit,AuthState>(
-         listener: (BuildContext context, state) {
-           // if (state.status ==AuthStates.verifyOtp) {
-           //   Navigator.push(
-           //     context,
-           //     MaterialPageRoute(
-           //       builder: (_) => NewPasswordView(),
-           //     ),
-           //   );
-           // }
-         },
-        builder: (BuildContext context, state) {
-           return Padding(
-             padding: const EdgeInsets.all(20),
-             child: Column(
-               children: [
-                 const SizedBox(height: 30),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) async {
+            if (state.status == AuthStates.successVerifyOtp) {
+              showSnackBar(
+                context: context,
+                message: 'OTP verified successfully',
+              );
 
-                 Text(
-                   "Enter the code sent to your email",
-                   style: TextStyle(fontSize: 16),
-                 ),
+              await Future.delayed(const Duration(seconds: 1));
 
-                 const SizedBox(height: 30),
+              if (context.mounted) {
+                navigateAndFinish(
+                  context,
+                  NewPasswordView(),
+                );
+              }
+            }
+          },
+          builder: (context, state) {
+            var cubit = context.read<AuthCubit>();
 
-                 TextField(
-                   controller: otpController,
-                   keyboardType: TextInputType.number,
-                   maxLength: 8,
-                   decoration: InputDecoration(
-                     border: OutlineInputBorder(),
-                     hintText: "Enter OTP",
-                   ),
-                 ),
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 20,
+              ),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    sizeBox(),
+                    Center(
+                      child: Container(
+                        height: 110,
+                        width: 110,
+                        decoration: BoxDecoration(
+                          color: AppColors.green.withOpacity(.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.mark_email_read_outlined,
+                          size: 55,
+                          color: AppColors.green,
+                        ),
+                      ),
+                    ),
 
-                 const SizedBox(height: 20),
+                    const SizedBox(height: 35),
 
-                 ElevatedButton(
-                   onPressed: () {
-                     // context.read<AuthCubit>().verifyCode(
-                     //   widget.email,
-                     //   otpController.text,
-                     // );
-                   },
-                   child: const Text("Verify"),
-                 ),
+                    const Center(
+                      child: Text(
+                        "Verify OTP",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
 
-                 const SizedBox(height: 20),
+                    const SizedBox(height: 12),
 
-                 seconds > 0
-                     ? Text("Resend code in $seconds s")
-                     : TextButton(
-                   onPressed: () {
-                     // context.read<AuthCubit>().resendOtp(widget.email);
-                     // setState(() => seconds = 60);
-                     // startTimer();
-                   },
-                   child: const Text("Resend Code"),
-                 ),
-               ],
-             ),
-           );
-        },
+                    Center(
+                      child: Text(
+                        "Enter the verification code sent to",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 6),
+
+                    Center(
+                      child: Text(
+                        widget.email,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.green,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 40),
+
+                    TextFormField(
+                      controller: otpController,
+                      keyboardType: TextInputType.number,
+                      textAlign: TextAlign.center,
+                      maxLength: 6,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 10,
+                      ),
+                      decoration: InputDecoration(
+                        counterText: "",
+                        hintText: "------",
+                        hintStyle: TextStyle(
+                          letterSpacing: 10,
+                          color: Colors.grey.shade400,
+                        ),
+                        filled: true,
+                        fillColor: Colors.grey.shade100,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(
+                            color: Colors.grey.shade300,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide(
+                            color: AppColors.green,
+                            width: 2,
+                          ),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 22,
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter OTP";
+                        }
+
+                        if (value.length < 6) {
+                          return "OTP must be 6 digits";
+                        }
+
+                        return null;
+                      },
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    buildMaterialButton(
+                      text: 'Verify Code',
+                      loading: state.status == AuthStates.loading,
+                      function: () {
+                        if (formKey.currentState!.validate()) {
+                          cubit.verifyOtp(
+                            context,
+                            VerifyOtpParams(
+                              email: widget.email,
+                              otp: otpController.text.trim(),
+                            ),
+                          );
+                        }
+                      },
+                      color: AppColors.green,
+                    ),
+
+                    const SizedBox(height: 25),
+
+                    Center(
+                      child: seconds > 0
+                          ? RichText(
+                        text: TextSpan(
+                          text: "Resend code in ",
+                          style: TextStyle(
+                            color: Colors.grey.shade700,
+                            fontSize: 15,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: "$seconds s",
+                              style: TextStyle(
+                                color: AppColors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                          : TextButton(
+                        onPressed: () {
+                          setState(() {
+                            seconds = 60;
+                          });
+
+                          startTimer();
+
+                          // cubit.resendOtp(widget.email);
+                        },
+                        child: Text(
+                          "Resend Code",
+                          style: TextStyle(
+                            color: AppColors.green,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dar
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/login_entity.dart';
 
-enum AuthStates { loading, initial, error, success }
+enum AuthStates { loading, initial, error, success ,successVerifyOtp,successForgetPassword}
 
 class AuthState {
   final AuthStates status;

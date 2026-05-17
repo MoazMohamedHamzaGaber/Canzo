@@ -135,7 +135,7 @@ class AuthCubit extends Cubit<AuthState> {
         );
       },
       (data) {
-        emit(state.copyWith(status: AuthStates.success));
+        emit(state.copyWith(status: AuthStates.successForgetPassword));
         pr(data);
       },
     );
@@ -155,9 +155,17 @@ class AuthCubit extends Cubit<AuthState> {
         );
       },
       (data) {
-        emit(state.copyWith(status: AuthStates.success));
+        emit(state.copyWith(status: AuthStates.successVerifyOtp));
         pr(data);
       },
+    );
+  }
+
+  void resetState() {
+    emit(
+      state.copyWith(
+        status: AuthStates.initial,
+      ),
     );
   }
 }
