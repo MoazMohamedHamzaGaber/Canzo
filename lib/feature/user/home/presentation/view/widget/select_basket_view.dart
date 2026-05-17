@@ -47,7 +47,7 @@ class SelectBasketView extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                       Text(AppStrings.basketType.tr()),
+                      Text(AppStrings.basketType.tr()),
                       sizeBox(height: 15),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -56,7 +56,9 @@ class SelectBasketView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: DropdownButton<String>(
-                          value: state.selectedMaterialType ?? AppStrings.plastic.tr(),
+                          value:
+                              state.selectedMaterialType ??
+                              AppStrings.plastic.tr(),
                           isExpanded: true,
                           icon: Icon(
                             Icons.keyboard_arrow_down_outlined,
@@ -78,21 +80,12 @@ class SelectBasketView extends StatelessWidget {
                   ),
                   sizeBox(),
                   buildItem(
-                    title: AppStrings.twoKgBasket.tr(),
-                    subtitle: AppStrings.forSmallWaste.tr(),
-                    keyName: '2kg',
-                  ),
-                  sizeBox(),
-                  buildItem(
-                    title: AppStrings.fiveKgBasket.tr(),
-                    subtitle: AppStrings.forMediumWaste.tr(),
-                    keyName: '5kg',
-                  ),
-                  sizeBox(),
-                  buildItem(
-                    title: AppStrings.tenKgBasket.tr(),
-                    subtitle: AppStrings.forLargeWaste.tr(),
-                    keyName: '10kg',
+                    title: state.selectedMaterialType !=null
+                        ? state.selectedMaterialType == AppStrings.plastic.tr()
+                              ? 'Soon'
+                              : '4kg basket'
+                        : 'Soon',
+                    keyName: '4kg',
                   ),
                   sizeBox(),
                   buildMaterialButton(
@@ -113,7 +106,7 @@ class SelectBasketView extends StatelessWidget {
 
   Widget buildItem({
     required String title,
-    required String subtitle,
+    // required String subtitle,
     required String keyName,
   }) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -131,12 +124,12 @@ class SelectBasketView extends StatelessWidget {
                     title,
                     style: StyleText.style18.copyWith(color: AppColors.green),
                   ),
-                  Text(subtitle, style: const TextStyle(color: Colors.grey)),
+                  //   Text(subtitle, style: const TextStyle(color: Colors.grey)),
                 ],
               ),
             ),
             CounterField(
-              value: state.counters[keyName]!,
+              value: state.counters[keyName] ?? 0,
               onIncrement: () => cubit.increment(keyName),
               onDecrement: () => cubit.decrement(keyName),
             ),
@@ -146,5 +139,3 @@ class SelectBasketView extends StatelessWidget {
     );
   }
 }
-
-
