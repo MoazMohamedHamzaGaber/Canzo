@@ -19,7 +19,7 @@ class RegisterView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildRegisterForm(state.appRole, state),
+              UserRegister(state: state.selectedActivityType),
             ],
           ),
         );
@@ -28,18 +28,18 @@ class RegisterView extends StatelessWidget {
   }
 }
 
-Widget _buildRegisterForm(AppRole? role, AuthState state) {
-  switch (role) {
-    case AppRole.user:
-      return UserRegister(state: state.selectedActivityType);
-
-    case AppRole.admin:
-      return const AdminRegister();
-
-    case AppRole.delivery:
-      return const DeliveryRegister();
-
-    default:
-      return const SizedBox();
-  }
-}
+// Widget _buildRegisterForm(AppRole? role, AuthState state) {
+//   switch (role) {
+//     case AppRole.user:
+//       return UserRegister(state: state.selectedActivityType);
+//
+//     case AppRole.admin:
+//       return const AdminRegister();
+//
+//     case AppRole.delivery:
+//       return const DeliveryRegister();
+//
+//     default:
+//       return const SizedBox();
+//   }
+// }

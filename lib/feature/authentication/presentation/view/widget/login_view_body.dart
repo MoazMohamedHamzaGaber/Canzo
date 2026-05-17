@@ -32,7 +32,7 @@ class LoginViewBody extends StatelessWidget {
                   style: StyleText.style16,
                 ),
                 sizeBox(),
-                _buildLoginForm(state.appRole, state),
+                UserLogin(),
               ],
             ),
           ),
@@ -42,18 +42,18 @@ class LoginViewBody extends StatelessWidget {
   }
 }
 
-Widget _buildLoginForm(AppRole? role, AuthState state) {
-  switch (role) {
-    case AppRole.user:
-      return UserLogin();
-
-    case AppRole.admin:
-      return const AdminLogin();
-
-    case AppRole.delivery:
-      return const DeliveryLogin();
-
-    default:
-      return const SizedBox();
-  }
-}
+// Widget _buildLoginForm(AppRole? role, AuthState state) {
+//   switch (role) {
+//     case AppRole.user:
+//       return UserLogin();
+//
+//     case AppRole.admin:
+//       return const AdminLogin();
+//
+//     case AppRole.delivery:
+//       return const DeliveryLogin();
+//
+//     default:
+//       return const SizedBox();
+//   }
+// }

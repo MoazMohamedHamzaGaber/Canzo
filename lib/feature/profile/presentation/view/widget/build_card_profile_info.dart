@@ -1,10 +1,8 @@
-import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
+import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
-import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +40,7 @@ class BuildCardProfileInfo extends StatelessWidget {
                           border: Border.all(color: Colors.black45),
                         ),
                         child: Text(
-                           _mapRoleToString(state.appRole!),
+                           role!,
                           style: StyleText.style13.copyWith(
                             color: AppColors.green,
                             fontWeight: FontWeight.bold,
@@ -60,14 +58,14 @@ class BuildCardProfileInfo extends StatelessWidget {
     );
   }
 
-  String _mapRoleToString(AppRole role) {
-    switch (role) {
-      case AppRole.user:
-        return AppStrings.user.tr();
-      case AppRole.admin:
-        return AppStrings.admin.tr();
-      case AppRole.delivery:
-        return AppStrings.delivery.tr();
-    }
-  }
+  // String _mapRoleToString(AppRole role) {
+  //   switch (role) {
+  //     case AppRole.user:
+  //       return AppStrings.user.tr();
+  //     case AppRole.admin:
+  //       return AppStrings.admin.tr();
+  //     case AppRole.delivery:
+  //       return AppStrings.delivery.tr();
+  //   }
+  // }
 }

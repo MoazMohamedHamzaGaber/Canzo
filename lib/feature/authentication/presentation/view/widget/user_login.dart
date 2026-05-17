@@ -16,7 +16,8 @@ import '../../../../../core/utils/components.dart';
 import 'custom_text_field.dart';
 
 class UserLogin extends StatefulWidget {
-  const UserLogin({super.key,});
+  const UserLogin({super.key});
+
   @override
   State<UserLogin> createState() => _UserLoginState();
 }
@@ -28,24 +29,30 @@ class _UserLoginState extends State<UserLogin> {
 
   @override
   Widget build(BuildContext context) {
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (BuildContext context, AuthState state) async {
+        if (state.status == AuthStates.successSignIn) {
+          showSnackBar(context: context, message: state.user!.message);
 
-    return BlocConsumer<AuthCubit,AuthState>(
-      listener: (BuildContext context, AuthState state) async{
-        if (state.status == AuthStates.success) {
-          showSnackBar(
-            context: context,
-            message: state.user!.message,
+          await Future.delayed(const Duration(seconds: 1));
+
+          if (!context.mounted) return;
+
+          await SharedPreference.saveData(
+            key: 'token',
+            value: state.user!.token,
           );
-          await Future.delayed(const Duration(seconds: 2));
 
-          if(context.mounted){
-            SharedPreference.saveData(
-              key: 'token',
-              value: state.user!.token,
-            ).then((value) {
-              token = state.user!.token;
-              navigateAndFinish(context, const BottomNavBar());
-            });
+          await SharedPreference.saveData(
+            key: 'role',
+            value: state.user!.userRole,
+          );
+
+          token = state.user!.token;
+          role = state.user!.userRole;
+
+          if (context.mounted) {
+            navigateAndFinish(context, const BottomNavBar());
           }
         }
       },
@@ -86,7 +93,7 @@ class _UserLoginState extends State<UserLogin> {
                 children: [
                   Spacer(),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       navigateTo(context, ForgetPassword());
                     },
                     child: Text(
@@ -99,7 +106,7 @@ class _UserLoginState extends State<UserLogin> {
               sizeBox(),
               buildMaterialButton(
                 text: AppStrings.signIn.tr(),
-                loading:state.status == AuthStates.loading? true : false,
+                loading: state.status == AuthStates.loading ? true : false,
                 function: () {
                   if (formKey.currentState!.validate()) {
                     cubit.signIn(

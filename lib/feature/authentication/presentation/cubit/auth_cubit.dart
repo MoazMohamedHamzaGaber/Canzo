@@ -75,7 +75,7 @@ class AuthCubit extends Cubit<AuthState> {
         );
       },
       (data) {
-        emit(state.copyWith(status: AuthStates.success));
+        emit(state.copyWith(status: AuthStates.successSignUp));
         pr(data);
       },
     );
@@ -94,8 +94,23 @@ class AuthCubit extends Cubit<AuthState> {
           backgroundColor: Colors.red,
         );
       },
-      (data) {
-        emit(state.copyWith(user: data, status: AuthStates.success));
+      (data) async{
+        AppRole role;
+
+        switch (data.userRole) {
+          case 'admin':
+            role = AppRole.admin;
+            break;
+
+          case 'delivery':
+            role = AppRole.delivery;
+            break;
+
+          default:
+            role = AppRole.user;
+        }
+
+        emit(state.copyWith(user: data, appRole: role,status: AuthStates.successSignIn));
         pr(data.message);
       },
     );

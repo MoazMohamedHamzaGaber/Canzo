@@ -2,7 +2,7 @@ import 'package:canzo_app/core/service/service_locator.dart';
 import 'package:canzo_app/core/shared/shared_preference.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
-import 'package:canzo_app/feature/authentication/presentation/view/widget/role_view.dart';
+import 'package:canzo_app/feature/authentication/presentation/view/login_view.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
@@ -18,13 +18,13 @@ void main() async {
 
 
   token=SharedPreference.getData(key: 'token');
-  role=SharedPreference.getData(key: 'role');
+   role = SharedPreference.getData(key: 'role');
   print(token);
   print(role);
 
 
   Widget startWidget =
-  token != null ? const BottomNavBar() : const SelectRoleView();
+  token != null ? const BottomNavBar() : const LoginView();
 
   runApp(
     EasyLocalization(
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
         locale: context.locale,
         supportedLocales: context.supportedLocales,
         localizationsDelegates: context.localizationDelegates,
-        home: SelectRoleView(),
+        home: startWidget,
       ),
     );
   }

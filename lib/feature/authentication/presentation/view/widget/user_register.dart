@@ -1,3 +1,4 @@
+import 'package:canzo_app/core/shared/shared_preference.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
@@ -37,13 +38,42 @@ class _UserRegisterState extends State<UserRegister> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(
-      listener: (BuildContext context, AuthState state) {
-        if (state.status == AuthStates.success) {
+      listener: (BuildContext context, AuthState state) async {
+        if (state.status == AuthStates.successSignUp) {
+          final authCubit = context.read<AuthCubit>();
           showSnackBar(
             context: context,
             message: 'Account created successfully',
           );
-          navigateAndFinish(context, SelectBasketView());
+          await Future.delayed(const Duration(seconds: 1));
+
+          await authCubit.signIn(
+            context,
+            SignInParams(
+              identifier: emailController.text,
+              password: passwordController.text,
+            ),
+          );
+
+          if (!context.mounted) return;
+
+          final loginUser = authCubit.state.user;
+
+          if (loginUser == null) return;
+
+          await SharedPreference.saveData(key: 'token', value: loginUser.token);
+
+          await SharedPreference.saveData(
+            key: 'role',
+            value: loginUser.userRole,
+          );
+
+          token = loginUser.token;
+          role = loginUser.userRole;
+
+          if (context.mounted) {
+            navigateAndFinish(context, const SelectBasketView());
+          }
         }
       },
       builder: (BuildContext context, state) {
@@ -132,7 +162,7 @@ class _UserRegisterState extends State<UserRegister> {
               sizeBox(),
               buildMaterialButton(
                 text: AppStrings.createAccount.tr(),
-                loading:state.status == AuthStates.loading? true : false,
+                loading: state.status == AuthStates.loading ? true : false,
                 function: () {
                   if (formKey.currentState!.validate()) {
                     if (state.selectedActivityType?.apiValue == null) {

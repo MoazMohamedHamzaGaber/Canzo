@@ -49,10 +49,13 @@ class PreferencesSection extends StatelessWidget {
         ),
         sizeBox(height: 30),
         GestureDetector(
-          onTap: () {
-            SharedPreference.removeData(key: 'token').then((value) {
-              navigateAndFinish(context, LoginView());
-            });
+          onTap: () async {
+            await SharedPreference.removeData(key: 'token');
+            await SharedPreference.removeData(key: 'role');
+
+            if (context.mounted) {
+              navigateAndFinish(context, const LoginView());
+            }
           },
           child: Container(
             width: double.infinity,
