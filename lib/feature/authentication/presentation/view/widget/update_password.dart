@@ -13,7 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPasswordView extends StatefulWidget {
-  const NewPasswordView({super.key});
+  const NewPasswordView({super.key, required this.resetToken, required this.email});
+  final String resetToken;
+  final String email;
 
   @override
   State<NewPasswordView> createState() => _NewPasswordViewState();
@@ -90,13 +92,22 @@ class _NewPasswordViewState extends State<NewPasswordView> {
                     text: 'Confirm',
                     loading: state.status == AuthStates.loading ? true : false,
                     function: () {
+                      if (passwordController.text != confirmPasswordController.text) {
+                        showSnackBar(
+                          context: context,
+                          message: 'Password does not match',
+                          backgroundColor: Colors.red
+                        );
+                        return;
+                      }
+
                       if (formKey.currentState!.validate()) {
                         cubit.resetPassword(
                           context,
                           ResetPasswordParams(
-                            email: 'email',
+                            email: widget.email,
                             password: passwordController.text,
-                            resetToken: 'resetToken',
+                            resetToken: widget.resetToken,
                           ),
                         );
                       }

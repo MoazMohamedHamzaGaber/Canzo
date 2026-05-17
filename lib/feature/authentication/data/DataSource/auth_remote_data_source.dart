@@ -2,8 +2,10 @@ import 'package:canzo_app/core/api/api_consumer.dart';
 import 'package:canzo_app/core/api/end_points.dart';
 import 'package:canzo_app/core/error/failure.dart';
 import 'package:canzo_app/feature/authentication/data/models/login_model.dart';
+import 'package:canzo_app/feature/authentication/data/models/verify_model.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/login_entity.dart';
+import 'package:canzo_app/feature/authentication/domain/entity/verify_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -12,7 +14,7 @@ abstract class AuthRemoteDataSource {
 
   Future<Either<Failure, LoginEntity>> signIn(SignInParams params);
   Future<Either<Failure,bool>> forgetPassword(ForgetPasswordParams params);
-  Future<Either<Failure,bool>> verifyOtp(VerifyOtpParams params);
+  Future<Either<Failure,VerifyEntity>> verifyOtp(VerifyOtpParams params);
   Future<Either<Failure,bool>> resetPasswordPassword(ResetPasswordParams params);
 }
 
@@ -43,17 +45,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
 
     return result.fold((failure) => Left(failure), (response) {
-      // // Store the auth token
-      // SharedPreference.saveData(key: 'token', value: response['auth_token']);
-      //
-      // // Check if refreshToken is present in the response
-      // if (response.containsKey('token')) {
-      //   SharedPreference.saveData(key: 'refreshToken', value: response['token']);
-      // } else {
-      //   // Handle the case where refresh token is not present
-      //   print('Refresh token is not available in the response');
-      // }
-
       return Right(LoginModel.fromJson(response));
     });
   }
@@ -85,7 +76,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, bool>> verifyOtp(VerifyOtpParams params) async {
+  Future<Either<Failure, VerifyEntity>> verifyOtp(VerifyOtpParams params) async {
     var result = await _apiConsumer.post(
       EndPoints.verifyOtp,
       options: Options(),
@@ -93,7 +84,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
 
     return result.fold((failure) => Left(failure), (response) {
-      return Right(true);
+      return Right(VerifyModel.fromJson(response));
     });
   }
 }

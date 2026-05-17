@@ -14,10 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OtpView extends StatefulWidget {
   final String email;
 
-  const OtpView({
-    super.key,
-    required this.email,
-  });
+  const OtpView({super.key, required this.email});
 
   @override
   State<OtpView> createState() => _OtpViewState();
@@ -40,18 +37,15 @@ class _OtpViewState extends State<OtpView> {
   void startTimer() {
     timer?.cancel();
 
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-          (timer) {
-        if (seconds > 0) {
-          setState(() {
-            seconds--;
-          });
-        } else {
-          timer.cancel();
-        }
-      },
-    );
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (seconds > 0) {
+        setState(() {
+          seconds--;
+        });
+      } else {
+        timer.cancel();
+      }
+    });
   }
 
   @override
@@ -69,17 +63,17 @@ class _OtpViewState extends State<OtpView> {
         child: BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) async {
             if (state.status == AuthStates.successVerifyOtp) {
-              showSnackBar(
-                context: context,
-                message: 'OTP verified successfully',
-              );
+              showSnackBar(context: context, message: state.verify!.message);
 
               await Future.delayed(const Duration(seconds: 1));
 
               if (context.mounted) {
                 navigateAndFinish(
                   context,
-                  NewPasswordView(),
+                  NewPasswordView(
+                    resetToken: state.verify!.resetToken,
+                    email: widget.email,
+                  ),
                 );
               }
             }
@@ -88,10 +82,7 @@ class _OtpViewState extends State<OtpView> {
             var cubit = context.read<AuthCubit>();
 
             return SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 20,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               child: Form(
                 key: formKey,
                 child: Column(
@@ -180,9 +171,7 @@ class _OtpViewState extends State<OtpView> {
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide: BorderSide(
-                            color: Colors.grey.shade300,
-                          ),
+                          borderSide: BorderSide(color: Colors.grey.shade300),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -223,6 +212,7 @@ class _OtpViewState extends State<OtpView> {
                             ),
                           );
                         }
+                        print('widget.email ${widget.email}');
                       },
                       color: AppColors.green,
                     ),
@@ -232,42 +222,45 @@ class _OtpViewState extends State<OtpView> {
                     Center(
                       child: seconds > 0
                           ? RichText(
-                        text: TextSpan(
-                          text: "Resend code in ",
-                          style: TextStyle(
-                            color: Colors.grey.shade700,
-                            fontSize: 15,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "$seconds s",
-                              style: TextStyle(
-                                color: AppColors.green,
-                                fontWeight: FontWeight.bold,
+                              text: TextSpan(
+                                text: "Resend code in ",
+                                style: TextStyle(
+                                  color: Colors.grey.shade700,
+                                  fontSize: 15,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: "$seconds s",
+                                    style: TextStyle(
+                                      color: AppColors.green,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  seconds = 60;
+                                });
+
+                                startTimer();
+
+                                cubit.forgetPassword(
+                                  context,
+                                  ForgetPasswordParams(email: widget.email),
+                                );
+                              },
+                              child: Text(
+                                "Resend Code",
+                                style: TextStyle(
+                                  color: AppColors.green,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ],
-                        ),
-                      )
-                          : TextButton(
-                        onPressed: () {
-                          setState(() {
-                            seconds = 60;
-                          });
-
-                          startTimer();
-
-                          // cubit.resendOtp(widget.email);
-                        },
-                        child: Text(
-                          "Resend Code",
-                          style: TextStyle(
-                            color: AppColors.green,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),

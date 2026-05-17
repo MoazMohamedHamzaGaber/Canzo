@@ -155,8 +155,8 @@ class AuthCubit extends Cubit<AuthState> {
         );
       },
       (data) {
-        emit(state.copyWith(status: AuthStates.successVerifyOtp));
-        pr(data);
+        emit(state.copyWith(verify: data,status: AuthStates.successVerifyOtp));
+        pr(data.message);
       },
     );
   }

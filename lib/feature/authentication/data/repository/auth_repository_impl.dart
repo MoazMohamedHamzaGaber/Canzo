@@ -1,6 +1,7 @@
 import 'package:canzo_app/core/error/failure.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/login_entity.dart';
+import 'package:canzo_app/feature/authentication/domain/entity/verify_entity.dart';
 import 'package:canzo_app/feature/authentication/domain/repository/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 
@@ -34,7 +35,7 @@ class AuthRepositoryImpl implements AuthRepository{
   }
 
   @override
-  Future<Either<Failure, bool>> verifyOtp(VerifyOtpParams params) {
+  Future<Either<Failure, VerifyEntity>> verifyOtp(VerifyOtpParams params) {
     return _remoteDataSource.verifyOtp(params);
   }
 }

@@ -68,6 +68,7 @@ class VerifyOtpParams {
   });
 
   Map<String, dynamic> toJson() => {
+    "email": email,
     "otp": otp,
   };
 }
