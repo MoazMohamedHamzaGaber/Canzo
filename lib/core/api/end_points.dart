@@ -9,4 +9,6 @@ class EndPoints {
   static const baskets = 'api/client/baskets';
   static String fill(int id) =>
       'api/client/baskets/$id/fill';
+  static String orderStatus(String status) =>
+      'api/client/orders/$status';
 }
