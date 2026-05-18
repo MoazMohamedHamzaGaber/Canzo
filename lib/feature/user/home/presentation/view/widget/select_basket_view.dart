@@ -4,6 +4,8 @@ import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/core/widget/logo_and_name_app.dart';
+import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/user/home/domain/usecases/add_baskets_use_case.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
@@ -19,7 +21,16 @@ class SelectBasketView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: BlocBuilder<HomeCubit, HomeState>(
+      body: BlocConsumer<HomeCubit, HomeState>(
+        listener: (BuildContext context, HomeState state) async {
+          if (state.status == HomeStates.addSuccess) {
+            showSnackBar(context: context, message: 'Add baskets successful');
+            await Future.delayed(const Duration(seconds: 1));
+            if (context.mounted) {
+              navigateAndFinish(context, const BottomNavBar());
+            }
+          }
+        },
         builder: (context, state) {
           final cubit = context.read<HomeCubit>();
           return Center(
@@ -80,18 +91,32 @@ class SelectBasketView extends StatelessWidget {
                   ),
                   sizeBox(),
                   buildItem(
-                    title: state.selectedMaterialType !=null
+                    title: state.selectedMaterialType != null
                         ? state.selectedMaterialType == AppStrings.plastic.tr()
                               ? 'Soon'
-                              : '4kg basket'
+                              : 'kg basket 4'
                         : 'Soon',
                     keyName: '4kg',
                   ),
                   sizeBox(),
                   buildMaterialButton(
                     text: AppStrings.confirmYourChoice.tr(),
+                    loading: state.status == HomeStates.loading ? true : false,
                     function: () {
-                      navigateAndFinish(context, BottomNavBar());
+                      cubit.addBaskets(
+                        context,
+                        AddBasketsParams(
+                          contentType:
+                              state.selectedMaterialType ??
+                              AppStrings.plastic.tr(),
+                          contentWeight: state.selectedMaterialType != null
+                              ? state.selectedMaterialType ==
+                                        AppStrings.plastic.tr()
+                                    ? 2
+                                    : 4
+                              : 2,
+                        ),
+                      );
                     },
                     color: AppColors.green,
                   ),

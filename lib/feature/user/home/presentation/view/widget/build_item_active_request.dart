@@ -1,3 +1,4 @@
+import 'package:canzo_app/core/service/service_locator.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/style.dart';
@@ -13,7 +14,7 @@ class BuildItemActiveRequest extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>HomeCubit(),
+      create: (BuildContext context) =>serviceLocator<HomeCubit>(),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (BuildContext context, state) {
           var cubit = context.read<HomeCubit>();
