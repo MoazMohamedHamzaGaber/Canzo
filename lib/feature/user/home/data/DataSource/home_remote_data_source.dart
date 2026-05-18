@@ -28,11 +28,9 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'Authorization': 'Bearer $token',
         },
       ),
-      formData: FormData.fromMap({
-        'data': [
-          params.toJson(),
-        ],
-      }),
+      data: [
+        params.toJson()
+      ],
     );
 
     return result.fold((failure) => Left(failure), (response) {

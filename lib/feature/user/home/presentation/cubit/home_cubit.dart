@@ -92,4 +92,12 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+  void resetState() {
+    emit(
+      state.copyWith(
+        status: HomeStates.initial,
+      ),
+    );
+  }
 }

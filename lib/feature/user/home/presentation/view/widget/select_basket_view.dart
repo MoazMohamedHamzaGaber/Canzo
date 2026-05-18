@@ -24,10 +24,20 @@ class SelectBasketView extends StatelessWidget {
       body: BlocConsumer<HomeCubit, HomeState>(
         listener: (BuildContext context, HomeState state) async {
           if (state.status == HomeStates.addSuccess) {
-            showSnackBar(context: context, message: 'Add baskets successful');
+            showSnackBar(
+              context: context,
+              message: 'Add baskets successful',
+            );
+
+            context.read<HomeCubit>().resetState();
+
             await Future.delayed(const Duration(seconds: 1));
+
             if (context.mounted) {
-              navigateAndFinish(context, const BottomNavBar());
+              navigateAndFinish(
+                context,
+                const BottomNavBar(),
+              );
             }
           }
         },
