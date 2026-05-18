@@ -64,7 +64,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<Either<Failure, bool>> resetPasswordPassword(ResetPasswordParams params) async {
-    var result = await _apiConsumer.post(
+    var result = await _apiConsumer.patch(
       EndPoints.resetPassword,
       options: Options(),
       data: params.toJson(),

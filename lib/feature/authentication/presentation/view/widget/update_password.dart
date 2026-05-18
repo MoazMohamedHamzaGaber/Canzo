@@ -33,7 +33,7 @@ class _NewPasswordViewState extends State<NewPasswordView> {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) async {
           if (state.status == AuthStates.successForgetPassword) {
-            showSnackBar(context: context, message: 'Password Updated');
+            showSnackBar(context: context, message: 'Password reset successful');
             await Future.delayed(const Duration(seconds: 2));
 
             if (context.mounted) {
@@ -92,21 +92,13 @@ class _NewPasswordViewState extends State<NewPasswordView> {
                     text: 'Confirm',
                     loading: state.status == AuthStates.loading ? true : false,
                     function: () {
-                      if (passwordController.text != confirmPasswordController.text) {
-                        showSnackBar(
-                          context: context,
-                          message: 'Password does not match',
-                          backgroundColor: Colors.red
-                        );
-                        return;
-                      }
-
                       if (formKey.currentState!.validate()) {
                         cubit.resetPassword(
                           context,
                           ResetPasswordParams(
                             email: widget.email,
                             password: passwordController.text,
+                            confirmPassword: confirmPasswordController.text,
                             resetToken: widget.resetToken,
                           ),
                         );

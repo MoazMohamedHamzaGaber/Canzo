@@ -6,5 +6,5 @@ class EndPoints {
   static const forgetPassword = 'auth/forgot-password';
   static const resetPassword = 'auth/reset-password';
   static const verifyOtp = 'auth/verify-otp';
-  static const baskets = 'auth/verify-otp';
+  static const baskets = 'api/client/baskets';
 }

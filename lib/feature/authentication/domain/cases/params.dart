@@ -76,17 +76,20 @@ class VerifyOtpParams {
 class ResetPasswordParams {
   final String email;
   final String password;
+  final String confirmPassword;
   final String resetToken;
 
   ResetPasswordParams({
     required this.email,
     required this.password,
+    required this.confirmPassword,
     required this.resetToken,
   });
 
   Map<String, dynamic> toJson() => {
     "email": email,
     "password": password,
+    "confirmPassword": confirmPassword,
     "resetToken": resetToken,
   };
 }

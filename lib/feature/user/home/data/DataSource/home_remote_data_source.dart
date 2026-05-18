@@ -1,6 +1,7 @@
 import 'package:canzo_app/core/api/api_consumer.dart';
 import 'package:canzo_app/core/api/end_points.dart';
 import 'package:canzo_app/core/error/failure.dart';
+import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/user/home/data/model/basket_model.dart';
 import 'package:canzo_app/feature/user/home/domain/entity/basket_entity.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/add_baskets_use_case.dart';
@@ -22,8 +23,16 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       ) async {
     var result = await _apiConsumer.post(
       EndPoints.baskets,
-      options: Options(),
-      data: params.toJson(),
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+      formData: FormData.fromMap({
+        'data': [
+          params.toJson(),
+        ],
+      }),
     );
 
     return result.fold((failure) => Left(failure), (response) {
@@ -35,7 +44,11 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   Future<Either<Failure, List<BasketEntity>>> getBaskets() async {
     var result = await _apiConsumer.get(
       EndPoints.baskets,
-      options: Options(),
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
     );
 
     return result.fold((failure) => Left(failure), (response) {

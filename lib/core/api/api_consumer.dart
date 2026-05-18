@@ -26,6 +26,14 @@ abstract class ApiConsumer {
         Options? options,
       });
 
+  Future<Either<Failure, Map<String, dynamic>>> patch(
+      String url, {
+        Map<String, dynamic>? data,
+        FormData? formData,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+      });
+
   Future<Either<Failure, Map<String, dynamic>>> put(
       String url, {
         Map<String, dynamic>? data,
@@ -167,6 +175,44 @@ class BaseApiConsumer extends ApiConsumer {
       return Left(_handleError(e));
     }
   }
+
+
+  // ========================= PATCH =========================
+
+  @override
+  Future<Either<Failure, Map<String, dynamic>>> patch(
+      String url, {
+        Map<String, dynamic>? data,
+        FormData? formData,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+      }) async {
+    try {
+      final response = await _dio.patch(
+        url,
+        data: formData ?? data,
+        queryParameters: queryParameters,
+        options: _options(options),
+      );
+
+      _logRequest(
+        method: 'PATCH',
+        url: url,
+        data: data,
+        query: queryParameters,
+        response: response.data,
+      );
+
+      if (response.statusCode == 204) {
+        return const Right({});
+      }
+
+      return _mapResponse(response);
+    } catch (e) {
+      return Left(_handleError(e));
+    }
+  }
+
 
   // ========================= PUT =========================
 
