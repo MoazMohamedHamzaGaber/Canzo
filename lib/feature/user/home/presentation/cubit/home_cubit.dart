@@ -2,6 +2,7 @@ import 'package:canzo_app/core/abstract/use_case.dart';
 import 'package:canzo_app/core/api/print_helper.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/add_baskets_use_case.dart';
+import 'package:canzo_app/feature/user/home/domain/usecases/fill_baskets_use_case.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/get_baskets_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +12,12 @@ import 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   final AddBasketsUseCase _addBasketsUseCase;
   final GetBasketsUseCase _getBasketsUseCase;
+  final FillBasketsUseCase _fillBasketsUseCase;
 
   HomeCubit(
       this._addBasketsUseCase,
       this._getBasketsUseCase,
+      this._fillBasketsUseCase,
       ) : super(const HomeState());
 
   void changeCurrentIndex(index)
@@ -89,6 +92,52 @@ class HomeCubit extends Cubit<HomeState> {
           (data) {
         emit(state.copyWith(baskets: data,status: HomeStates.addSuccess));
         pr(data);
+      },
+    );
+  }
+
+  Future<void> fillBaskets(
+      BuildContext context,
+      int id,
+      ) async {
+    //emit(state.copyWith(status: HomeStates.loading));
+
+    final response = await _fillBasketsUseCase(id);
+
+    response.fold(
+          (l) {
+        emit(
+          state.copyWith(
+            failure: l,
+            status: HomeStates.error,
+          ),
+        );
+
+        if (context.mounted) {
+          showSnackBar(
+            context: context,
+            message: l.errMessage,
+            backgroundColor: Colors.red,
+          );
+        }
+      },
+          (data) {
+        final updatedBaskets = state.baskets?.map((basket) {
+          if (basket.id == id) {
+            return basket.copyWith(
+              isFull: 1,
+            );
+          }
+
+          return basket;
+        }).toList();
+
+        emit(
+          state.copyWith(
+            baskets: updatedBaskets,
+            status: HomeStates.fillSuccess,
+          ),
+        );
       },
     );
   }

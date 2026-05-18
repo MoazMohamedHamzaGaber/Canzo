@@ -1,7 +1,7 @@
 import 'package:canzo_app/core/error/failure.dart';
 import 'package:canzo_app/feature/user/home/domain/entity/basket_entity.dart';
 
-enum HomeStates { loading, initial, error ,addSuccess, success}
+enum HomeStates { loading, initial, error ,addSuccess, success, fillSuccess}
 
 class HomeState {
   final HomeStates status;

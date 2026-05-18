@@ -1,12 +1,16 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BuildItemBaskets extends StatelessWidget {
-  const BuildItemBaskets({super.key, required this.title, required this.value});
+  const BuildItemBaskets({super.key, required this.title, required this.value, required this.id, required this.subTitle});
   final String title;
+  final String subTitle;
   final bool value;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,7 @@ class BuildItemBaskets extends StatelessWidget {
                     Text(title,
                       style: StyleText.style19,
                     ),
-                    Text(AppStrings.empty.tr(),
+                    Text(subTitle,
                       style: StyleText.style13,
                     ),
                   ],
@@ -43,7 +47,14 @@ class BuildItemBaskets extends StatelessWidget {
                 Switch(
                     value: value,
                     activeThumbColor: Colors.green,
-                    onChanged: (value) async {}
+                  onChanged: (value) async {
+                    if (!this.value) {
+                      context.read<HomeCubit>().fillBaskets(
+                        context,
+                        id,
+                      );
+                    }
+                  },
                 ),
               ],
             ),

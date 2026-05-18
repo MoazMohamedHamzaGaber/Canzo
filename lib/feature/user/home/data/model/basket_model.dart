@@ -7,7 +7,7 @@ class BasketModel extends BasketEntity {
     return BasketModel(
       id:  json['id'] ??0,
       contentType:  json['content_type'] ??'',
-      contentWeight: json['content_weight'] ??'',
+      contentWeight: json['content_weight'] ??0,
       isFull: json['is_full']??0,
     );
   }

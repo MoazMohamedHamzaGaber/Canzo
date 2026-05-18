@@ -33,6 +33,8 @@ class BasketsSection extends StatelessWidget {
               title:
                   'Kg basket ${state.baskets![index].contentWeight} - ${state.baskets![index].contentType}',
               value: state.baskets![index].isFull == 0 ? false: true,
+              id: state.baskets![index].id,
+              subTitle:state.baskets![index].isFull == 0? AppStrings.empty.tr() : 'Full',
             ),
             separatorBuilder: (context, index) => sizeBox(),
             itemCount: state.baskets?.length ??0,

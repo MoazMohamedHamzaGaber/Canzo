@@ -6,4 +6,5 @@ import 'package:dartz/dartz.dart';
 abstract class HomeRepository {
   Future<Either<Failure,bool>> addBaskets(AddBasketsParams params);
   Future<Either<Failure,List<BasketEntity>>> getBaskets();
+  Future<Either<Failure,bool>> fillBaskets(int id);
 }

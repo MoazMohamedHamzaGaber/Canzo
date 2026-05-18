@@ -11,6 +11,7 @@ import 'package:dio/dio.dart';
 abstract class HomeRemoteDataSource {
   Future<Either<Failure,bool>> addBaskets(AddBasketsParams params);
   Future<Either<Failure,List<BasketEntity>>> getBaskets();
+  Future<Either<Failure,bool>> fillBaskets(int id);
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -54,6 +55,22 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           .map((e) => BasketModel.fromJson(e))
           .toList();
       return Right(list);
+    });
+  }
+
+  @override
+  Future<Either<Failure, bool>> fillBaskets(int id) async {
+    var result = await _apiConsumer.patch(
+      EndPoints.fill(id),
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      return Right(true);
     });
   }
 }

@@ -18,4 +18,9 @@ class HomeRepositoryImpl extends HomeRepository{
   Future<Either<Failure, List<BasketEntity>>> getBaskets() {
     return _remoteDataSource.getBaskets();
   }
+
+  @override
+  Future<Either<Failure, bool>> fillBaskets(int id) {
+    return _remoteDataSource.fillBaskets(id);
+  }
 }
