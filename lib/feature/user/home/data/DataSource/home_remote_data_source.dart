@@ -50,7 +50,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     );
 
     return result.fold((failure) => Left(failure), (response) {
-      final list = (response as List)
+      final list = (response['baskets'] as List)
           .map((e) => BasketModel.fromJson(e))
           .toList();
       return Right(list);

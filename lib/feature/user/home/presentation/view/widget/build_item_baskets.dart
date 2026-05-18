@@ -4,7 +4,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BuildItemBaskets extends StatelessWidget {
-  const BuildItemBaskets({super.key});
+  const BuildItemBaskets({super.key, required this.title, required this.value});
+  final String title;
+  final bool value;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class BuildItemBaskets extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('بلاستيك - kgباسكت 2',
+                    Text(title,
                       style: StyleText.style19,
                     ),
                     Text(AppStrings.empty.tr(),
@@ -39,7 +41,7 @@ class BuildItemBaskets extends StatelessWidget {
                 ),
                 Spacer(),
                 Switch(
-                    value: false,
+                    value: value,
                     activeThumbColor: Colors.green,
                     onChanged: (value) async {}
                 ),
