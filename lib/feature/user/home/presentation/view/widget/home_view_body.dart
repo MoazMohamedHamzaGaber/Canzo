@@ -2,6 +2,7 @@ import 'package:canzo_app/core/service/service_locator.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
+import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/active_requests.dart';
@@ -21,7 +22,15 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) =>serviceLocator<HomeCubit>()..getBaskets(context),
-      child: BlocBuilder<HomeCubit,HomeState>(
+      child: BlocConsumer<HomeCubit,HomeState>(
+        listener: (BuildContext context, HomeState state) async {
+          if (state.status == HomeStates.fillSuccess) {
+            showSnackBar(
+              context: context,
+              message: 'Basket filled successfully',
+            );
+          }
+        },
         builder: (BuildContext context, state) {
           if(state.status ==HomeStates.loading){
             return Center(child: CircularProgressIndicator());
