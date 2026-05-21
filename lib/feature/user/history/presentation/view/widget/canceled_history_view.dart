@@ -6,8 +6,8 @@ import 'package:canzo_app/feature/user/history/presentation/cubit/history_state.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CompleteHistoryView extends StatelessWidget {
-  const CompleteHistoryView({super.key});
+class CanceledHistoryView extends StatelessWidget {
+  const CanceledHistoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,19 +18,19 @@ class CompleteHistoryView extends StatelessWidget {
         } else if (state.status == HistoryStates.error) {
           return EmptyScreen(title: state.failure!.errMessage);
         }
-        if (state.completedOrders != null && state.completedOrders!.isNotEmpty) {
+        if(state.cancelledOrders != null && state.cancelledOrders!.isNotEmpty) {
           return ListView.separated(
-            itemBuilder: (context, index) => BuildItemCard(
-              title: '3 packages - plastic',
-              subtitle: state.completedOrders?[index].address ?? '',
-              state: state.completedOrders?[index].status ?? '',
-              createAt: state.completedOrders?[index].createdAt ?? '',
-            ),
-            separatorBuilder: (context, index) => sizeBox(),
-            itemCount: state.completedOrders?.length ?? 0,
-          );
-        } else {
-          return EmptyScreen(title: 'No complete orders yet');
+          itemBuilder: (context, index) => BuildItemCard(
+            title: '3 packages - plastic',
+            subtitle: state.cancelledOrders?[index].address ?? '',
+            state: state.cancelledOrders?[index].status ?? '',
+            createAt: state.cancelledOrders?[index].createdAt ?? '',
+          ),
+          separatorBuilder: (context, index) => sizeBox(),
+          itemCount: state.cancelledOrders?.length ?? 0,
+        );
+        }else{
+          return EmptyScreen(title: 'No canceled orders yet');
         }
       },
     );

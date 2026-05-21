@@ -1,10 +1,11 @@
-import 'package:canzo_app/feature/user/history/presentation/view/widget/all_history_view.dart';
+import 'package:canzo_app/core/service/service_locator.dart';
+import 'package:canzo_app/feature/user/history/presentation/cubit/history_cubit.dart';
 import 'package:canzo_app/feature/user/history/presentation/view/widget/bidding_history_view.dart';
+import 'package:canzo_app/feature/user/history/presentation/view/widget/canceled_history_view.dart';
 import 'package:canzo_app/feature/user/history/presentation/view/widget/complete_history_view.dart';
-import 'package:canzo_app/feature/user/history/presentation/view/widget/inprogress_history_view.dart';
 import 'package:canzo_app/feature/user/history/presentation/view/widget/tab_bar_item_history.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TabBarHistory extends StatelessWidget {
   const TabBarHistory({super.key});
@@ -12,25 +13,30 @@ class TabBarHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: DefaultTabController(
-        length: 4,
-        child: Column(
-          children: [
-            const TabBarItemHistory(),
+      child: BlocProvider(
+        create: (context) => serviceLocator<HistoryCubit>()
+          ..getBaskets(context, 'Pending')
+          ..getBaskets(context, 'Cancelled')
+          ..getBaskets(context, 'Completed'),
+        child: DefaultTabController(
+          length: 3,
+          child: Column(
+            children: [
+              const TabBarItemHistory(),
 
-            const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-            Expanded(
-              child: TabBarView(
-                children: [
-                  AllHistoryView(),
-                  BiddingHistoryView(),
-                  InProgressHistoryView(),
-                  CompleteHistoryView(),
-                ],
+              const Expanded(
+                child: TabBarView(
+                  children: [
+                    BiddingHistoryView(),
+                    CanceledHistoryView(),
+                    CompleteHistoryView(),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

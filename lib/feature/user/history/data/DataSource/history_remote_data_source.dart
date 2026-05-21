@@ -17,7 +17,7 @@ class HistoryRemoteDataSourceImpl extends HistoryRemoteDataSource{
   HistoryRemoteDataSourceImpl(this._apiConsumer);
   @override
   Future<Either<Failure, List<OrderStatusEntity>>> getOrderStatus(String status) async {
-    var result = await _apiConsumer.patch(
+    var result = await _apiConsumer.get(
       EndPoints.orderStatus(status),
       options: Options(
         headers: {

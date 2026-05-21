@@ -1,5 +1,3 @@
-import 'package:canzo_app/core/api/print_helper.dart';
-import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/user/history/domain/UseCase/order_status_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,15 +19,35 @@ class HistoryCubit extends Cubit<HistoryState> {
     response.fold(
           (l) {
         emit(state.copyWith(failure: l, status: HistoryStates.error));
-        showSnackBar(
-          context: context,
-          message: l.errMessage,
-          backgroundColor: Colors.red,
-        );
       },
-          (data) {
-        emit(state.copyWith(orders: data,status: HistoryStates.success));
-        pr(data);
+          (orders) {
+
+        if(status == 'Pending'){
+          emit(
+            state.copyWith(
+              status: HistoryStates.success,
+              pendingOrders: orders,
+            ),
+          );
+        }
+
+        else if(status == 'Cancelled'){
+          emit(
+            state.copyWith(
+              status: HistoryStates.success,
+              cancelledOrders: orders,
+            ),
+          );
+        }
+
+        else if(status == 'Completed'){
+          emit(
+            state.copyWith(
+              status: HistoryStates.success,
+              completedOrders: orders,
+            ),
+          );
+        }
       },
     );
   }

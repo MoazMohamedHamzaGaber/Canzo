@@ -11,7 +11,7 @@ class BuildItemCard extends StatelessWidget {
     this.image = true,
     required this.title,
     required this.subtitle,
-    required this.state,
+    required this.state, required this.createAt,
   });
 
   final bool? body;
@@ -19,6 +19,7 @@ class BuildItemCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String state;
+  final String createAt;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class BuildItemCard extends StatelessWidget {
                   Text(title, style: StyleText.style19),
                   Text(subtitle, style: StyleText.style13),
                   if (body == true)
-                    Text('27 Api 2026 - 07:09', style: StyleText.style13),
+                    Text(createAt, style: StyleText.style13),
                 ],
               ),
               Spacer(),

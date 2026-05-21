@@ -14,7 +14,7 @@ class CompleteHistoryDeliveryView extends StatelessWidget {
         title: 'Moaz Mohamed',
         subtitle: '3pk - plastic',
         state: AppStrings.complete.tr(),
-        image: false,
+        image: false, createAt: '27 Api 2026 - 07:09',
       ),
       separatorBuilder: (context,index)=>sizeBox(),
       itemCount: 20,

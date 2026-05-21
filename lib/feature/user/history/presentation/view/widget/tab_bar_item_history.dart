@@ -27,10 +27,9 @@ class _TabBarItemHistoryState extends State<TabBarItemHistory> {
           tabAlignment: TabAlignment.start,
           labelPadding: const EdgeInsets.symmetric(horizontal: 5),
           tabs: [
-            _buildTab(AppStrings.all.tr(), 0, controller),
-            _buildTab(AppStrings.bidding.tr(), 1, controller),
-            _buildTab(AppStrings.inProgress.tr(), 2, controller),
-            _buildTab(AppStrings.complete.tr(), 3, controller),
+            _buildTab(AppStrings.bidding.tr(), 0, controller),
+            _buildTab('Cancel', 1, controller),
+            _buildTab(AppStrings.complete.tr(), 2, controller),
           ],
         );
       },

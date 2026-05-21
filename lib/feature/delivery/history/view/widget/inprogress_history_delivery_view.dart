@@ -14,7 +14,7 @@ class InProgressHistoryDeliveryView extends StatelessWidget {
         title: 'Moaz Mohamed',
         subtitle: '3pk - plastic',
         state: AppStrings.inProgress.tr(),
-        image: false,
+        image: false, createAt: '27 Api 2026 - 07:09',
       ),
       separatorBuilder: (context,index)=>sizeBox(),
       itemCount: 20,

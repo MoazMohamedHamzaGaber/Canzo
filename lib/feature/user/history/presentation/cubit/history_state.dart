@@ -6,23 +6,31 @@ enum HistoryStates { loading, initial, error , success}
 class HistoryState {
   final HistoryStates status;
   final Failure? failure;
-  final List<OrderStatusEntity>? orders;
+  final List<OrderStatusEntity>? pendingOrders;
+  final List<OrderStatusEntity>? cancelledOrders;
+  final List<OrderStatusEntity>? completedOrders;
 
   const HistoryState({
     this.status = HistoryStates.initial,
     this.failure,
-    this.orders
+    this.pendingOrders,
+    this.cancelledOrders,
+    this.completedOrders,
   });
 
   HistoryState copyWith({
     HistoryStates? status,
     Failure? failure,
-    List<OrderStatusEntity>? orders,
+    List<OrderStatusEntity>? pendingOrders,
+     List<OrderStatusEntity>? cancelledOrders,
+     List<OrderStatusEntity>? completedOrders,
   }) {
     return HistoryState(
       status: status ?? this.status,
       failure: failure ?? this.failure,
-      orders: orders ?? this.orders,
+      pendingOrders: pendingOrders ?? this.pendingOrders,
+      cancelledOrders: cancelledOrders ?? this.cancelledOrders,
+      completedOrders: completedOrders ?? this.completedOrders,
     );
   }
 }
