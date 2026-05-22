@@ -24,21 +24,18 @@ class BasketsSection extends StatelessWidget {
           ),
         ),
         sizeBox(height: 10),
-        SizedBox(
-          height: 300,
-          child: ListView.separated(
-            // shrinkWrap: true,
-            // physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) => BuildItemBaskets(
-              title:
-                  'Kg basket ${state.baskets![index].contentWeight} - ${state.baskets![index].contentType}',
-              value: state.baskets![index].isFull == 0 ? false: true,
-              id: state.baskets![index].id,
-              subTitle:state.baskets![index].isFull == 0? AppStrings.empty.tr() : 'Full',
-            ),
-            separatorBuilder: (context, index) => sizeBox(),
-            itemCount: state.baskets?.length ??0,
+        ListView.separated(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) => BuildItemBaskets(
+            title:
+                'Kg basket ${state.baskets![index].contentWeight} - ${state.baskets![index].contentType}',
+            value: state.baskets![index].isFull == 0 ? false: true,
+            id: state.baskets![index].id,
+            subTitle:state.baskets![index].isFull == 0? AppStrings.empty.tr() : 'Full',
           ),
+          separatorBuilder: (context, index) => sizeBox(),
+          itemCount: state.baskets?.length ??0,
         ),
       ],
     );
