@@ -6,7 +6,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({super.key});
+  const CustomCard({super.key, required this.balance});
+  final int balance;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class CustomCard extends StatelessWidget {
               ),
             ),
             Text(
-              '${AppStrings.egp.tr()} 250',
+              '${AppStrings.egp.tr()} $balance',
               style: StyleText.style40.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

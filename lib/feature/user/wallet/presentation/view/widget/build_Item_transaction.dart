@@ -5,7 +5,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class BuildItemTransaction extends StatelessWidget {
-  const BuildItemTransaction({super.key});
+  const BuildItemTransaction({
+    super.key,
+    required this.name,
+    required this.createAt,
+    required this.price,
+  });
+
+  final String name;
+  final String createAt;
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +49,20 @@ class BuildItemTransaction extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${AppStrings.sentTo.tr()} Moaz',
+                          '${AppStrings.sentTo.tr()} $name',
                           style: StyleText.style19.copyWith(
                             color: AppColors.green,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Text('27 Api 2026 - 07:09', style: StyleText.style13),
+                        Text(createAt, style: StyleText.style13),
                       ],
                     ),
                     Spacer(),
-                    Text('+${AppStrings.egp.tr()} 300', style: StyleText.style19),
+                    Text(
+                      '+${AppStrings.egp.tr()} $price',
+                      style: StyleText.style19,
+                    ),
                   ],
                 ),
               ),

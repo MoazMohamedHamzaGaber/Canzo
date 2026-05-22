@@ -6,7 +6,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class EarningSection extends StatelessWidget {
-  const EarningSection({super.key});
+  const EarningSection({super.key, required this.today, required this.thisWeek, required this.thisMonth});
+  final int today;
+  final int thisWeek;
+  final int thisMonth;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +26,11 @@ class EarningSection extends StatelessWidget {
         sizeBox(),
         Row(
           children: [
-            buildContainer(AppStrings.today.tr(), 0),
+            buildContainer(AppStrings.today.tr(), today),
             sizeBox(width: 10),
-            buildContainer(AppStrings.thisWeek.tr(), 600),
+            buildContainer(AppStrings.thisWeek.tr(), thisWeek),
             sizeBox(width: 10),
-            buildContainer(AppStrings.thisMonth.tr(), 600),
+            buildContainer(AppStrings.thisMonth.tr(), thisMonth),
           ],
         ),
       ],

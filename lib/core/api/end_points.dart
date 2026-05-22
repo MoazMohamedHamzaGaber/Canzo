@@ -11,4 +11,6 @@ class EndPoints {
       'api/client/baskets/$id/fill';
   static String orderStatus(String status) =>
       'api/client/orders/$status';
+  static const transaction = 'api/client/transactions';
+  static const wallet = 'api/client/wallet';
 }
