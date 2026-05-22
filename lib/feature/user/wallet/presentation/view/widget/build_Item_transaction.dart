@@ -49,7 +49,7 @@ class BuildItemTransaction extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${AppStrings.sentTo.tr()} $name',
+                          'Transform',
                           style: StyleText.style19.copyWith(
                             color: AppColors.green,
                             fontWeight: FontWeight.w500,

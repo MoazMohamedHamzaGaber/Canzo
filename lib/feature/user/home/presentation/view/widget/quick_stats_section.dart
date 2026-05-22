@@ -6,7 +6,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class QuickStatsSection extends StatelessWidget {
-  const QuickStatsSection({super.key});
+  const QuickStatsSection({super.key, required this.bidding, required this.cancel, required this.complete});
+  final int bidding;
+  final int cancel;
+  final int complete;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +26,11 @@ class QuickStatsSection extends StatelessWidget {
         sizeBox(height: 10),
         Row(
           children: [
-            buildContainer(AppStrings.totals.tr(), 4,AppStrings.pickups.tr()),
+            buildContainer(AppStrings.bidding.tr(), bidding,AppStrings.pickups.tr()),
             sizeBox(width: 10),
-            buildContainer(AppStrings.active.tr(), 2, AppStrings.ongoing.tr()),
+            buildContainer('Canceled', cancel, AppStrings.ongoing.tr()),
             sizeBox(width: 10),
-            buildContainer(AppStrings.done.tr(), 2, AppStrings.completed.tr()),
+            buildContainer(AppStrings.completed.tr(), complete, AppStrings.completed.tr()),
           ],
         ),
       ],
@@ -60,13 +63,13 @@ class QuickStatsSection extends StatelessWidget {
             ),
           ),
           sizeBox(height: 10),
-          Text(
-            state,
-            style: StyleText.style13.copyWith(
-              color: Colors.black38,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          // Text(
+          //   state,
+          //   style: StyleText.style13.copyWith(
+          //     color: Colors.black38,
+          //     fontWeight: FontWeight.w600,
+          //   ),
+        //  ),
         ],
       ),
     ),

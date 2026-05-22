@@ -9,7 +9,13 @@ class EmptyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(title, style: StyleText.style19.copyWith(fontSize: 20)),
+      child: Text(
+        title,
+        style: StyleText.style19.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     );
   }
 }

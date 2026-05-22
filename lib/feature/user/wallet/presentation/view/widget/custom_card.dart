@@ -1,6 +1,5 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
-import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -36,50 +35,50 @@ class CustomCard extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            sizeBox(),
-            Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.green.shade300,
-                      ),
-                      child: Text(
-                        AppStrings.withdraw.tr(),
-                        textAlign: TextAlign.center,
-                        style: StyleText.style19.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                sizeBox(),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.black54,
-                      ),
-                      child: Text(
-                        AppStrings.send.tr(),
-                        textAlign: TextAlign.center,
-                        style: StyleText.style19.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // sizeBox(),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       child: GestureDetector(
+            //         onTap: () {},
+            //         child: Container(
+            //           padding: EdgeInsets.all(15),
+            //           decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(12),
+            //             color: Colors.green.shade300,
+            //           ),
+            //           child: Text(
+            //             AppStrings.withdraw.tr(),
+            //             textAlign: TextAlign.center,
+            //             style: StyleText.style19.copyWith(
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //     sizeBox(),
+            //     Expanded(
+            //       child: GestureDetector(
+            //         onTap: () {},
+            //         child: Container(
+            //           padding: EdgeInsets.all(15),
+            //           decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(12),
+            //             color: Colors.black54,
+            //           ),
+            //           child: Text(
+            //             AppStrings.send.tr(),
+            //             textAlign: TextAlign.center,
+            //             style: StyleText.style19.copyWith(
+            //               color: Colors.white,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

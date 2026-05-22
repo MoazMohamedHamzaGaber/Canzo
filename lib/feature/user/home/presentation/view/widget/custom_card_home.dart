@@ -6,7 +6,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardHome extends StatelessWidget {
-  const CustomCardHome({super.key});
+  const CustomCardHome({super.key, required this.price});
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -29,64 +30,64 @@ class CustomCardHome extends StatelessWidget {
               ),
             ),
             Text(
-              '${AppStrings.egp.tr()} 250',
+              '${AppStrings.egp.tr()} $price',
               style: StyleText.style40.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            sizeBox(),
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Row(
-                    children: [
-                      Text(
-                        '${AppStrings.totalEarned.tr()} ',
-                        style: StyleText.style13.copyWith(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '${AppStrings.egp.tr()} 600',
-                        style: StyleText.style13.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                sizeBox(),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.green.shade300,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppStrings.view.tr(),
-                            textAlign: TextAlign.center,
-                            style: StyleText.style19.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                          Icon(Icons.arrow_right_alt_rounded,color: Colors.white,)
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            sizeBox(height: 10),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //       flex: 2,
+            //       child: Row(
+            //         children: [
+            //           Text(
+            //             '${AppStrings.totalEarned.tr()} ',
+            //             style: StyleText.style13.copyWith(
+            //               color: Colors.white70,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //           Text(
+            //             '${AppStrings.egp.tr()} 600',
+            //             style: StyleText.style13.copyWith(
+            //               color: Colors.white,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     sizeBox(),
+            //     Expanded(
+            //       child: GestureDetector(
+            //         onTap: () {},
+            //         child: Container(
+            //           padding: EdgeInsets.all(8),
+            //           decoration: BoxDecoration(
+            //             borderRadius: BorderRadius.circular(30),
+            //             color: Colors.green.shade300,
+            //           ),
+            //           child: Row(
+            //             mainAxisAlignment: MainAxisAlignment.center,
+            //             children: [
+            //               Text(
+            //                 AppStrings.view.tr(),
+            //                 textAlign: TextAlign.center,
+            //                 style: StyleText.style19.copyWith(
+            //                   color: Colors.white,
+            //                 ),
+            //               ),
+            //               Icon(Icons.arrow_right_alt_rounded,color: Colors.white,)
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

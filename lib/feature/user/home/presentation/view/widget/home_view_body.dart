@@ -3,6 +3,8 @@ import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/user/history/presentation/cubit/history_cubit.dart';
+import 'package:canzo_app/feature/user/history/presentation/cubit/history_state.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/active_requests.dart';
@@ -11,6 +13,8 @@ import 'package:canzo_app/feature/user/home/presentation/view/widget/custom_card
 import 'package:canzo_app/feature/user/home/presentation/view/widget/pickup_request.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/quick_stats_section.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/resent_packup_section.dart';
+import 'package:canzo_app/feature/user/wallet/presentation/cubit/wallet_cubit.dart';
+import 'package:canzo_app/feature/user/wallet/presentation/cubit/wallet_state.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,9 +24,24 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) =>serviceLocator<HomeCubit>()..getBaskets(context),
-      child: BlocConsumer<HomeCubit,HomeState>(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) =>
+              serviceLocator<HomeCubit>()..getBaskets(context),
+        ),
+        BlocProvider(
+          create: (BuildContext context) => serviceLocator<HistoryCubit>()
+            ..getBaskets(context, 'Pending')
+            ..getBaskets(context, 'Cancelled')
+            ..getBaskets(context, 'Completed'),
+        ),
+        BlocProvider(
+          create: (BuildContext context) =>
+              serviceLocator<WalletCubit>()..getWallet(context),
+        ),
+      ],
+      child: BlocConsumer<HomeCubit, HomeState>(
         listener: (BuildContext context, HomeState state) async {
           if (state.status == HomeStates.fillSuccess) {
             showSnackBar(
@@ -32,8 +51,15 @@ class HomeViewBody extends StatelessWidget {
           }
         },
         builder: (BuildContext context, state) {
-          if(state.status ==HomeStates.loading){
-            return Center(child: CircularProgressIndicator());
+          final history = context.watch<HistoryCubit>().state;
+          final wallet = context.watch<WalletCubit>().state;
+
+          if (state.status == HomeStates.loading ||
+              history.status == HistoryStates.loading ||
+              wallet.status == WalletStates.loading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
           return SafeArea(
             child: SingleChildScrollView(
@@ -47,13 +73,17 @@ class HomeViewBody extends StatelessWidget {
                       body: AppStrings.letsRecycle.tr(),
                     ),
                     sizeBox(),
-                    CustomCardHome(),
+                    CustomCardHome(price: wallet.wallet?.balance ?? 0),
                     sizeBox(),
                     PickupRequestView(),
                     sizeBox(),
-                    QuickStatsSection(),
+                    QuickStatsSection(
+                      bidding: history.pendingOrders?.length ?? 0,
+                      cancel: history.cancelledOrders?.length ?? 0,
+                      complete: history.completedOrders?.length ?? 0,
+                    ),
                     sizeBox(),
-                    BasketsSection(state: state,),
+                    BasketsSection(state: state),
                     sizeBox(),
                     ActiveRequests(),
                     sizeBox(),
