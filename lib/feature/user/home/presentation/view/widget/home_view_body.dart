@@ -7,12 +7,10 @@ import 'package:canzo_app/feature/user/history/presentation/cubit/history_cubit.
 import 'package:canzo_app/feature/user/history/presentation/cubit/history_state.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
-import 'package:canzo_app/feature/user/home/presentation/view/widget/active_requests.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/baskets_section.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/custom_card_home.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/pickup_request.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/quick_stats_section.dart';
-import 'package:canzo_app/feature/user/home/presentation/view/widget/resent_packup_section.dart';
 import 'package:canzo_app/feature/user/wallet/presentation/cubit/wallet_cubit.dart';
 import 'package:canzo_app/feature/user/wallet/presentation/cubit/wallet_state.dart';
 import 'package:easy_localization/easy_localization.dart';
