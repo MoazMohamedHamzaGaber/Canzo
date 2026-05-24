@@ -183,4 +183,47 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
   }
+
+  Future<void> socialLogin(
+      BuildContext context, {
+        required String token,
+        required String provider,
+      }) async {
+
+    try {
+
+      emit(
+        state.copyWith(
+          status: AuthStates.loading,
+        ),
+      );
+
+      /// هنا هتبعت للباك اند
+      ///
+      /// provider => google / facebook
+      /// token => social token
+
+      print(token);
+      print(provider);
+
+      /// مثال مؤقت
+      ///
+      /// بعد ما الباك اند يجهز API
+      /// استبدله باليوز كيس
+
+    } catch (e) {
+
+      emit(
+        state.copyWith(
+          status: AuthStates.error,
+        ),
+      );
+
+      showSnackBar(
+        context: context,
+        message: e.toString(),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 }

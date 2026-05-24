@@ -1,7 +1,10 @@
+import 'package:canzo_app/core/service/social_auth_service.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
+import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SocialLoginView extends StatelessWidget {
   const SocialLoginView({super.key});
@@ -42,14 +45,40 @@ class SocialLoginView extends StatelessWidget {
           title: AppStrings.google.tr(),
           image:
           'assets/images/google.png',
-          onTap: () {},
+          onTap: () async {
+
+            final token =
+            await SocialAuthService.signInWithGoogle();
+
+            if (token != null && context.mounted) {
+
+              context.read<AuthCubit>().socialLogin(
+                context,
+                token: token,
+                provider: 'google',
+              );
+            }
+          },
         ),
         sizeBox(),
         buildSocialButton(
           title: AppStrings.facebook.tr(),
           image:
           'assets/images/communication.png',
-          onTap: () {},
+          onTap: () async {
+
+            final token =
+            await SocialAuthService.signInWithFacebook();
+
+            if (token != null && context.mounted) {
+
+              context.read<AuthCubit>().socialLogin(
+                context,
+                token: token,
+                provider: 'facebook',
+              );
+            }
+          },
         ),
       ],
     );
