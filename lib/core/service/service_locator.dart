@@ -1,6 +1,7 @@
 import 'package:canzo_app/service_locator/auth_service_locator.dart';
 import 'package:canzo_app/service_locator/history_service_locator.dart';
 import 'package:canzo_app/service_locator/home_service_locator.dart';
+import 'package:canzo_app/service_locator/profile_service_locator.dart';
 import 'package:canzo_app/service_locator/wallet_service_locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -34,5 +35,6 @@ class DI {
     HomeServiceLocator.execute(serviceLocator);
     HistoryServiceLocator.execute(serviceLocator);
     WalletServiceLocator.execute(serviceLocator);
+    ProfileServiceLocator.execute(serviceLocator);
   }
 }

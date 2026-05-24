@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => serviceLocator<AuthCubit>(),),
         BlocProvider(create: (context) => serviceLocator<HomeCubit>()),
-        BlocProvider(create: (context) => ProfileCubit(),),
+        BlocProvider(create: (context) => serviceLocator<ProfileCubit>()..getProfile(),),
       ],
       child: MaterialApp(
         title: 'Canzo',

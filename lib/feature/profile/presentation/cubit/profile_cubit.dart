@@ -1,17 +1,40 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:canzo_app/core/abstract/use_case.dart';
+import 'package:canzo_app/feature/profile/domain/UseCase/get_profile_use_case.dart';
+import 'package:canzo_app/feature/profile/domain/UseCase/update_profile_use_case.dart';
+import 'package:canzo_app/feature/profile/presentation/cubit/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'profile_state.dart';
-
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit() : super(const ProfileState());
+  final GetProfileUseCase _getProfileUseCase;
+  final UpdateProfileUseCase _updateProfileUseCase;
 
-  // void changeLanguage(BuildContext context, Locale locale) {
-  //   context.setLocale(locale);
-  //
-  //   emit(
-  //     state.copyWith(locale: locale),
-  //   );
-  // }
+  ProfileCubit(this._getProfileUseCase,this._updateProfileUseCase) : super(const ProfileState());
+
+  Future<void> getProfile() async {
+    emit(state.copyWith(status: ProfileStates.loading));
+
+    final response = await _getProfileUseCase(NoParams());
+    response.fold(
+      (l) {
+        emit(state.copyWith(failure: l, status: ProfileStates.error));
+      },
+      (profile) {
+        emit(state.copyWith(profile: profile, status: ProfileStates.success));
+      },
+    );
+  }
+
+  Future<void> updateProfile(UpdateProfileParams params) async {
+    emit(state.copyWith(status: ProfileStates.loading));
+
+    final response = await _updateProfileUseCase(params);
+    response.fold(
+          (l) {
+        emit(state.copyWith(failure: l, status: ProfileStates.error));
+      },
+          (profile) {
+        emit(state.copyWith(status: ProfileStates.updateSuccess));
+      },
+    );
+  }
 }

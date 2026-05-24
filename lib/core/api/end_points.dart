@@ -13,4 +13,5 @@ class EndPoints {
       'api/client/orders/$status';
   static const transaction = 'api/client/transactions';
   static const wallet = 'api/client/wallet';
+  static const profile = 'api/client/profile';
 }

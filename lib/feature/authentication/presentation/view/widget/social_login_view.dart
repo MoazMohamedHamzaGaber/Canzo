@@ -51,13 +51,6 @@ class SocialLoginView extends StatelessWidget {
           'assets/images/communication.png',
           onTap: () {},
         ),
-        sizeBox(),
-        buildSocialButton(
-          title: AppStrings.apple.tr(),
-          image:
-          'assets/images/apple-logo.png',
-          onTap: () {},
-        ),
       ],
     );
   }

@@ -1,27 +1,27 @@
+import 'package:canzo_app/core/error/failure.dart';
+import 'package:canzo_app/feature/profile/domain/entity/profile_entity.dart';
 
-import 'dart:ui';
-
-enum ProfileStates { loading, initial, error }
+enum ProfileStates { loading, initial, error, success ,updateSuccess}
 
 class ProfileState {
   final ProfileStates status;
-  //final Failure? failure;
-  //final Locale? locale;
+  final Failure? failure;
+  final ProfileEntity? profile;
 
   const ProfileState({
     this.status = ProfileStates.initial,
-    //this.failure,
-   // this.locale,
+    this.failure,
+    this.profile,
   });
   ProfileState copyWith({
     ProfileStates? status,
-    //Failure? failure,
-  //  Locale? locale,
+    Failure? failure,
+   ProfileEntity? profile,
   }) {
     return ProfileState(
       status: status ?? this.status,
-      //failure: failure ?? this.failure,
-    //  locale: locale ?? this.locale,
+      failure: failure ?? this.failure,
+      profile: profile ?? this.profile,
     );
   }
 }

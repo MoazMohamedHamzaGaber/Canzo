@@ -25,6 +25,9 @@ class WalletViewBody extends StatelessWidget {
               serviceLocator<WalletCubit>()..load(context),
           child: BlocBuilder<WalletCubit, WalletState>(
             builder: (BuildContext context, state) {
+              if(state.status == WalletStates.loading){
+                return Center(child: CircularProgressIndicator());
+              }
               if (state.wallet != null && state.transaction != null) {
                 return SingleChildScrollView(
                   child: Column(
@@ -53,10 +56,9 @@ class WalletViewBody extends StatelessWidget {
                     ],
                   ),
                 );
-              } else if (state.status == WalletStates.error) {
-                return EmptyScreen(title: state.failure!.errMessage);
+              } else  {
+                return EmptyScreen(title: state.failure?.errMessage ??'');
               }
-              return Center(child: CircularProgressIndicator());
             },
           ),
         ),
