@@ -3,6 +3,7 @@ import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:canzo_app/feature/user/history/presentation/cubit/history_cubit.dart';
 import 'package:canzo_app/feature/user/history/presentation/cubit/history_state.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
@@ -51,6 +52,7 @@ class HomeViewBody extends StatelessWidget {
         builder: (BuildContext context, state) {
           final history = context.watch<HistoryCubit>().state;
           final wallet = context.watch<WalletCubit>().state;
+          final profile = context.watch<ProfileCubit>().state;
 
           if (state.status == HomeStates.loading ||
               history.status == HistoryStates.loading ||
@@ -67,7 +69,7 @@ class HomeViewBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomAppBar(
-                      title: '${AppStrings.hi.tr()}, Moaz',
+                      title: '${AppStrings.hi.tr()}, ${profile.profile?.userName ??''}',
                       body: AppStrings.letsRecycle.tr(),
                     ),
                     sizeBox(),

@@ -1,5 +1,6 @@
 import 'package:canzo_app/feature/profile/data/DataSource/profile_remote_data_source.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/get_profile_use_case.dart';
+import 'package:canzo_app/feature/profile/domain/UseCase/update_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/repository/profile_repository.dart';
 import 'package:get_it/get_it.dart';
 
@@ -23,6 +24,11 @@ class ProfileServiceLocator {
     // use cases
     serviceLocator.registerLazySingleton<GetProfileUseCase>(
           () => GetProfileUseCase(
+        serviceLocator(),
+      ),
+    );
+    serviceLocator.registerLazySingleton<UpdateProfileUseCase>(
+          () => UpdateProfileUseCase(
         serviceLocator(),
       ),
     );
