@@ -20,47 +20,52 @@ class WalletViewBody extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: BlocProvider(
-          create: (BuildContext context) =>
-              serviceLocator<WalletCubit>()..load(context),
-          child: BlocBuilder<WalletCubit, WalletState>(
-            builder: (BuildContext context, state) {
-              if(state.status == WalletStates.loading){
-                return Center(child: CircularProgressIndicator());
-              }
-              if (state.wallet != null && state.transaction != null) {
-                return SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomAppBar(
-                        title: AppStrings.wallet.tr(),
-                        body: AppStrings.yourEarn.tr(),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CustomAppBar(
+              title: AppStrings.wallet.tr(),
+              body: AppStrings.yourEarn.tr(),
+            ),
+            BlocProvider(
+              create: (BuildContext context) =>
+                  serviceLocator<WalletCubit>()..load(context),
+              child: BlocBuilder<WalletCubit, WalletState>(
+                builder: (BuildContext context, state) {
+                  if(state.status == WalletStates.loading){
+                    return Expanded(child: Center(child: CircularProgressIndicator()));
+                  }
+                  if (state.wallet != null && state.transaction != null) {
+                    return SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          sizeBox(),
+                          CustomCard(balance: state.wallet?.balance ?? 0),
+                          sizeBox(),
+                          EarningSection(
+                            today: state.transaction!.todayTransactions.length,
+                            thisWeek:
+                                state.transaction!.lastWeekTransactions.length,
+                            thisMonth:
+                                state.transaction!.lastMonthTransactions.length,
+                          ),
+                          sizeBox(),
+                          TransactionSection(
+                            state: state,
+                            condition:
+                                state.transaction!.allTransactions.isNotEmpty,
+                          ),
+                        ],
                       ),
-                      sizeBox(),
-                      CustomCard(balance: state.wallet?.balance ?? 0),
-                      sizeBox(),
-                      EarningSection(
-                        today: state.transaction!.todayTransactions.length,
-                        thisWeek:
-                            state.transaction!.lastWeekTransactions.length,
-                        thisMonth:
-                            state.transaction!.lastMonthTransactions.length,
-                      ),
-                      sizeBox(),
-                      TransactionSection(
-                        state: state,
-                        condition:
-                            state.transaction!.allTransactions.isNotEmpty,
-                      ),
-                    ],
-                  ),
-                );
-              } else  {
-                return EmptyScreen(title: state.failure?.errMessage ??'');
-              }
-            },
-          ),
+                    );
+                  } else  {
+                    return EmptyScreen(title: state.failure?.errMessage ??'');
+                  }
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -17,7 +17,6 @@ class UpdateProfileUseCase extends UseCase<bool, UpdateProfileParams> {
 class UpdateProfileParams {
   final String username;
   final String email;
-  final String role;
   final String phoneNumber;
   final String address;
   final String activityType;
@@ -26,7 +25,6 @@ class UpdateProfileParams {
   UpdateProfileParams({
     required this.username,
     required this.email,
-    required this.role,
     required this.phoneNumber,
     required this.address,
     required this.activityType,
@@ -36,7 +34,6 @@ class UpdateProfileParams {
   Map<String, dynamic> toJson() => {
     "username": username,
     "email": email,
-    "user_role": role,
     "phoneNumber": phoneNumber,
     "address": address,
     "activityType": activityType,

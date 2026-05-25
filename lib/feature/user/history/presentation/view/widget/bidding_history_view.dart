@@ -13,26 +13,24 @@ class BiddingHistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HistoryCubit, HistoryState>(
       builder: (BuildContext context, state) {
-        if(state.status == HistoryStates.loading){
-          return Center(child: CircularProgressIndicator());
+        if(state.pendingOrders != null && state.pendingOrders!.isNotEmpty) {
+          return ListView.separated(
+            itemBuilder: (context, index) => BuildItemCard(
+              title: '3 packages - plastic',
+              subtitle: state.pendingOrders?[index].address ?? '',
+              state: state.pendingOrders?[index].status ?? '',
+              createAt: state.pendingOrders?[index].createdAt ?? '',
+            ),
+            separatorBuilder: (context, index) => sizeBox(),
+            itemCount: state.pendingOrders?.length ??0,
+          );
+        }else if(state.pendingOrders != null && state.pendingOrders!.isEmpty){
+          return EmptyScreen(title: 'No binding orders yet');
         }
         else if(state.status == HistoryStates.error){
           return EmptyScreen(title: state.failure!.errMessage);
         }
-        if(state.pendingOrders != null && state.pendingOrders!.isNotEmpty) {
-          return ListView.separated(
-          itemBuilder: (context, index) => BuildItemCard(
-            title: '3 packages - plastic',
-            subtitle: state.pendingOrders?[index].address ?? '',
-            state: state.pendingOrders?[index].status ?? '',
-            createAt: state.pendingOrders?[index].createdAt ?? '',
-          ),
-          separatorBuilder: (context, index) => sizeBox(),
-          itemCount: state.pendingOrders?.length ??0,
-        );
-        }else{
-          return EmptyScreen(title: 'No binding orders yet');
-        }
+        return Center(child: CircularProgressIndicator());
       },
     );
   }

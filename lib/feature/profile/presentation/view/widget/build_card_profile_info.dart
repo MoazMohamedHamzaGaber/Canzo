@@ -1,8 +1,10 @@
 import 'package:canzo_app/core/utils/color.dart';
+import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/core/widget/empty_screen.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_state.dart';
+import 'package:canzo_app/feature/profile/presentation/view/widget/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
@@ -15,65 +17,70 @@ class BuildCardProfileInfo extends StatelessWidget {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (BuildContext context, state) {
 
-        if (state.status == ProfileStates.success) {
-          return Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(
-                  top: 12,
-                  bottom: 20,
-                  right: 12,
-                  left: 12,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black45),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'assets/images/logo.jpg',
-                      width: 80,
-                      height: 80,
-                    ),
-                    const SizedBox(width: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          state.profile?.userName ?? '',
-                          style: StyleText.style19,
-                        ),
-                        Text(
-                          state.profile?.email ?? '',
-                          style: StyleText.style13,
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 5,
-                            horizontal: 16,
+        if (state.profile != null) {
+          return GestureDetector(
+            onTap: (){
+              navigateTo(context, UpdateProfileScreen());
+            },
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                    top: 12,
+                    bottom: 20,
+                    right: 12,
+                    left: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.black45),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/logo.jpg',
+                        width: 80,
+                        height: 80,
+                      ),
+                      const SizedBox(width: 10),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            state.profile?.userName ?? '',
+                            style: StyleText.style19,
                           ),
-                          margin: const EdgeInsets.only(top: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.green.shade50,
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: Colors.black45),
+                          Text(
+                            state.profile?.email ?? '',
+                            style: StyleText.style13,
                           ),
-                          child: Text(
-                            state.profile?.userRole ?? '',
-                            style: StyleText.style13.copyWith(
-                              color: AppColors.green,
-                              fontWeight: FontWeight.bold,
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 5,
+                              horizontal: 16,
+                            ),
+                            margin: const EdgeInsets.only(top: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green.shade50,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.black45),
+                            ),
+                            child: Text(
+                              state.profile?.userRole ?? '',
+                              style: StyleText.style13.copyWith(
+                                color: AppColors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         }
         if (state.status == ProfileStates.error){
