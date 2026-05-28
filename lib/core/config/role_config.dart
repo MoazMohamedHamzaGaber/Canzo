@@ -16,7 +16,7 @@ class RoleConfig {
 
   static List<Widget> screens(String role) {
     switch (role) {
-      case 'admin':
+      case 'Admin':
         return const [
           OverviewView(),
           AnalyticsView(),
@@ -43,7 +43,7 @@ class RoleConfig {
 
   static List<BottomNavigationBarItem> items(String role) {
     switch (role) {
-      case 'admin':
+      case 'Admin':
         return [
           _item(Icons.dashboard, AppStrings.overview.tr()),
           _item(Icons.analytics, AppStrings.analytics.tr()),

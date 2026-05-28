@@ -53,7 +53,10 @@ class _UserLoginState extends State<UserLogin> {
           role = state.user!.userRole;
 
           if (context.mounted) {
-            navigateAndFinish(context, const BottomNavBar());
+            navigateAndFinish(
+              context,
+              const BottomNavBar(initialIndex: 0),
+            );
           }
         }
       },

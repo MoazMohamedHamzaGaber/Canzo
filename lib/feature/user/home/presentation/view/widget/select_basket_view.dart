@@ -36,7 +36,7 @@ class SelectBasketView extends StatelessWidget {
             if (context.mounted) {
               navigateAndFinish(
                 context,
-                const BottomNavBar(),
+                const BottomNavBar(initialIndex: 0),
               );
             }
           }
