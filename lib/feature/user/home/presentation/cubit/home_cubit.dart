@@ -40,7 +40,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   void increment(String key) {
     final newCounters = Map<String, int>.from(state.counters);
-    newCounters[key] = newCounters[key]! + 1;
+
+    newCounters[key] = (newCounters[key] ?? 1) + 1;
 
     emit(state.copyWith(counters: newCounters));
   }
@@ -48,8 +49,10 @@ class HomeCubit extends Cubit<HomeState> {
   void decrement(String key) {
     final newCounters = Map<String, int>.from(state.counters);
 
-    if (newCounters[key]! > 0) {
-      newCounters[key] = newCounters[key]! - 1;
+    final currentValue = newCounters[key] ?? 1;
+
+    if (currentValue > 1) {
+      newCounters[key] = currentValue - 1;
     }
 
     emit(state.copyWith(counters: newCounters));

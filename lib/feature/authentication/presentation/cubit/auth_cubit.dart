@@ -11,6 +11,9 @@ import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/shared/shared_preference.dart';
+import '../../../../core/utils/const.dart';
+import '../view/login_view.dart';
 import 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -98,7 +101,7 @@ class AuthCubit extends Cubit<AuthState> {
         AppRole role;
 
         switch (data.userRole) {
-          case 'admin':
+          case 'Admin':
             role = AppRole.admin;
             break;
 
@@ -184,6 +187,29 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+  void resetAuth() {
+    emit(AuthState.initial());
+  }
+
+  Future<void> logout(BuildContext context) async {
+    await SharedPreference.removeData(key: 'token');
+    await SharedPreference.removeData(key: 'role');
+
+    token = null;
+    role = null;
+
+    emit(
+      state.copyWith(
+        user: null,
+        status: AuthStates.initial,
+      ),
+    );
+
+    if (context.mounted) {
+      navigateAndFinish(context, const LoginView());
+    }
+  }
+
   Future<void> socialLogin(
       BuildContext context, {
         required String token,
@@ -205,11 +231,6 @@ class AuthCubit extends Cubit<AuthState> {
 
       print(token);
       print(provider);
-
-      /// مثال مؤقت
-      ///
-      /// بعد ما الباك اند يجهز API
-      /// استبدله باليوز كيس
 
     } catch (e) {
 

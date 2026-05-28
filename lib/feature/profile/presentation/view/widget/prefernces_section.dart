@@ -1,3 +1,4 @@
+import 'package:canzo_app/core/service/service_locator.dart';
 import 'package:canzo_app/core/shared/shared_preference.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
@@ -8,6 +9,9 @@ import 'package:canzo_app/feature/profile/presentation/view/widget/language_cust
 import 'package:canzo_app/feature/profile/presentation/view/widget/open_whats_app.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../authentication/presentation/cubit/auth_cubit.dart';
 
 class PreferencesSection extends StatelessWidget {
   const PreferencesSection({super.key});
@@ -53,8 +57,19 @@ class PreferencesSection extends StatelessWidget {
             await SharedPreference.removeData(key: 'token');
             await SharedPreference.removeData(key: 'role');
 
+            token = null;
+            role = null;
+
             if (context.mounted) {
-              navigateAndFinish(context, const LoginView());
+              context.read<AuthCubit>().resetAuth();
+
+              navigateAndFinish(
+                context,
+                BlocProvider(
+                  create: (_) => serviceLocator<AuthCubit>(),
+                  child: const LoginView(),
+                ),
+              );
             }
           },
           child: Container(
@@ -107,7 +122,7 @@ class PreferencesSection extends StatelessWidget {
             color: Colors.green.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
-          child:  Icon(icon, color: Colors.green),
+          child: Icon(icon, color: Colors.green),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -118,14 +133,14 @@ class PreferencesSection extends StatelessWidget {
         ),
         Text(
           subtitle,
-          style:  TextStyle(
+          style: TextStyle(
             fontSize: 14,
             color: color,
             fontWeight: FontWeight.w500,
           ),
         ),
-        if(isArrow)
-        Icon(Icons.arrow_right_alt, color: AppColors.green, size: 14),
+        if (isArrow)
+          Icon(Icons.arrow_right_alt, color: AppColors.green, size: 14),
       ],
     ),
   );

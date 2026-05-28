@@ -124,7 +124,7 @@ class SelectBasketView extends StatelessWidget {
                                         AppStrings.plastic.tr()
                                     ? 2
                                     : 4
-                              : 2,
+                              : 2, amount: state.counters['4kg'] ?? 1,
                         ),
                       );
                     },
@@ -164,7 +164,7 @@ class SelectBasketView extends StatelessWidget {
               ),
             ),
             CounterField(
-              value: state.counters[keyName] ?? 0,
+              value: state.counters[keyName] ?? 1,
               onIncrement: () => cubit.increment(keyName),
               onDecrement: () => cubit.decrement(keyName),
             ),

@@ -7,6 +7,7 @@ import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.d
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_state.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/forget_password.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/widget/social_login_view.dart';
+import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +108,7 @@ class _UserLoginState extends State<UserLogin> {
               buildMaterialButton(
                 text: AppStrings.signIn.tr(),
                 loading: state.status == AuthStates.loading ? true : false,
-                function: () {
+                function: () async{
                   if (formKey.currentState!.validate()) {
                     cubit.signIn(
                       context,
@@ -116,6 +117,8 @@ class _UserLoginState extends State<UserLogin> {
                         password: passwordController.text,
                       ),
                     );
+
+                    await context.read<ProfileCubit>().getProfile();
                   }
                 },
                 color: AppColors.green,

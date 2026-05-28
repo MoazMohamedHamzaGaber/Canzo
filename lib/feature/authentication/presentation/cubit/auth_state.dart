@@ -48,4 +48,13 @@ class AuthState {
       verify: verify ?? this.verify,
     );
   }
+  factory AuthState.initial() {
+    return AuthState(
+      status: AuthStates.initial,
+      user: null,
+      selectedActivityType: null,
+      obscurePassword: true,
+      obscureConfirmPassword: true,
+    );
+  }
 }

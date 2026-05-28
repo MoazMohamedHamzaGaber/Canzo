@@ -3,7 +3,6 @@ import 'package:canzo_app/core/shared/shared_preference.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:canzo_app/feature/authentication/presentation/view/login_view.dart';
-import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -49,7 +48,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => serviceLocator<AuthCubit>(),),
         BlocProvider(create: (context) => serviceLocator<HomeCubit>()),
-        BlocProvider(create: (context) => serviceLocator<ProfileCubit>()..getProfile(),),
+        //BlocProvider(create: (context) => serviceLocator<ProfileCubit>()..getProfile(),),
       ],
       child: MaterialApp(
         title: 'Canzo',

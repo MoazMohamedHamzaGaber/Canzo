@@ -1,3 +1,4 @@
+import 'package:canzo_app/core/service/service_locator.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
@@ -14,138 +15,141 @@ class BuildCardProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
-      builder: (BuildContext context, state) {
+    return BlocProvider(
+      create: (BuildContext context) =>serviceLocator<ProfileCubit>()..getProfile(),
+      child: BlocBuilder<ProfileCubit, ProfileState>(
+        builder: (BuildContext context, state) {
 
-        if (state.profile != null) {
-          return GestureDetector(
-            onTap: (){
-              navigateTo(context, UpdateProfileScreen());
-            },
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(
-                    top: 12,
-                    bottom: 20,
-                    right: 12,
-                    left: 12,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.black45),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/logo.jpg',
-                        width: 80,
-                        height: 80,
-                      ),
-                      const SizedBox(width: 10),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            state.profile?.userName ?? '',
-                            style: StyleText.style19,
-                          ),
-                          Text(
-                            state.profile?.email ?? '',
-                            style: StyleText.style13,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 16,
-                            ),
-                            margin: const EdgeInsets.only(top: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.green.shade50,
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.black45),
-                            ),
-                            child: Text(
-                              state.profile?.userRole ?? '',
-                              style: StyleText.style13.copyWith(
-                                color: AppColors.green,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-        if (state.status == ProfileStates.error){
-          return EmptyScreen(title: state.failure?.errMessage ??'');
-        }
-          return Shimmer.fromColors(
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
-            child: Container(
-              padding: const EdgeInsets.only(
-                top: 12,
-                bottom: 20,
-                right: 12,
-                left: 12,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.black45),
-                color: Colors.white,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+          if (state.profile != null) {
+            return GestureDetector(
+              onTap: (){
+                navigateTo(context, UpdateProfileScreen());
+              },
+              child: Column(
                 children: [
                   Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
+                    padding: const EdgeInsets.only(
+                      top: 12,
+                      bottom: 20,
+                      right: 12,
+                      left: 12,
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.black45),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          height: 18,
-                          width: 120,
-                          color: Colors.white,
+                        Image.asset(
+                          'assets/images/logo.jpg',
+                          width: 80,
+                          height: 80,
                         ),
-                        const SizedBox(height: 10),
-                        Container(
-                          height: 14,
-                          width: 180,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          height: 30,
-                          width: 90,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                        const SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.profile?.userName ?? '',
+                              style: StyleText.style19,
+                            ),
+                            Text(
+                              state.profile?.email ?? '',
+                              style: StyleText.style13,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 5,
+                                horizontal: 16,
+                              ),
+                              margin: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.green.shade50,
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: Colors.black45),
+                              ),
+                              child: Text(
+                                state.profile?.userRole ?? '',
+                                style: StyleText.style13.copyWith(
+                                  color: AppColors.green,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
-            ),
-          );
+            );
+          }
+          if (state.status == ProfileStates.error){
+            return EmptyScreen(title: state.failure?.errMessage ??'');
+          }
+            return Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade100,
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 12,
+                  bottom: 20,
+                  right: 12,
+                  left: 12,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.black45),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 18,
+                            width: 120,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(height: 10),
+                          Container(
+                            height: 14,
+                            width: 180,
+                            color: Colors.white,
+                          ),
+                          const SizedBox(height: 15),
+                          Container(
+                            height: 30,
+                            width: 90,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
 
-      },
+        },
+      ),
     );
   }
 }

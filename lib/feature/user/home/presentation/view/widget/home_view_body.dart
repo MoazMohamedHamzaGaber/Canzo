@@ -30,6 +30,9 @@ class HomeViewBody extends StatelessWidget {
               serviceLocator<HomeCubit>()..getBaskets(context),
         ),
         BlocProvider(
+          create: (BuildContext context) =>serviceLocator<ProfileCubit>()..getProfile(),
+        ),
+        BlocProvider(
           create: (BuildContext context) => serviceLocator<HistoryCubit>()
             ..getBaskets(context, 'Pending')
             ..getBaskets(context, 'Cancelled')

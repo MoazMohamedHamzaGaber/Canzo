@@ -17,11 +17,13 @@ class AddBasketsUseCase extends UseCase<bool, AddBasketsParams> {
 class AddBasketsParams{
   final String contentType;
   final int contentWeight;
+  final int amount;
 
-  AddBasketsParams({required this.contentType, required this.contentWeight});
+  AddBasketsParams({required this.contentType, required this.contentWeight, required this.amount});
 
   Map<String,dynamic> toJson() => {
     'content_type': contentType,
     'content_weight': contentWeight,
+    'amount': amount,
   };
 }
