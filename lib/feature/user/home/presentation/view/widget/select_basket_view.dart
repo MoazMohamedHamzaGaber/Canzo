@@ -24,20 +24,14 @@ class SelectBasketView extends StatelessWidget {
       body: BlocConsumer<HomeCubit, HomeState>(
         listener: (BuildContext context, HomeState state) async {
           if (state.status == HomeStates.addSuccess) {
-            showSnackBar(
-              context: context,
-              message: 'Add baskets successful',
-            );
+            showSnackBar(context: context, message: 'Add baskets successful');
 
             context.read<HomeCubit>().resetState();
 
             await Future.delayed(const Duration(seconds: 1));
 
             if (context.mounted) {
-              navigateAndFinish(
-                context,
-                const BottomNavBar(initialIndex: 0),
-              );
+              navigateAndFinish(context, const BottomNavBar(initialIndex: 0));
             }
           }
         },
@@ -104,7 +98,7 @@ class SelectBasketView extends StatelessWidget {
                     title: state.selectedMaterialType != null
                         ? state.selectedMaterialType == AppStrings.plastic.tr()
                               ? 'Soon'
-                              : 'kg basket 4'
+                              : 'Basket 4 Kg'
                         : 'Soon',
                     keyName: '4kg',
                   ),
@@ -116,9 +110,7 @@ class SelectBasketView extends StatelessWidget {
                       cubit.addBaskets(
                         context,
                         AddBasketsParams(
-                          contentType:
-                              state.selectedMaterialType ??
-                              AppStrings.plastic.tr(),
+                      contentType: getContentType(state.selectedMaterialType),
                           contentWeight: state.selectedMaterialType != null
                               ? state.selectedMaterialType ==
                                         AppStrings.plastic.tr()
@@ -130,8 +122,7 @@ class SelectBasketView extends StatelessWidget {
                     },
                     color: AppColors.green,
                   ),
-                ],
-              ),
+                ],              ),
             ),
           );
         },
@@ -172,5 +163,29 @@ class SelectBasketView extends StatelessWidget {
         );
       },
     );
+  }
+
+  String getContentType(String? selectedType) {
+    if (selectedType == null) return 'Plastic';
+
+    final type = selectedType.trim().toLowerCase();
+
+    // Plastic
+    if (type == AppStrings.plastic.tr().toLowerCase() ||
+        type == 'Waters' ||
+        type == 'مياه') {
+      return 'Plastic';
+    }
+
+    // Cans
+    if (type == AppStrings.cans.tr().toLowerCase() ||
+        type == 'cans' ||
+        type == 'Canz' ||
+        type == 'علب' ||
+        type == 'كانز') {
+      return 'Canz';
+    }
+
+    return 'Plastic';
   }
 }

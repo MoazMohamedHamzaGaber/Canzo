@@ -89,7 +89,7 @@
   "resent_pickups": "طلبات الاستلام السابقة",
   "material": "المادة",
   "select_material": "اختر المادة",
-  "plastic": "بلاستيك",
+  "plastic": "مياه",
   "cans": "كانز",
 
   "support": "الدعم",
@@ -97,8 +97,8 @@
   "terms": "الشروط والخصوصية",
   "sign_out": "تسجيل الخروج",
 
-  "choose_the_baskets": "اختر السلال",
-  "chose_type_basket": "اختر نوع السلال وعدد كل حجم",
+  "choose_the_baskets": "اختر السلات",
+  "chose_type_basket": "اختر نوع السلات وعدد كل حجم",
   "basket_type": "نوع السلة",
   "confirm_your_choice": "تأكيد اختيارك",
   "for_small_waste": "للنفايات الصغيرة",
