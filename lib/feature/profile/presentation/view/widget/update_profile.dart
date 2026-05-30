@@ -7,8 +7,11 @@ import 'package:canzo_app/feature/profile/presentation/cubit/profile_state.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/entity/profile_entity.dart';
+
 class UpdateProfileScreen extends StatefulWidget {
-  const UpdateProfileScreen({super.key});
+  const UpdateProfileScreen({super.key, required this.profile});
+  final ProfileEntity profile;
 
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
@@ -28,23 +31,23 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   void initState() {
     super.initState();
 
-    final profile = BlocProvider.of<ProfileCubit>(context).state.profile;
+    nameController =
+        TextEditingController(text: widget.profile.userName);
 
-    nameController = TextEditingController(text: profile?.userName ?? '');
+    emailController =
+        TextEditingController(text: widget.profile.email);
 
-    emailController = TextEditingController(text: profile?.email ?? '');
+    phoneController =
+        TextEditingController(text: widget.profile.phone);
 
-    phoneController = TextEditingController(text: profile?.phone ?? '');
+    addressController =
+        TextEditingController(text: widget.profile.address);
 
-    addressController = TextEditingController(text: profile?.address ?? '');
+    activityTypeController =
+        TextEditingController(text: widget.profile.activityType);
 
-    activityTypeController = TextEditingController(
-      text: profile?.activityType ?? '',
-    );
-
-    activityNameController = TextEditingController(
-      text: profile?.activityName ?? '',
-    );
+    activityNameController =
+        TextEditingController(text: widget.profile.activityName);
   }
 
   @override

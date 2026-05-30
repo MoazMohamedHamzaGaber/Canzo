@@ -1,6 +1,5 @@
 import 'package:canzo_app/core/service/service_locator.dart';
 import 'package:canzo_app/core/utils/color.dart';
-import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/core/widget/empty_screen.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
@@ -23,7 +22,15 @@ class BuildCardProfileInfo extends StatelessWidget {
           if (state.profile != null) {
             return GestureDetector(
               onTap: (){
-                navigateTo(context, UpdateProfileScreen());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                      value: context.read<ProfileCubit>(),
+                      child:  UpdateProfileScreen(profile: state.profile!,),
+                    ),
+                  ),
+                );
               },
               child: Column(
                 children: [
