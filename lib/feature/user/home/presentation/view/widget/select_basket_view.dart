@@ -14,6 +14,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+
+class BasketType {
+  final String key;
+  final String title;
+  final String image;
+
+  const BasketType({
+    required this.key,
+    required this.title,
+    required this.image,
+  });
+}
+
 class SelectBasketView extends StatelessWidget {
   const SelectBasketView({super.key});
 
@@ -37,6 +50,21 @@ class SelectBasketView extends StatelessWidget {
         },
         builder: (context, state) {
           final cubit = context.read<HomeCubit>();
+          final basketTypes = [
+            BasketType(
+              key: 'Plastic',
+              title: AppStrings.plastic.tr(),
+              image: 'assets/images/waters.jpeg',
+            ),
+            BasketType(
+              key: 'Canz',
+              title: AppStrings.cans.tr(),
+              image: 'assets/images/canz.jpeg',
+            ),
+          ];
+
+          final selectedType =
+              state.selectedMaterialType ?? basketTypes.first.title;
           return Center(
             child: Container(
               margin: const EdgeInsets.all(16),
@@ -64,31 +92,69 @@ class SelectBasketView extends StatelessWidget {
                     children: [
                       Text(AppStrings.basketType.tr()),
                       sizeBox(height: 15),
+
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.green.shade100),
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        child: DropdownButton<String>(
-                          value:
-                              state.selectedMaterialType ??
-                              AppStrings.plastic.tr(),
-                          isExpanded: true,
-                          icon: Icon(
-                            Icons.keyboard_arrow_down_outlined,
-                            size: 18,
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            value: selectedType,
+                            isExpanded: true,
+                            icon: const Icon(
+                              Icons.keyboard_arrow_down_outlined,
+                              size: 18,
+                            ),
+
+                            // Selected item UI
+                            selectedItemBuilder: (context) {
+                              return basketTypes.map((item) {
+                                return Row(
+                                  children: [
+                                    Image.asset(
+                                      item.image,
+                                      width: 28,
+                                      height: 28,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      item.title,
+                                      style: StyleText.style16,
+                                    ),
+                                  ],
+                                );
+                              }).toList();
+                            },
+
+                            // Dropdown items UI
+                            items: basketTypes.map((item) {
+                              return DropdownMenuItem<String>(
+                                value: item.title,
+                                child: Row(
+                                  children: [
+                                    Image.asset(
+                                      item.image,
+                                      width: 28,
+                                      height: 28,
+                                      fit: BoxFit.contain,
+                                    ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      item.title,
+                                      style: StyleText.style16,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }).toList(),
+
+                            onChanged: (value) {
+                              cubit.changeSelectedMaterial(value);
+                            },
                           ),
-                          underline: const SizedBox(),
-                          items: [AppStrings.plastic.tr(), AppStrings.cans.tr()]
-                              .map(
-                                (e) =>
-                                    DropdownMenuItem(value: e, child: Text(e)),
-                              )
-                              .toList(),
-                          onChanged: (value) {
-                            cubit.changeSelectedMaterial(value);
-                          },
                         ),
                       ),
                     ],
@@ -98,7 +164,7 @@ class SelectBasketView extends StatelessWidget {
                     title: state.selectedMaterialType != null
                         ? state.selectedMaterialType == AppStrings.plastic.tr()
                               ? 'Soon'
-                              : 'Basket 4 Kg'
+                              : '${AppStrings.basket.tr()} 4 ${AppStrings.kg.tr()}'
                         : 'Soon',
                     keyName: '4kg',
                   ),
@@ -170,17 +236,15 @@ class SelectBasketView extends StatelessWidget {
 
     final type = selectedType.trim().toLowerCase();
 
-    // Plastic
     if (type == AppStrings.plastic.tr().toLowerCase() ||
-        type == 'Waters' ||
+        type == 'waters' ||
         type == 'مياه') {
       return 'Plastic';
     }
 
-    // Cans
     if (type == AppStrings.cans.tr().toLowerCase() ||
         type == 'cans' ||
-        type == 'Canz' ||
+        type == 'canz' ||
         type == 'علب' ||
         type == 'كانز') {
       return 'Canz';

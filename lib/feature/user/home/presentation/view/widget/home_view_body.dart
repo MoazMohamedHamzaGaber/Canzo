@@ -48,7 +48,7 @@ class HomeViewBody extends StatelessWidget {
           if (state.status == HomeStates.fillSuccess) {
             showSnackBar(
               context: context,
-              message: 'Basket filled successfully',
+              message: AppStrings.basketFilledSuccessfully.tr(),
             );
           }
         },

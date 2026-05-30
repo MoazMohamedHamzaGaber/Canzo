@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class BasketsSection extends StatelessWidget {
   const BasketsSection({super.key, required this.state});
 
- final HomeState state;
+  final HomeState state;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +29,15 @@ class BasketsSection extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => BuildItemBaskets(
             title:
-                'Kg basket ${state.baskets![index].contentWeight} - ${state.baskets![index].contentType}',
-            value: state.baskets![index].isFull == 0 ? false: true,
+                '${AppStrings.basket.tr()} ${state.baskets![index].contentWeight} ${AppStrings.kg.tr()} - ${state.baskets![index].contentType}',
+            value: state.baskets![index].isFull == 0 ? false : true,
             id: state.baskets![index].id,
-            subTitle:state.baskets![index].isFull == 0? AppStrings.empty.tr() : 'Full',
+            subTitle: state.baskets![index].isFull == 0
+                ? AppStrings.empty.tr()
+                : AppStrings.full.tr(),
           ),
           separatorBuilder: (context, index) => sizeBox(),
-          itemCount: state.baskets?.length ??0,
+          itemCount: state.baskets?.length ?? 0,
         ),
       ],
     );

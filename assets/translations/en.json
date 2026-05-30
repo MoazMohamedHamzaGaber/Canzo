@@ -156,5 +156,11 @@
   "google": "Sign up via Google",
   "facebook": "Sign up via Facebook",
   "apple": "Sign up via Apple",
-  "or": "OR"
+  "or": "OR",
+  "basket_filled_successfully": "Basket filled successfully",
+  "basket": "Basket",
+  "kg": "Kg",
+  "full": "Full",
+  "canceled": "Canceled",
+  "cancel": "Cancel"
 }

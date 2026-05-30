@@ -28,7 +28,7 @@ class QuickStatsSection extends StatelessWidget {
           children: [
             buildContainer(AppStrings.bidding.tr(), bidding,AppStrings.pickups.tr()),
             sizeBox(width: 10),
-            buildContainer('Canceled', cancel, AppStrings.ongoing.tr()),
+            buildContainer(AppStrings.canceled.tr(), cancel, AppStrings.ongoing.tr()),
             sizeBox(width: 10),
             buildContainer(AppStrings.completed.tr(), complete, AppStrings.completed.tr()),
           ],

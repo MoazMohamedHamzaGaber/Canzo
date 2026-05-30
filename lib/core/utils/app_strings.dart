@@ -182,6 +182,12 @@ class AppStrings {
   static const String close = "close";
   static const String check = "check";
   static const String addBaskets = "add_baskets";
+  static const String basketFilledSuccessfully = "basket_filled_successfully";
+  static const String basket = "basket";
+  static const String kg = "kg";
+  static const String full = "full";
+  static const String canceled = "canceled";
+  static const String cancel = "cancel";
 
 
 }
