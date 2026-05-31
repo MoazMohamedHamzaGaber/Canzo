@@ -1,3 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
+import '../../../../core/utils/app_strings.dart';
+
 enum ActivityType {
   restaurant,
   cafe,
@@ -6,36 +9,36 @@ enum ActivityType {
 }
 
 extension ActivityTypeExtension on ActivityType {
-
   String get title {
     switch (this) {
       case ActivityType.restaurant:
-        return "Restaurant";
+        return AppStrings.restaurant.tr();
 
       case ActivityType.cafe:
-        return "Cafe";
+        return AppStrings.cafe.tr();
 
       case ActivityType.weddingHall:
-        return "Wedding Hall";
+        return AppStrings.weddingHall.tr();
 
       case ActivityType.club:
-        return "Club";
+        return AppStrings.club.tr();
     }
   }
 
+  // Value sent to API
   String get apiValue {
     switch (this) {
       case ActivityType.restaurant:
-        return "Restaurant";
+        return 'Restaurant';
 
       case ActivityType.cafe:
-        return "Cafe";
+        return 'Cafe';
 
       case ActivityType.weddingHall:
-        return "Wedding hall";
+        return 'Wedding hall';
 
       case ActivityType.club:
-        return "Club";
+        return 'Club';
     }
   }
 }

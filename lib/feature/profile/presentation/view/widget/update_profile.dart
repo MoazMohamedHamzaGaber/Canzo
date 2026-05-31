@@ -1,5 +1,6 @@
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
+import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/update_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
@@ -7,10 +8,14 @@ import 'package:canzo_app/feature/profile/presentation/cubit/profile_state.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../authentication/domain/entity/activity_type.dart';
+import '../../../../authentication/presentation/cubit/auth_cubit.dart';
+import '../../../../authentication/presentation/view/widget/dropdown_button_section.dart';
 import '../../../domain/entity/profile_entity.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key, required this.profile});
+
   final ProfileEntity profile;
 
   @override
@@ -24,30 +29,30 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   late TextEditingController emailController;
   late TextEditingController phoneController;
   late TextEditingController addressController;
-  late TextEditingController activityTypeController;
   late TextEditingController activityNameController;
 
   @override
   void initState() {
     super.initState();
 
-    nameController =
-        TextEditingController(text: widget.profile.userName);
+    nameController = TextEditingController(text: widget.profile.userName);
 
-    emailController =
-        TextEditingController(text: widget.profile.email);
+    emailController = TextEditingController(text: widget.profile.email);
 
-    phoneController =
-        TextEditingController(text: widget.profile.phone);
+    phoneController = TextEditingController(text: widget.profile.phone);
 
-    addressController =
-        TextEditingController(text: widget.profile.address);
+    addressController = TextEditingController(text: widget.profile.address);
 
-    activityTypeController =
-        TextEditingController(text: widget.profile.activityType);
+    activityNameController = TextEditingController(
+      text: widget.profile.activityName,
+    );
 
-    activityNameController =
-        TextEditingController(text: widget.profile.activityName);
+    context.read<AuthCubit>().changeSelectedActivity(
+      context.read<AuthCubit>().getActivityTypeFromString(
+            widget.profile.activityType,
+          ) ??
+          ActivityType.restaurant,
+    );
   }
 
   @override
@@ -56,7 +61,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     emailController.dispose();
     phoneController.dispose();
     addressController.dispose();
-    activityTypeController.dispose();
     activityNameController.dispose();
 
     super.dispose();
@@ -68,7 +72,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     TextInputType keyboardType = TextInputType.text,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(),
       child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
@@ -115,28 +119,26 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     title: 'User Name',
                     controller: nameController,
                   ),
-
+                  sizeBox(),
                   buildTextField(
                     title: 'Email',
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                   ),
-
+                  sizeBox(),
                   buildTextField(
                     title: 'Phone Number',
                     controller: phoneController,
                     keyboardType: TextInputType.phone,
                   ),
-
+                  sizeBox(),
                   buildTextField(
                     title: 'Address',
                     controller: addressController,
                   ),
-
-                  buildTextField(
-                    title: 'Activity Type',
-                    controller: activityTypeController,
-                  ),
+                  sizeBox(height: 12),
+                  const DropdownButtonSection(),
+                  sizeBox(),
 
                   buildTextField(
                     title: 'Activity Name',
@@ -159,7 +161,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             email: emailController.text,
                             phoneNumber: phoneController.text,
                             address: addressController.text,
-                            activityType: activityTypeController.text,
+                            activityType: context
+                                .read<AuthCubit>()
+                                .state
+                                .selectedActivityType
+                                ?.apiValue ??
+                                '',
                             activityName: activityNameController.text,
                           ),
                         );

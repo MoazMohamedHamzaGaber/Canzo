@@ -142,13 +142,6 @@ class _UserRegisterState extends State<UserRegister> {
                   ),
                 ),
               ),
-              CustomTextField(
-                controller: addressController,
-                title: AppStrings.address.tr(),
-                name: AppStrings.address.tr(),
-                validate: '',
-                type: TextInputType.text,
-              ),
               sizeBox(height: 10),
               DropdownButtonSection(),
               if (widget.state != null)
@@ -159,6 +152,13 @@ class _UserRegisterState extends State<UserRegister> {
                   validate: '',
                   type: TextInputType.text,
                 ),
+              CustomTextField(
+                controller: addressController,
+                title: AppStrings.address.tr(),
+                name: AppStrings.address.tr(),
+                validate: '',
+                type: TextInputType.text,
+              ),
               sizeBox(),
               buildMaterialButton(
                 text: AppStrings.createAccount.tr(),
