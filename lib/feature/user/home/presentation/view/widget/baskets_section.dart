@@ -34,7 +34,7 @@ class BasketsSection extends StatelessWidget {
             id: state.baskets![index].id,
             subTitle: state.baskets![index].isFull == 0
                 ? AppStrings.empty.tr()
-                : AppStrings.full.tr(),
+                : AppStrings.full.tr(), price: state.baskets![index].price,
           ),
           separatorBuilder: (context, index) => sizeBox(),
           itemCount: state.baskets?.length ?? 0,

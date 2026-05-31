@@ -198,6 +198,7 @@ class AppStrings {
   static const String update = "update";
   static const String updateProfile = "update_profile";
   static const String profileUpdatedSuccessfully = "profile_updated_successfully";
+  static const String le = "le";
 
 
 }
