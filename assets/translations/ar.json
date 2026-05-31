@@ -163,6 +163,12 @@
   "no_binding": "لا توجد طلبات ملزمة حتى الآن",
   "no_canceled": "لا توجد طلبات ملغاة حتى الآن",
   "no_complete": "لا توجد طلبات مكتملة حتى الآن",
-  "no_transaction": "لا توجد معاملات حاليا"
+  "no_transaction": "لا توجد معاملات حاليا",
+  "update_profile": "تحديث الملف الشخصي",
+  "profile_updated_successfully": "تم تحديث الملف الشخصي بنجاح",
+  "please_enter": "الرجاء إدخال",
+  "user_name": "اسم المستخدم",
+  "activity_name": "اسم النشاط",
+  "update": "تحديث"
 
 }

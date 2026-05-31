@@ -8,12 +8,9 @@ import 'package:canzo_app/feature/authentication/domain/cases/sign_up_use_case.d
 import 'package:canzo_app/feature/authentication/domain/cases/verify_otp_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/shared/shared_preference.dart';
-import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/const.dart';
 import '../view/login_view.dart';
 import 'auth_state.dart';

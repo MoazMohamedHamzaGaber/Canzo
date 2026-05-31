@@ -5,9 +5,11 @@ import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/update_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/utils/app_strings.dart';
 import '../../../../authentication/domain/entity/activity_type.dart';
 import '../../../../authentication/presentation/cubit/auth_cubit.dart';
 import '../../../../authentication/presentation/view/widget/dropdown_button_section.dart';
@@ -49,8 +51,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
     context.read<AuthCubit>().changeSelectedActivity(
       context.read<AuthCubit>().getActivityTypeFromString(
-            widget.profile.activityType,
-          ) ??
+        widget.profile.activityType,
+      ) ??
           ActivityType.restaurant,
     );
   }
@@ -78,7 +80,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         keyboardType: keyboardType,
         validator: (value) {
           if (value == null || value.isEmpty) {
-            return 'Please enter $title';
+            return '${AppStrings.pleaseEnter.tr()} $title';
           }
 
           return null;
@@ -94,13 +96,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Update Profile'), centerTitle: true),
+      appBar: AppBar(title:  Text(AppStrings.updateProfile.tr())),
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state.status == ProfileStates.updateSuccess) {
             showSnackBar(
               context: context,
-              message: 'Profile updated successfully',
+              message: AppStrings.profileUpdatedSuccessfully.tr(),
             );
 
             //Navigator.pop(context);
@@ -116,24 +118,24 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               child: Column(
                 children: [
                   buildTextField(
-                    title: 'User Name',
+                    title: AppStrings.userName.tr(),
                     controller: nameController,
                   ),
                   sizeBox(),
                   buildTextField(
-                    title: 'Email',
+                    title: AppStrings.email.tr(),
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                   ),
                   sizeBox(),
                   buildTextField(
-                    title: 'Phone Number',
+                    title: AppStrings.phoneNumber.tr(),
                     controller: phoneController,
                     keyboardType: TextInputType.phone,
                   ),
                   sizeBox(),
                   buildTextField(
-                    title: 'Address',
+                    title: AppStrings.address.tr(),
                     controller: addressController,
                   ),
                   sizeBox(height: 12),
@@ -141,19 +143,20 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   sizeBox(),
 
                   buildTextField(
-                    title: 'Activity Name',
+                    title: AppStrings.activityName.tr(),
                     controller: activityNameController,
                   ),
 
                   const SizedBox(height: 20),
 
                   buildMaterialButton(
-                    text: 'Update',
+                    text: AppStrings.update.tr(),
                     loading: state.status == ProfileStates.loading
                         ? true
                         : false,
                     function: () {
                       if (formKey.currentState!.validate()) {
+                        print(widget.profile.activityType);
                         cubit.updateProfile(
                           context,
                           UpdateProfileParams(

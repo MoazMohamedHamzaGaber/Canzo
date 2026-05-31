@@ -166,5 +166,11 @@
   "no_binding": "No binding orders yet",
   "no_canceled": "No canceled orders yet",
   "no_complete": "No complete orders yet",
-  "no_transaction": "No transaction yet"
+  "no_transaction": "No transaction yet",
+  "update_profile": "Update Profile",
+  "profile_updated_successfully": "Profile updated successfully",
+  "please_enter": "Please enter",
+  "user_name": "User Name",
+  "activity_name": "Activity Name",
+  "update": "Update"
 }

@@ -192,6 +192,12 @@ class AppStrings {
   static const String noCanceled = "no_canceled";
   static const String noComplete = "no_complete";
   static const String noTransaction = "no_transaction";
+  static const String pleaseEnter = "please_enter";
+  static const String userName = "user_name";
+  static const String activityName = "activity_name";
+  static const String update = "update";
+  static const String updateProfile = "update_profile";
+  static const String profileUpdatedSuccessfully = "profile_updated_successfully";
 
 
 }
