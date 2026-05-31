@@ -36,7 +36,7 @@ class TransactionSection extends StatelessWidget {
           ),
           separatorBuilder: (context, index) => sizeBox(),
           itemCount: 20,
-        ) :EmptyScreen(title: 'No transaction yet'),
+        ) :EmptyScreen(title: AppStrings.noTransaction.tr()),
       ],
     );
   }

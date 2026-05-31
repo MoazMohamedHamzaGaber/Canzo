@@ -162,5 +162,9 @@
   "kg": "Kg",
   "full": "Full",
   "canceled": "Canceled",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "no_binding": "No binding orders yet",
+  "no_canceled": "No canceled orders yet",
+  "no_complete": "No complete orders yet",
+  "no_transaction": "No transaction yet"
 }

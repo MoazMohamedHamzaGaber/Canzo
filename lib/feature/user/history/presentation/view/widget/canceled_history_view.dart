@@ -3,8 +3,11 @@ import 'package:canzo_app/core/widget/build_item_card.dart';
 import 'package:canzo_app/core/widget/empty_screen.dart';
 import 'package:canzo_app/feature/user/history/presentation/cubit/history_cubit.dart';
 import 'package:canzo_app/feature/user/history/presentation/cubit/history_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../core/utils/app_strings.dart';
 
 class CanceledHistoryView extends StatelessWidget {
   const CanceledHistoryView({super.key});
@@ -30,7 +33,7 @@ class CanceledHistoryView extends StatelessWidget {
           itemCount: state.cancelledOrders?.length ?? 0,
         );
         }else{
-          return EmptyScreen(title: 'No canceled orders yet');
+          return EmptyScreen(title: AppStrings.noCanceled.tr());
         }
       },
     );
