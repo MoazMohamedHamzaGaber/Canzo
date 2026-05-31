@@ -50,7 +50,7 @@ class DropdownButtonSection extends StatelessWidget {
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                 ),
-                value: cubit.state.selectedActivityType,
+                initialValue: cubit.state.selectedActivityType,
                 items:  [
                   DropdownMenuItem(
                     value:ActivityType.restaurant,
