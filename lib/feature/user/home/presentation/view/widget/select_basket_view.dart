@@ -22,6 +22,18 @@ class SelectBasketView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final basketTypes = [
+      BasketType(
+        key: 'Plastic',
+        title: AppStrings.plastic.tr(),
+        image: 'assets/images/waters.jpeg',
+      ),
+      BasketType(
+        key: 'Canz',
+        title: AppStrings.cans.tr(),
+        image: 'assets/images/canz.jpeg',
+      ),
+    ];
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocProvider(
@@ -259,16 +271,3 @@ class BasketType {
     required this.image,
   });
 }
-
-final basketTypes = [
-  BasketType(
-    key: 'Plastic',
-    title: AppStrings.plastic.tr(),
-    image: 'assets/images/waters.jpeg',
-  ),
-  BasketType(
-    key: 'Canz',
-    title: AppStrings.cans.tr(),
-    image: 'assets/images/canz.jpeg',
-  ),
-];
