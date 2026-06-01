@@ -51,8 +51,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
     context.read<AuthCubit>().changeSelectedActivity(
       context.read<AuthCubit>().getActivityTypeFromString(
-        widget.profile.activityType,
-      ) ??
+            widget.profile.activityType,
+          ) ??
           ActivityType.restaurant,
     );
   }
@@ -96,7 +96,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:  Text(AppStrings.updateProfile.tr())),
+      appBar: AppBar(title: Text(AppStrings.updateProfile.tr())),
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state.status == ProfileStates.updateSuccess) {
@@ -157,22 +157,41 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     function: () {
                       if (formKey.currentState!.validate()) {
                         print(widget.profile.activityType);
-                        cubit.updateProfile(
-                          context,
-                          UpdateProfileParams(
-                            username: nameController.text,
-                            email: emailController.text,
-                            phoneNumber: phoneController.text,
-                            address: addressController.text,
-                            activityType: context
-                                .read<AuthCubit>()
-                                .state
-                                .selectedActivityType
-                                ?.apiValue ??
-                                '',
-                            activityName: activityNameController.text,
-                          ),
-                        );
+                        role == 'Admin'
+                            ? cubit.updateAdminProfile(
+                                context,
+                                UpdateProfileParams(
+                                  username: nameController.text,
+                                  email: emailController.text,
+                                  phoneNumber: phoneController.text,
+                                  address: addressController.text,
+                                  activityType:
+                                      context
+                                          .read<AuthCubit>()
+                                          .state
+                                          .selectedActivityType
+                                          ?.apiValue ??
+                                      '',
+                                  activityName: activityNameController.text,
+                                ),
+                              )
+                            : cubit.updateProfile(
+                                context,
+                                UpdateProfileParams(
+                                  username: nameController.text,
+                                  email: emailController.text,
+                                  phoneNumber: phoneController.text,
+                                  address: addressController.text,
+                                  activityType:
+                                      context
+                                          .read<AuthCubit>()
+                                          .state
+                                          .selectedActivityType
+                                          ?.apiValue ??
+                                      '',
+                                  activityName: activityNameController.text,
+                                ),
+                              );
                       }
                     },
                     color: AppColors.green,

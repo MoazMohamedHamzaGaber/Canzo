@@ -23,4 +23,9 @@ class ProfileRepositoryImpl extends ProfileRepository{
   Future<Either<Failure, ProfileEntity>> getAdminProfile() {
     return _remoteDataSource.getAdminProfile();
   }
+
+  @override
+  Future<Either<Failure, bool>> updateAdminProfile(UpdateProfileParams params) {
+    return _remoteDataSource.updateAdminProfile(params);
+  }
 }

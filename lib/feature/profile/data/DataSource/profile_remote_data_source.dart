@@ -11,9 +11,12 @@ import '../../domain/UseCase/update_profile_use_case.dart';
 
 abstract class ProfileRemoteDataSource {
   Future<Either<Failure, ProfileEntity>> getProfile();
+
   Future<Either<Failure, ProfileEntity>> getAdminProfile();
 
   Future<Either<Failure, bool>> updateProfile(UpdateProfileParams params);
+
+  Future<Either<Failure, bool>> updateAdminProfile(UpdateProfileParams params);
 }
 
 class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
@@ -40,7 +43,7 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
     var result = await _apiConsumer.patch(
       EndPoints.profile,
       options: Options(headers: {'Authorization': 'Bearer $token'}),
-      data: params.toJson()
+      data: params.toJson(),
     );
 
     return result.fold((failure) => Left(failure), (response) {
@@ -57,6 +60,21 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
 
     return result.fold((failure) => Left(failure), (response) {
       return Right(ProfileModel.fromJson(response['profile']));
+    });
+  }
+
+  @override
+  Future<Either<Failure, bool>> updateAdminProfile(
+    UpdateProfileParams params,
+  ) async {
+    var result = await _apiConsumer.patch(
+      EndPoints.adminProfile,
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+      data: params.toJson(),
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      return Right(true);
     });
   }
 }

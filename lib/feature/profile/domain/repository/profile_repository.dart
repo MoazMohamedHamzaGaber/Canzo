@@ -7,4 +7,5 @@ abstract class ProfileRepository {
   Future<Either<Failure,ProfileEntity>> getProfile();
   Future<Either<Failure,ProfileEntity>> getAdminProfile();
   Future<Either<Failure,bool>> updateProfile(UpdateProfileParams params);
+  Future<Either<Failure,bool>> updateAdminProfile(UpdateProfileParams params);
 }
