@@ -15,4 +15,5 @@ class EndPoints {
   static const transaction = 'api/client/transactions';
   static const wallet = 'api/client/wallet';
   static const profile = 'api/client/profile';
+  static const adminProfile = 'api/admin/profile';
 }

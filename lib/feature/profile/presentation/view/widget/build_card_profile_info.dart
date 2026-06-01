@@ -9,25 +9,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../../core/utils/const.dart';
+
 class BuildCardProfileInfo extends StatelessWidget {
   const BuildCardProfileInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) =>serviceLocator<ProfileCubit>()..getProfile(),
+      create: (BuildContext context) {
+        final cubit = serviceLocator<ProfileCubit>();
+
+        if (role == 'Admin') {
+          cubit.getAdminProfile();
+        } else {
+          cubit.getProfile();
+        }
+
+        return cubit;
+      },
       child: BlocBuilder<ProfileCubit, ProfileState>(
         builder: (BuildContext context, state) {
+          final profile = role == 'Admin'
+              ? state.adminProfile
+              : state.profile;
 
-          if (state.profile != null) {
+          if (profile != null) {
             return GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => BlocProvider.value(
                       value: context.read<ProfileCubit>(),
-                      child:  UpdateProfileScreen(profile: state.profile!,),
+                      child: UpdateProfileScreen(
+                        profile: profile,
+                      ),
                     ),
                   ),
                 );
@@ -58,11 +75,11 @@ class BuildCardProfileInfo extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              state.profile?.userName ?? '',
+                              profile.userName,
                               style: StyleText.style19,
                             ),
                             Text(
-                              state.profile?.email ?? '',
+                              profile.email,
                               style: StyleText.style13,
                             ),
                             Container(
@@ -77,7 +94,7 @@ class BuildCardProfileInfo extends StatelessWidget {
                                 border: Border.all(color: Colors.black45),
                               ),
                               child: Text(
-                                state.profile?.userRole ?? '',
+                                profile.userRole,
                                 style: StyleText.style13.copyWith(
                                   color: AppColors.green,
                                   fontWeight: FontWeight.bold,
@@ -93,68 +110,59 @@ class BuildCardProfileInfo extends StatelessWidget {
               ),
             );
           }
-          if (state.status == ProfileStates.error){
-            return EmptyScreen(title: state.failure?.errMessage ??'');
+          if (state.status == ProfileStates.error) {
+            return EmptyScreen(title: state.failure?.errMessage ?? '');
           }
-            return Shimmer.fromColors(
-              baseColor: Colors.grey.shade300,
-              highlightColor: Colors.grey.shade100,
-              child: Container(
-                padding: const EdgeInsets.only(
-                  top: 12,
-                  bottom: 20,
-                  right: 12,
-                  left: 12,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.black45),
-                  color: Colors.white,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 18,
-                            width: 120,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(height: 10),
-                          Container(
-                            height: 14,
-                            width: 180,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(height: 15),
-                          Container(
-                            height: 30,
-                            width: 90,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+          return Shimmer.fromColors(
+            baseColor: Colors.grey.shade300,
+            highlightColor: Colors.grey.shade100,
+            child: Container(
+              padding: const EdgeInsets.only(
+                top: 12,
+                bottom: 20,
+                right: 12,
+                left: 12,
               ),
-            );
-
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.black45),
+                color: Colors.white,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(height: 18, width: 120, color: Colors.white),
+                        const SizedBox(height: 10),
+                        Container(height: 14, width: 180, color: Colors.white),
+                        const SizedBox(height: 15),
+                        Container(
+                          height: 30,
+                          width: 90,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
     );

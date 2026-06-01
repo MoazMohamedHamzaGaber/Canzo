@@ -5,6 +5,7 @@ import 'package:canzo_app/feature/profile/domain/repository/profile_repository.d
 import 'package:get_it/get_it.dart';
 
 import '../feature/profile/data/repository/profile_repository_impl.dart';
+import '../feature/profile/domain/UseCase/get_admin_profile_use_case.dart';
 import '../feature/profile/presentation/cubit/profile_cubit.dart';
 
 class ProfileServiceLocator {
@@ -32,10 +33,16 @@ class ProfileServiceLocator {
         serviceLocator(),
       ),
     );
+    serviceLocator.registerLazySingleton<GetAdminProfileUseCase>(
+          () => GetAdminProfileUseCase(
+        serviceLocator(),
+      ),
+    );
 
     // cubits
     serviceLocator.registerFactory<ProfileCubit>(
           () => ProfileCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
       )

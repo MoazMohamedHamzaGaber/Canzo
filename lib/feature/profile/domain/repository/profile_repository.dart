@@ -5,5 +5,6 @@ import 'package:dartz/dartz.dart';
 
 abstract class ProfileRepository {
   Future<Either<Failure,ProfileEntity>> getProfile();
+  Future<Either<Failure,ProfileEntity>> getAdminProfile();
   Future<Either<Failure,bool>> updateProfile(UpdateProfileParams params);
 }
