@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import '../../service_locator/analytics_service_locator.dart';
+import '../../service_locator/overview_service_locator.dart';
 import '../api/api_consumer.dart';
 import '../api/end_points.dart';
 
@@ -38,5 +39,6 @@ class DI {
     WalletServiceLocator.execute(serviceLocator);
     ProfileServiceLocator.execute(serviceLocator);
     AnalyticsServiceLocator.execute(serviceLocator);
+    OverViewServiceLocator.execute(serviceLocator);
   }
 }
