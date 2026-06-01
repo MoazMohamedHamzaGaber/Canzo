@@ -6,26 +6,50 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+import '../../../domain/entity/analytic_entity.dart';
+
 class RevenueCard extends StatelessWidget {
-  const RevenueCard({super.key});
+  final AnalyticsEntity analytics;
+
+  const RevenueCard({
+    super.key,
+    required this.analytics,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final spots = analytics.chart
+        .asMap()
+        .entries
+        .map(
+          (e) => FlSpot(
+        e.key.toDouble(),
+        e.value.totalProfit,
+      ),
+    )
+        .toList();
+
+    final maxProfit = analytics.chart.isEmpty
+        ? 100.0
+        : analytics.chart
+        .map((e) => e.totalProfit)
+        .reduce((a, b) => a > b ? a : b);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         Text(
-        AppStrings.revenue.tr(),
+        Text(
+          AppStrings.revenue.tr(),
           style: StyleText.style16.copyWith(
             color: AppColors.green,
-            fontWeight: FontWeight.bold
+            fontWeight: FontWeight.bold,
           ),
         ),
         sizeBox(),
         Container(
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             vertical: 20,
-            horizontal: 20
+            horizontal: 20,
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -43,50 +67,41 @@ class RevenueCard extends StatelessWidget {
                 child: LineChart(
                   LineChartData(
                     minX: 0,
-                    maxX: 6,
+                    maxX: analytics.chart.isEmpty
+                        ? 0
+                        : (analytics.chart.length - 1).toDouble(),
                     minY: 0,
-                    maxY: 100,
+                    maxY: maxProfit + (maxProfit * .2),
 
-                    /// remove grid
-                    gridData: FlGridData(show: false),
-
-                    /// remove borders
+                    gridData: const FlGridData(show: false),
                     borderData: FlBorderData(show: false),
 
-                    /// remove left numbers
                     titlesData: FlTitlesData(
-                      leftTitles: AxisTitles(
+                      leftTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      topTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false),
+                      ),
+                      rightTitles: const AxisTitles(
                         sideTitles: SideTitles(showTitles: false),
                       ),
 
-                      topTitles: AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-
-                      rightTitles: AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-
-                      /// 👇 الأيام هنا
                       bottomTitles: AxisTitles(
                         sideTitles: SideTitles(
                           showTitles: true,
                           interval: 1,
                           getTitlesWidget: (value, meta) {
-                            final days = [
-                              AppStrings.sat.tr(),
-                              AppStrings.sun.tr(),
-                              AppStrings.mon.tr(),
-                              AppStrings.tue.tr(),
-                              AppStrings.wed.tr(),
-                              AppStrings.thu.tr(),
-                              AppStrings.fri.tr()
-                            ];
+                            final index = value.toInt();
+
+                            if (index >= analytics.chart.length) {
+                              return const SizedBox();
+                            }
 
                             return Padding(
                               padding: const EdgeInsets.only(top: 8),
                               child: Text(
-                                days[value.toInt()],
+                                analytics.chart[index].day,
                                 style: const TextStyle(
                                   fontSize: 10,
                                   color: Colors.grey,
@@ -98,47 +113,39 @@ class RevenueCard extends StatelessWidget {
                       ),
                     ),
 
-                    /// line data
                     lineBarsData: [
                       LineChartBarData(
                         isCurved: true,
-                        color: const Color(0xff4CAF50),
+                        color: AppColors.green,
                         barWidth: 3,
+                        spots: spots,
 
-                        /// dots
                         dotData: FlDotData(
                           show: true,
-                          getDotPainter: (spot, percent, bar, index) {
-                            return FlDotCirclePainter(
-                              radius: 4,
-                              color: const Color(0xff4CAF50),
-                              strokeWidth: 0,
-                            );
-                          },
+                          getDotPainter:
+                              (spot, percent, bar, index) =>
+                              FlDotCirclePainter(
+                                radius: 4,
+                                color: AppColors.green,
+                                strokeWidth: 0,
+                              ),
                         ),
 
-                        /// remove area under line
-                        belowBarData: BarAreaData(show: false),
-
-                        /// 👇 نفس الداتا بتاعتك
-                        spots: const [
-                          FlSpot(0, 30),
-                          FlSpot(1, 35),
-                          FlSpot(2, 40),
-                          FlSpot(3, 38),
-                          FlSpot(4, 45),
-                          FlSpot(5, 50),
-                          FlSpot(6, 70),
-                        ],
+                        belowBarData: BarAreaData(
+                          show: false,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
+
               sizeBox(),
+
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:  [
+                mainAxisAlignment:
+                MainAxisAlignment.spaceBetween,
+                children: [
                   Text(
                     AppStrings.totalThisWeek.tr(),
                     style: StyleText.style18.copyWith(
@@ -146,14 +153,14 @@ class RevenueCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${AppStrings.egp.tr()} 1,000",
+                    "${analytics.totalProfit.toStringAsFixed(0)} ${AppStrings.egp.tr()}",
                     style: StyleText.style18.copyWith(
                       color: AppColors.green,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

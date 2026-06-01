@@ -7,6 +7,7 @@ class EndPoints {
   static const resetPassword = 'auth/reset-password';
   static const verifyOtp = 'auth/verify-otp';
   static const baskets = 'api/client/baskets';
+  static const analytics = 'api/admin/analytics';
   static String fill(int id) =>
       'api/client/baskets/$id/fill';
   static String orderStatus(String status) =>

@@ -4,14 +4,34 @@ import 'package:canzo_app/feature/admin/analytics/presentation/view/widget/mater
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../domain/entity/analytic_entity.dart';
+
 class MaterialsCard extends StatelessWidget {
-  const MaterialsCard({super.key});
+  final AnalyticsEntity analytics;
+
+  const MaterialsCard({
+    super.key,
+    required this.analytics,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final totalWeight =
+        analytics.plasticWeight + analytics.canzWeight;
+
+    final plasticPercent =
+    totalWeight == 0
+        ? 0
+        : analytics.plasticWeight / totalWeight;
+
+    final cansPercent =
+    totalWeight == 0
+        ? 0
+        : analytics.canzWeight / totalWeight;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children:  [
+      children: [
         Text(
           AppStrings.mostCollection.tr(),
           style: StyleText.style16.copyWith(
@@ -19,19 +39,21 @@ class MaterialsCard extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 16),
+
+        const SizedBox(height: 16),
+
         MaterialProgressItem(
           title: AppStrings.plastic.tr(),
-          value: 0.75,
-          amount: "11 pkg",
+          value: plasticPercent.toDouble(),
+          amount: "${analytics.plasticWeight} kg",
         ),
 
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
 
         MaterialProgressItem(
           title: AppStrings.cans.tr(),
-          value: 0.45,
-          amount: "7 pkg",
+          value: cansPercent.toDouble(),
+          amount: "${analytics.canzWeight} kg",
         ),
       ],
     );
