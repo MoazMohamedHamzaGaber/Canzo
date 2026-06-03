@@ -10,6 +10,7 @@ import 'package:canzo_app/feature/admin/overview/presentation/cubit/overview_cub
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/useCase/update_order_use_case.dart';
+import 'details_pending_approval.dart';
 
 class BuildItemPendingApprovals extends StatelessWidget {
   final OrderEntity order;
@@ -21,120 +22,118 @@ class BuildItemPendingApprovals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(
-        top: 12,
-        bottom: 20,
-        right: 12,
-        left: 12,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.black45),
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment:
-            MainAxisAlignment.spaceBetween,
-            crossAxisAlignment:
-            CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment:
-                  CrossAxisAlignment.start,
+    return GestureDetector(
+      onTap: (){
+        navigateTo(context, OrderDetailsView(order: order,));
+      },
+      child: Container(
+        padding: const EdgeInsets.only(
+          top: 12,
+          bottom: 20,
+          right: 12,
+          left: 12,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.black45),
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment:
+              MainAxisAlignment.spaceBetween,
+              crossAxisAlignment:
+              CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment:
+                    CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        order.userName,
+                        style: StyleText.style19.copyWith(
+                          fontSize: 20
+                        ),
+                      ),
+                      SizedBox(height: 5,),
+                      Text(
+                        "Basket Count: ${order.basketsCount} - ${order.address}",
+                        style: StyleText.style13,
+                      ),
+                      SizedBox(height: 5,),
+                      Text(
+                        order.createdAt,
+                        style: StyleText.style13,
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
                   children: [
                     Text(
-                      order.userName,
-                      style: StyleText.style19.copyWith(
-                        fontSize: 20
+                      "${order.totalWeight!.ceil()} ${AppStrings.kg.tr()}",
+                      style: StyleText.style18.copyWith(
+                        color: AppColors.green,
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    SizedBox(height: 15,),
                     Text(
-                      "Basket Count: ${order.basketsCount} - ${order.address}",
-                      style: StyleText.style13,
-                    ),
-                    SizedBox(height: 5,),
-                    Text(
-                      order.createdAt,
-                      style: StyleText.style13,
+                      '${order.price} ${AppStrings.egp.tr()}',
+                      style: StyleText.style19.copyWith(
+                        fontSize: 17,
+                      ),
                     ),
                   ],
                 ),
-              ),
-              Column(
-                children: [
-                  Text(
-                    "${order.totalWeight!.ceil()} ${AppStrings.kg.tr()}",
-                    style: StyleText.style18.copyWith(
-                      color: AppColors.green,
-                    ),
+              ],
+            ),
+
+            sizeBox(),
+
+            Row(
+              children: [
+                Expanded(
+                  child: buildMaterialButton(
+                    text: AppStrings.cancel.tr(),
+                    color: Colors.red,
+                    function: () {
+                      context
+                          .read<OverviewCubit>()
+                          .updateOrder(
+                        UpdateOrderParams(
+                          orderId: order.id,
+                          status: 'Cancelled',
+                        ),
+                      );
+                    },
                   ),
-                  SizedBox(height: 15,),
-                  Text(
-                    '${order.price} ${AppStrings.egp.tr()}',
-                    style: StyleText.style19.copyWith(
-                      fontSize: 17,
-                    ),
+                ),
+
+                const SizedBox(width: 12),
+
+                Expanded(
+                  child: buildMaterialButton(
+                    text: AppStrings.complete.tr(),
+                    color: AppColors.green,
+                    function: () {
+                      context
+                          .read<OverviewCubit>()
+                          .updateOrder(
+                        UpdateOrderParams(
+                          orderId: order.id,
+                          status: 'Completed',
+                        ),
+                      );
+                    },
                   ),
-                ],
-              ),
-            ],
-          ),
-
-          sizeBox(),
-
-          Row(
-            children: [
-              Expanded(
-                child: buildMaterialButton(
-                  text: AppStrings.cancel.tr(),
-                  color: Colors.red,
-                  function: () {
-                    context
-                        .read<OverviewCubit>()
-                        .updateOrder(
-                      UpdateOrderParams(
-                        orderId: order.id,
-                        status: 'Cancelled',
-                      ),
-                    );
-                  },
                 ),
-              ),
-
-              const SizedBox(width: 12),
-
-              Expanded(
-                child: buildMaterialButton(
-                  text: AppStrings.complete.tr(),
-                  color: AppColors.green,
-                  function: () {
-                    context
-                        .read<OverviewCubit>()
-                        .updateOrder(
-                      UpdateOrderParams(
-                        orderId: order.id,
-                        status: 'Completed',
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  void _showCompleteDialog(
-      BuildContext context,
-      int orderId,
-      ) {
-    // هنا تفتح Dialog اختيار الصورة
   }
 }
 
