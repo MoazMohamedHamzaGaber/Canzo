@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 
 import '../feature/user/home/domain/repository/home_repository.dart';
 import '../feature/user/home/domain/usecases/fill_baskets_use_case.dart';
+import '../feature/user/home/domain/usecases/request_withdraw_use_case.dart';
 
 class HomeServiceLocator {
   static void execute(GetIt serviceLocator) {
@@ -39,10 +40,16 @@ class HomeServiceLocator {
         serviceLocator(),
       ),
     );
+    serviceLocator.registerLazySingleton<RequestWithdrawUseCase>(
+          () => RequestWithdrawUseCase(
+        serviceLocator(),
+      ),
+    );
 
     // cubits
     serviceLocator.registerFactory<HomeCubit>(
           () => HomeCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

@@ -3,6 +3,7 @@ import 'package:canzo_app/feature/user/home/data/DataSource/home_remote_data_sou
 import 'package:canzo_app/feature/user/home/domain/entity/basket_entity.dart';
 import 'package:canzo_app/feature/user/home/domain/repository/home_repository.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/add_baskets_use_case.dart';
+import 'package:canzo_app/feature/user/home/domain/usecases/request_withdraw_use_case.dart';
 import 'package:dartz/dartz.dart';
 
 class HomeRepositoryImpl extends HomeRepository{
@@ -22,5 +23,10 @@ class HomeRepositoryImpl extends HomeRepository{
   @override
   Future<Either<Failure, bool>> fillBaskets(int id) {
     return _remoteDataSource.fillBaskets(id);
+  }
+
+  @override
+  Future<Either<Failure, bool>> requestWithdraw(RequestWithdrawParams params) {
+    return _remoteDataSource.requestWithdraw(params);
   }
 }

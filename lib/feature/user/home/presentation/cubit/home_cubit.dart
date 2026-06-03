@@ -7,17 +7,20 @@ import 'package:canzo_app/feature/user/home/domain/usecases/get_baskets_use_case
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/usecases/request_withdraw_use_case.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final AddBasketsUseCase _addBasketsUseCase;
   final GetBasketsUseCase _getBasketsUseCase;
   final FillBasketsUseCase _fillBasketsUseCase;
+  final RequestWithdrawUseCase _requestWithdrawUseCase;
 
   HomeCubit(
       this._addBasketsUseCase,
       this._getBasketsUseCase,
       this._fillBasketsUseCase,
+      this._requestWithdrawUseCase,
       ) : super(const HomeState());
 
   void changeCurrentIndex(index)
@@ -141,6 +144,26 @@ class HomeCubit extends Cubit<HomeState> {
             status: HomeStates.fillSuccess,
           ),
         );
+      },
+    );
+  }
+
+  Future<void> requestWithdraw(BuildContext context, RequestWithdrawParams params) async {
+    emit(state.copyWith(status: HomeStates.loading));
+
+    final response = await _requestWithdrawUseCase(params);
+    response.fold(
+          (l) {
+        emit(state.copyWith(failure: l, status: HomeStates.error));
+        showSnackBar(
+          context: context,
+          message: l.errMessage,
+          backgroundColor: Colors.red,
+        );
+      },
+          (data) {
+        emit(state.copyWith(status: HomeStates.addSuccess));
+        pr(data);
       },
     );
   }

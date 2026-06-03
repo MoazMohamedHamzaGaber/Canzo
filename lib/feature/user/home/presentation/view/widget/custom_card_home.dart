@@ -2,11 +2,13 @@ import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/request_withdraw_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardHome extends StatelessWidget {
   const CustomCardHome({super.key, required this.price});
+
   final int price;
 
   @override
@@ -16,9 +18,7 @@ class CustomCardHome extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 14),
         width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -60,34 +60,42 @@ class CustomCardHome extends StatelessWidget {
             //         ],
             //       ),
             //     ),
-            //     sizeBox(),
-            //     Expanded(
-            //       child: GestureDetector(
-            //         onTap: () {},
-            //         child: Container(
-            //           padding: EdgeInsets.all(8),
-            //           decoration: BoxDecoration(
-            //             borderRadius: BorderRadius.circular(30),
-            //             color: Colors.green.shade300,
-            //           ),
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.center,
-            //             children: [
-            //               Text(
-            //                 AppStrings.view.tr(),
-            //                 textAlign: TextAlign.center,
-            //                 style: StyleText.style19.copyWith(
-            //                   color: Colors.white,
-            //                 ),
-            //               ),
-            //               Icon(Icons.arrow_right_alt_rounded,color: Colors.white,)
-            //             ],
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
+            Row(
+              children: [
+                Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    navigateTo(context, WithdrawRequestView());
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.green.shade300,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Request Withdraw',
+                          textAlign: TextAlign.center,
+                          style: StyleText.style19.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                        sizeBox(
+                          width: 4
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

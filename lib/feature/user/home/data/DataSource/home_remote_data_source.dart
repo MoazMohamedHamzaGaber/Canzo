@@ -8,10 +8,13 @@ import 'package:canzo_app/feature/user/home/domain/usecases/add_baskets_use_case
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../domain/usecases/request_withdraw_use_case.dart';
+
 abstract class HomeRemoteDataSource {
   Future<Either<Failure,bool>> addBaskets(AddBasketsParams params);
   Future<Either<Failure,List<BasketEntity>>> getBaskets();
   Future<Either<Failure,bool>> fillBaskets(int id);
+  Future<Either<Failure,bool>> requestWithdraw(RequestWithdrawParams params);
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -67,6 +70,23 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'Authorization': 'Bearer $token',
         },
       ),
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      return Right(true);
+    });
+  }
+
+  @override
+  Future<Either<Failure, bool>> requestWithdraw(RequestWithdrawParams params) async {
+    var result = await _apiConsumer.post(
+      EndPoints.requestWithdraw,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+      data: params.toJson(),
     );
 
     return result.fold((failure) => Left(failure), (response) {
