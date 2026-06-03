@@ -1,4 +1,5 @@
 import 'package:canzo_app/core/service/service_locator.dart';
+import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/request_withdraw_use_case.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
@@ -139,10 +140,10 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                       if (amountController.text.isEmpty ||
                           walletController.text.isEmpty ||
                           selectedMethod == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please fill all fields'),
-                          ),
+                        showSnackBar(
+                          context: context,
+                          message: 'Please fill all fields',
+                          backgroundColor: Colors.red,
                         );
                         return;
                       }
