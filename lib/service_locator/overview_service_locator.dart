@@ -6,6 +6,8 @@ import 'package:canzo_app/feature/admin/overview/domain/useCase/update_order_use
 import 'package:canzo_app/feature/admin/overview/presentation/cubit/overview_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import '../feature/admin/overview/domain/useCase/get_wallet_admin_use_case.dart';
+
 class OverViewServiceLocator {
   static void execute(GetIt serviceLocator) {
     serviceLocator.registerLazySingleton<OverviewRemoteDataSource>(
@@ -31,10 +33,16 @@ class OverViewServiceLocator {
           serviceLocator(),
         )
     );
+    serviceLocator.registerFactory<GetWalletAdminUseCase>(
+            () => GetWalletAdminUseCase(
+          serviceLocator(),
+        )
+    );
 
     // cubits
     serviceLocator.registerFactory<OverviewCubit>(
           () => OverviewCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
       )

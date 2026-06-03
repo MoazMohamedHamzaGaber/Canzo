@@ -1,12 +1,16 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
-import 'package:canzo_app/feature/admin/overview/presentation/view/widget/active_in_field_section.dart';
-import 'package:canzo_app/feature/admin/overview/presentation/view/widget/all_requests_overview_section.dart';
+import 'package:canzo_app/core/widget/empty_screen.dart';
+import 'package:canzo_app/feature/admin/overview/presentation/cubit/overview_state.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/custom_card_overview_admin.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/pending_approvals.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../core/service/service_locator.dart';
+import '../../cubit/overview_cubit.dart';
 
 class OverviewViewBody extends StatelessWidget {
   const OverviewViewBody({super.key});
@@ -25,9 +29,54 @@ class OverviewViewBody extends StatelessWidget {
                 body: AppStrings.systemOverview.tr(),
               ),
               sizeBox(),
-              CustomCardOverviewAdmin(),
-              sizeBox(height: 30),
-              PendingApprovals(),
+              BlocProvider(
+                create: (BuildContext context) =>
+                serviceLocator<OverviewCubit>()
+                  ..loadData(),
+                child: BlocConsumer<OverviewCubit,OverviewState>(
+                  listener: (BuildContext context, state) {  },
+                  builder: (context, state) {
+                    if (state.status == OverviewStates.loading) {
+                      return SizedBox(
+                        height: MediaQuery.sizeOf(context).height * .7,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+
+                    if (state.status == OverviewStates.error) {
+                      return EmptyScreen(
+                        title: state.failure?.errMessage ?? '',
+                      );
+                    }
+
+                    if (state.wallet == null) {
+                      return const SizedBox();
+                    }
+
+                    final pendingOrders = state.orders
+                        .where((e) => e.status == 'Pending')
+                        .toList();
+
+                    return Column(
+                      children: [
+                        CustomCardOverviewAdmin(
+                          wallet: state.wallet!,
+                        ),
+
+                        sizeBox(height: 30),
+
+                        state.orders.isEmpty
+                            ? const EmptyScreen(title: 'No order')
+                            : PendingApprovals(
+                          pendingOrders: pendingOrders,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
               // sizeBox(),
               // ActiveInFieldSection(),
               // sizeBox(),

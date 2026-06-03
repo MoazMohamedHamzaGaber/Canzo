@@ -1,3 +1,4 @@
+import 'package:canzo_app/feature/admin/overview/domain/entity/wallet_entity.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failure.dart';
@@ -19,5 +20,10 @@ class OverviewRepositoryImpl implements OverviewRepository {
   @override
   Future<Either<Failure, String>> updateOrder(UpdateOrderParams params) {
     return remote.updateOrder(params);
+  }
+
+  @override
+  Future<Either<Failure, WalletAdminEntity>> getWallet() {
+    return remote.getWallet();
   }
 }

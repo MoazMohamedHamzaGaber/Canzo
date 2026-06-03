@@ -1,3 +1,4 @@
+import 'package:canzo_app/feature/admin/overview/domain/useCase/get_wallet_admin_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/abstract/use_case.dart';
@@ -8,12 +9,20 @@ import 'overview_state.dart';
 class OverviewCubit extends Cubit<OverviewState> {
   final GetOrdersUseCase getOrdersUseCase;
   final UpdateOrderUseCase updateOrderUseCase;
+  final GetWalletAdminUseCase getWalletAdminUseCase;
 
-  OverviewCubit(this.getOrdersUseCase, this.updateOrderUseCase)
+  OverviewCubit(this.getOrdersUseCase, this.updateOrderUseCase,this.getWalletAdminUseCase)
     : super(const OverviewState());
 
-  Future<void> getOrders() async {
+
+  Future<void> loadData()async{
     emit(state.copyWith(status: OverviewStates.loading));
+
+    await getOrders();
+    await getWallet();
+  }
+
+  Future<void> getOrders() async {
 
     final result = await getOrdersUseCase(NoParams());
 
@@ -45,6 +54,20 @@ class OverviewCubit extends Cubit<OverviewState> {
         );
 
         await getOrders();
+      },
+    );
+  }
+
+  Future<void> getWallet() async {
+
+    final result = await getWalletAdminUseCase(NoParams());
+
+    result.fold(
+          (failure) {
+        emit(state.copyWith(status: OverviewStates.error, failure: failure));
+      },
+          (wallet) {
+        emit(state.copyWith(status: OverviewStates.success, wallet: wallet));
       },
     );
   }

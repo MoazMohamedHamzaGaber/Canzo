@@ -2,11 +2,13 @@ import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:canzo_app/feature/admin/overview/domain/entity/wallet_entity.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardOverviewAdmin extends StatelessWidget {
-  const CustomCardOverviewAdmin({super.key});
+  const CustomCardOverviewAdmin({super.key, required this.wallet});
+  final WalletAdminEntity wallet;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class CustomCardOverviewAdmin extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${AppStrings.egp.tr()} 400',
+                      '${AppStrings.egp.tr()} ${wallet.totalSpends}',
                       style: StyleText.style20().copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
@@ -62,11 +64,11 @@ class CustomCardOverviewAdmin extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildItem(AppStrings.userA.tr(), '1'),
+                buildItem(AppStrings.userA.tr(), '${wallet.clientCount}'),
                 sizeBox(width: 10),
                 // buildItem(AppStrings.agent.tr(), '1'),
                 // sizeBox(width: 10),
-                buildItem(AppStrings.pickups.tr(), '4'),
+                buildItem(AppStrings.pickups.tr(), '${wallet.completedOrdersCount}'),
               ],
             ),
           ],

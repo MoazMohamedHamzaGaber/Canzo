@@ -19,4 +19,5 @@ class EndPoints {
   static const orders = 'api/admin/orders?status=Pending';
   static const order = 'api/admin/order';
   static const requestWithdraw = 'api/client/withdraw';
+  static const stats = 'api/admin/stats';
 }
