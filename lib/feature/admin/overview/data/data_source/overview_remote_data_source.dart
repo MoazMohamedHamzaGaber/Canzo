@@ -36,7 +36,6 @@ class OverviewRemoteDataSourceImpl implements OverviewRemoteDataSource {
           (response) {
         final orders = (response['orders'] as List)
             .map((e) => OrderModel.fromJson(e))
-            .where((order) => order.status == 'Pending')
             .toList();
 
         return Right(orders);

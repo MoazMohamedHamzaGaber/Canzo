@@ -112,9 +112,13 @@ class BuildItemPendingApprovals extends StatelessWidget {
                   text: AppStrings.complete.tr(),
                   color: AppColors.green,
                   function: () {
-                    _showCompleteDialog(
-                      context,
-                      order.id,
+                    context
+                        .read<OverviewCubit>()
+                        .updateOrder(
+                      UpdateOrderParams(
+                        orderId: order.id,
+                        status: 'Completed',
+                      ),
                     );
                   },
                 ),

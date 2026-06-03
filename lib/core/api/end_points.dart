@@ -16,6 +16,6 @@ class EndPoints {
   static const wallet = 'api/client/wallet';
   static const profile = 'api/client/profile';
   static const adminProfile = 'api/admin/profile';
-  static const orders = 'api/admin/orders';
+  static const orders = 'api/admin/orders?status=Pending';
   static const order = 'api/admin/order';
 }
