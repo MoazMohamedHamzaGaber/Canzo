@@ -90,7 +90,7 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                   const SizedBox(height: 16),
 
                   DropdownButtonFormField<String>(
-                    value: selectedMethod,
+                    initialValue: selectedMethod,
                     decoration: InputDecoration(
                       labelText: 'Withdrawal Method',
                       prefixIcon: const Icon(Icons.account_balance_wallet),
