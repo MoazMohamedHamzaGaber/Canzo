@@ -61,23 +61,23 @@ class OrderDetailsView extends StatelessWidget {
             const SizedBox(height: 20),
 
             /// CUSTOMER INFO
-            _SectionCard(
+            SectionCard(
               title: 'Customer Information',
               icon: Icons.person_outline,
               children:  [
-                _InfoTile(
+                InfoTile(
                   icon: Icons.person,
                   title: 'Customer Name',
                   value: order.userName,
                 ),
                 Divider(),
-                _InfoTile(
+                InfoTile(
                   icon: Icons.phone,
                   title: 'Phone Number',
                   value: order.phoneNumber,
                 ),
                 Divider(),
-                _InfoTile(
+                InfoTile(
                   icon: Icons.location_on_outlined,
                   title: 'Address',
                   value: order.address,
@@ -88,17 +88,17 @@ class OrderDetailsView extends StatelessWidget {
             const SizedBox(height: 16),
 
             /// COLLECTION INFO
-            _SectionCard(
+            SectionCard(
               title: 'Collection Information',
               icon: Icons.recycling,
               children:  [
-                _InfoTile(
+                InfoTile(
                   icon: Icons.shopping_basket_outlined,
                   title: 'Baskets Count',
                   value: '${order.basketsCount}',
                 ),
                 Divider(),
-                _InfoTile(
+                InfoTile(
                   icon: Icons.scale_outlined,
                   title: 'Total Weight',
                   value: '${order.totalWeight}',
@@ -109,7 +109,7 @@ class OrderDetailsView extends StatelessWidget {
             const SizedBox(height: 16),
 
             /// STATISTICS
-            _SectionCard(
+            SectionCard(
               title: 'Material Statistics',
               icon: Icons.bar_chart,
               children: [
@@ -138,11 +138,11 @@ class OrderDetailsView extends StatelessWidget {
             const SizedBox(height: 16),
 
             /// DATE
-            _SectionCard(
+            SectionCard(
               title: 'Order Information',
               icon: Icons.calendar_month,
               children:  [
-                _InfoTile(
+                InfoTile(
                   icon: Icons.access_time,
                   title: 'Created At',
                   value: order.createdAt,
@@ -156,12 +156,12 @@ class OrderDetailsView extends StatelessWidget {
   }
 }
 
-class _SectionCard extends StatelessWidget {
+class SectionCard extends StatelessWidget {
   final String title;
   final IconData icon;
   final List<Widget> children;
 
-  const _SectionCard({
+  const SectionCard({super.key,
     required this.title,
     required this.icon,
     required this.children,
@@ -200,12 +200,12 @@ class _SectionCard extends StatelessWidget {
   }
 }
 
-class _InfoTile extends StatelessWidget {
+class InfoTile extends StatelessWidget {
   final String title;
   final String value;
   final IconData icon;
 
-  const _InfoTile({
+  const InfoTile({super.key,
     required this.title,
     required this.value,
     required this.icon,

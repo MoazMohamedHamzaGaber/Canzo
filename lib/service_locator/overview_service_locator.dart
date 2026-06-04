@@ -7,6 +7,7 @@ import 'package:canzo_app/feature/admin/overview/presentation/cubit/overview_cub
 import 'package:get_it/get_it.dart';
 
 import '../feature/admin/overview/domain/useCase/get_wallet_admin_use_case.dart';
+import '../feature/admin/overview/domain/useCase/get_withdraw_admin_use_case.dart';
 
 class OverViewServiceLocator {
   static void execute(GetIt serviceLocator) {
@@ -38,10 +39,16 @@ class OverViewServiceLocator {
           serviceLocator(),
         )
     );
+    serviceLocator.registerFactory<GetWithdrawAdminUseCase>(
+            () => GetWithdrawAdminUseCase(
+          serviceLocator(),
+        )
+    );
 
     // cubits
     serviceLocator.registerFactory<OverviewCubit>(
           () => OverviewCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

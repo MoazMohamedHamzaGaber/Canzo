@@ -1,4 +1,5 @@
 import 'package:canzo_app/feature/admin/overview/domain/entity/wallet_entity.dart';
+import 'package:canzo_app/feature/admin/overview/domain/entity/withdraw_entity.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failure.dart';
@@ -25,5 +26,10 @@ class OverviewRepositoryImpl implements OverviewRepository {
   @override
   Future<Either<Failure, WalletAdminEntity>> getWallet() {
     return remote.getWallet();
+  }
+
+  @override
+  Future<Either<Failure, List<WithdrawalEntity>>> getWithdraw() {
+    return remote.getWithdraw();
   }
 }

@@ -4,6 +4,7 @@ import 'package:canzo_app/core/utils/style.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/build_item_pending_approvals.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../../../../../core/widget/empty_screen.dart';
 import '../../../domain/entity/order_entity.dart';
 
 class PendingApprovals extends StatelessWidget {
@@ -38,7 +39,9 @@ class PendingApprovals extends StatelessWidget {
 
         sizeBox(height: 10),
 
-        ListView.separated(
+        pendingOrders.isEmpty
+            ? const EmptyScreen(title: 'No order')
+            :  ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: pendingOrders.length,

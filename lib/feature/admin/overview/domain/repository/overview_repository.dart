@@ -1,3 +1,4 @@
+import 'package:canzo_app/feature/admin/overview/domain/entity/withdraw_entity.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failure.dart';
@@ -8,6 +9,7 @@ import '../useCase/update_order_use_case.dart';
 abstract class OverviewRepository {
   Future<Either<Failure, List<OrderEntity>>> getOrders();
   Future<Either<Failure, WalletAdminEntity>> getWallet();
+  Future<Either<Failure, List<WithdrawalEntity>>> getWithdraw();
 
   Future<Either<Failure, String>> updateOrder(UpdateOrderParams params);
 }

@@ -1,4 +1,5 @@
 import 'package:canzo_app/feature/admin/overview/data/model/wallet_model.dart';
+import 'package:canzo_app/feature/admin/overview/data/model/withdraw_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -8,13 +9,14 @@ import '../../../../../core/error/failure.dart';
 import '../../../../../core/utils/const.dart';
 import '../../domain/entity/order_entity.dart';
 import '../../domain/entity/wallet_entity.dart';
+import '../../domain/entity/withdraw_entity.dart';
 import '../../domain/useCase/update_order_use_case.dart';
 import '../model/order_model.dart';
 
 abstract class OverviewRemoteDataSource {
   Future<Either<Failure, List<OrderEntity>>> getOrders();
   Future<Either<Failure, WalletAdminEntity>> getWallet();
-
+  Future<Either<Failure, List<WithdrawalEntity>>> getWithdraw();
   Future<Either<Failure, String>> updateOrder(UpdateOrderParams params);
 }
 
@@ -83,6 +85,29 @@ class OverviewRemoteDataSourceImpl implements OverviewRemoteDataSource {
         return Right(
           WalletAdminModel.fromJson(response),
         );
+      },
+    );
+  }
+
+  @override
+  Future<Either<Failure, List<WithdrawalEntity>>> getWithdraw() async {
+    final result = await apiConsumer.get(
+      EndPoints.withdraw,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    return result.fold(
+          (failure) => Left(failure),
+          (response) {
+        final orders = (response['withdrawals'] as List)
+            .map((e) => WithdrawalModel.fromJson(e))
+            .toList();
+
+        return Right(orders);
       },
     );
   }

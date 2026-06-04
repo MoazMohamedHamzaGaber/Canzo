@@ -30,32 +30,12 @@ class CustomCardOverviewAdmin extends StatelessWidget {
             ),
             Row(
               children: [
-                Expanded(
-                  child: Text(
-                    '${AppStrings.egp.tr()} 10,000',
-                    style: StyleText.style40.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Text(
+                  '${wallet.totalSpends} ${AppStrings.egp.tr()}',
+                  style: StyleText.style40.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                ),
-                Column(
-                  children: [
-                    Text(
-                      AppStrings.totalPaidOut.tr(),
-                      style: StyleText.style16.copyWith(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '${AppStrings.egp.tr()} ${wallet.totalSpends}',
-                      style: StyleText.style20().copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
                 ),
               ],
             ),

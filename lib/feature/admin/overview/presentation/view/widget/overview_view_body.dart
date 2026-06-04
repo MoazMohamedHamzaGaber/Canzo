@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../../core/service/service_locator.dart';
 import '../../cubit/overview_cubit.dart';
+import 'all_requests_overview_section.dart';
 
 class OverviewViewBody extends StatelessWidget {
   const OverviewViewBody({super.key});
@@ -58,6 +59,8 @@ class OverviewViewBody extends StatelessWidget {
                     final pendingOrders = state.orders
                         .where((e) => e.status == 'Pending')
                         .toList();
+                    final withdraw = state.withdraw
+                        ?.toList();
 
                     return Column(
                       children: [
@@ -67,11 +70,11 @@ class OverviewViewBody extends StatelessWidget {
 
                         sizeBox(height: 30),
 
-                        state.orders.isEmpty
-                            ? const EmptyScreen(title: 'No order')
-                            : PendingApprovals(
+                        PendingApprovals(
                           pendingOrders: pendingOrders,
                         ),
+                        sizeBox(height: 30),
+                        AllRequestsOverviewSection(withdraw: withdraw ??[]),
                       ],
                     );
                   },
@@ -79,8 +82,6 @@ class OverviewViewBody extends StatelessWidget {
               ),
               // sizeBox(),
               // ActiveInFieldSection(),
-              // sizeBox(),
-              // AllRequestsOverviewSection(),
             ],
           ),
         ),
