@@ -3,6 +3,7 @@ import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/components.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
+import 'package:canzo_app/feature/admin/overview/presentation/cubit/overview_state.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:canzo_app/feature/admin/overview/domain/entity/order_entity.dart';
@@ -14,10 +15,11 @@ import 'details_pending_approval.dart';
 
 class BuildItemPendingApprovals extends StatelessWidget {
   final OrderEntity order;
+  final OverviewState state;
 
   const BuildItemPendingApprovals({
     super.key,
-    required this.order,
+    required this.order, required this.state,
   });
 
   @override
@@ -97,10 +99,14 @@ class BuildItemPendingApprovals extends StatelessWidget {
                   child: buildMaterialButton(
                     text: AppStrings.cancel.tr(),
                     color: Colors.red,
+                    loading:
+                    state.loadingOrderId == order.id &&
+                        state.loadingOrderAction == 'Cancelled',
                     function: () {
                       context
                           .read<OverviewCubit>()
                           .updateOrder(
+                        context,
                         UpdateOrderParams(
                           orderId: order.id,
                           status: 'Cancelled',
@@ -116,10 +122,14 @@ class BuildItemPendingApprovals extends StatelessWidget {
                   child: buildMaterialButton(
                     text: AppStrings.complete.tr(),
                     color: AppColors.green,
+                    loading:
+                    state.loadingOrderId == order.id &&
+                        state.loadingOrderAction == 'Completed',
                     function: () {
                       context
                           .read<OverviewCubit>()
                           .updateOrder(
+                        context,
                         UpdateOrderParams(
                           orderId: order.id,
                           status: 'Completed',

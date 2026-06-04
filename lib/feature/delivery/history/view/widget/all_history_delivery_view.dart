@@ -12,6 +12,7 @@ class AllHistoryDeliveryView extends StatelessWidget {
     return ListView.separated(
       itemBuilder: (context, index) => BuildItemCard(
         title: 'Moaz Mohamed',
+        price: 100,
         subtitle: '3pk - plastic',
         state: AppStrings.inProgress.tr(),
         image: false, createAt: '27 Api 2026 - 07:09',

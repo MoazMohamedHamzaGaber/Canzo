@@ -61,7 +61,11 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
       body: BlocProvider(
         create: (BuildContext context) => serviceLocator<HomeCubit>(),
         child: BlocConsumer<HomeCubit, HomeState>(
-          listener: (BuildContext context, state) {},
+          listener: (BuildContext context, state) {
+            if(state.status == HomeStates.addSuccess){
+              showSnackBar(context: context, message: 'Request withdraw successful');
+            }
+          },
           builder: (BuildContext context, state) {
             return SingleChildScrollView(
               padding: const EdgeInsets.all(20),

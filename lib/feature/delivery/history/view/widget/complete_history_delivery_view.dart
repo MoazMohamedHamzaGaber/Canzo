@@ -11,6 +11,7 @@ class CompleteHistoryDeliveryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder: (context, index) => BuildItemCard(
+        price: 100,
         title: 'Moaz Mohamed',
         subtitle: '3pk - plastic',
         state: AppStrings.complete.tr(),

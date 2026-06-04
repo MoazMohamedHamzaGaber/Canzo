@@ -28,7 +28,7 @@ class ResentPickupSection extends StatelessWidget {
             title: '3 packages - plastic',
             subtitle: 'Haram, Giza',
             state: AppStrings.completed.tr(),
-            body: false, createAt: '27 Api 2026 - 07:09',
+            body: false, createAt: '27 Api 2026 - 07:09', price: 100,
           ),
           separatorBuilder: (context,index)=>sizeBox(),
           itemCount: 2,

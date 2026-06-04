@@ -10,6 +10,7 @@ import '../../../../../core/utils/const.dart';
 import '../../domain/entity/order_entity.dart';
 import '../../domain/entity/wallet_entity.dart';
 import '../../domain/entity/withdraw_entity.dart';
+import '../../domain/useCase/approve_withdraw_use_case.dart';
 import '../../domain/useCase/update_order_use_case.dart';
 import '../model/order_model.dart';
 
@@ -18,6 +19,7 @@ abstract class OverviewRemoteDataSource {
   Future<Either<Failure, WalletAdminEntity>> getWallet();
   Future<Either<Failure, List<WithdrawalEntity>>> getWithdraw();
   Future<Either<Failure, String>> updateOrder(UpdateOrderParams params);
+  Future<Either<Failure, String>> approveWithdraw(ApproveWithdrawParams params);
 }
 
 class OverviewRemoteDataSourceImpl implements OverviewRemoteDataSource {
@@ -109,6 +111,24 @@ class OverviewRemoteDataSourceImpl implements OverviewRemoteDataSource {
 
         return Right(orders);
       },
+    );
+  }
+
+  @override
+  Future<Either<Failure, String>> approveWithdraw(ApproveWithdrawParams params) async {
+    FormData formData = FormData.fromMap({
+      'status': params.status,
+    });
+
+    final result = await apiConsumer.patch(
+      "${EndPoints.approveWithdraw}/${params.withdrawId}",
+      formData: formData,
+      options: Options(headers: {'Authorization': 'Bearer $token'}),
+    );
+
+    return result.fold(
+          (failure) => Left(failure),
+          (response) => Right(response['message']),
     );
   }
 }

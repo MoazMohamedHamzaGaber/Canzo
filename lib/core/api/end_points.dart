@@ -21,4 +21,5 @@ class EndPoints {
   static const requestWithdraw = 'api/client/withdraw';
   static const stats = 'api/admin/stats';
   static const withdraw = 'api/admin/withdrawals?status=Pending';
+  static const approveWithdraw = 'api/admin/withdraw';
 }

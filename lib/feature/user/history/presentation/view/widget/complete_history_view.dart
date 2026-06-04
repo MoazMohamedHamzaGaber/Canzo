@@ -21,13 +21,16 @@ class CompleteHistoryView extends StatelessWidget {
         } else if (state.status == HistoryStates.error) {
           return EmptyScreen(title: state.failure!.errMessage);
         }
-        if (state.completedOrders != null && state.completedOrders!.isNotEmpty) {
+        if (state.completedOrders != null &&
+            state.completedOrders!.isNotEmpty) {
           return ListView.separated(
             itemBuilder: (context, index) => BuildItemCard(
-              title: '3 packages - plastic',
+              title:
+                  '${state.completedOrders?[index].contentWeight} packages - ${state.completedOrders?[index].contentType}',
               subtitle: state.completedOrders?[index].address ?? '',
               state: state.completedOrders?[index].status ?? '',
               createAt: state.completedOrders?[index].createdAt ?? '',
+              price: state.completedOrders?[index].price ??0,
             ),
             separatorBuilder: (context, index) => sizeBox(),
             itemCount: state.completedOrders?.length ?? 0,

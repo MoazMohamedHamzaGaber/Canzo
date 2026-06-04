@@ -11,6 +11,7 @@ class BuildItemCard extends StatelessWidget {
     this.image = true,
     required this.title,
     required this.subtitle,
+    required this.price,
     required this.state, required this.createAt,
   });
 
@@ -20,6 +21,7 @@ class BuildItemCard extends StatelessWidget {
   final String subtitle;
   final String state;
   final String createAt;
+  final int price;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +69,7 @@ class BuildItemCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text('${AppStrings.egp.tr()} 300', style: StyleText.style19),
+                  Text('${AppStrings.egp.tr()} $price', style: StyleText.style19),
                 ],
               ),
             ],

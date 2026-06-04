@@ -68,9 +68,9 @@ class CustomCardHome extends StatelessWidget {
                     navigateTo(context, WithdrawRequestView());
                   },
                   child: Container(
-                    padding: EdgeInsets.all(12),
+                    padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(12),
                       color: Colors.green.shade300,
                     ),
                     child: Row(
@@ -79,7 +79,7 @@ class CustomCardHome extends StatelessWidget {
                         Text(
                           'Request Withdraw',
                           textAlign: TextAlign.center,
-                          style: StyleText.style19.copyWith(
+                          style: StyleText.style18.copyWith(
                             color: Colors.white,
                           ),
                         ),

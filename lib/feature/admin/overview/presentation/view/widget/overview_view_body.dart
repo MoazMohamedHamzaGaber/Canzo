@@ -1,7 +1,6 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/custom_app_bar.dart';
-import 'package:canzo_app/core/widget/empty_screen.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/cubit/overview_state.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/custom_card_overview_admin.dart';
 import 'package:canzo_app/feature/admin/overview/presentation/view/widget/pending_approvals.dart';
@@ -34,8 +33,7 @@ class OverviewViewBody extends StatelessWidget {
                 create: (BuildContext context) =>
                 serviceLocator<OverviewCubit>()
                   ..loadData(),
-                child: BlocConsumer<OverviewCubit,OverviewState>(
-                  listener: (BuildContext context, state) {  },
+                child: BlocBuilder<OverviewCubit,OverviewState>(
                   builder: (context, state) {
                     if (state.status == OverviewStates.loading) {
                       return SizedBox(
@@ -43,12 +41,6 @@ class OverviewViewBody extends StatelessWidget {
                         child: const Center(
                           child: CircularProgressIndicator(),
                         ),
-                      );
-                    }
-
-                    if (state.status == OverviewStates.error) {
-                      return EmptyScreen(
-                        title: state.failure?.errMessage ?? '',
                       );
                     }
 
@@ -71,10 +63,10 @@ class OverviewViewBody extends StatelessWidget {
                         sizeBox(height: 30),
 
                         PendingApprovals(
-                          pendingOrders: pendingOrders,
+                          pendingOrders: pendingOrders, state: state,
                         ),
                         sizeBox(height: 30),
-                        AllRequestsOverviewSection(withdraw: withdraw ??[]),
+                        AllRequestsOverviewSection(withdraw: withdraw ??[], state: state,),
                       ],
                     );
                   },

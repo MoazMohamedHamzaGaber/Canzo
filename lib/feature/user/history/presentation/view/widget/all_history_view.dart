@@ -13,7 +13,7 @@ class AllHistoryView extends StatelessWidget {
       itemBuilder: (context, index) => BuildItemCard(
         title: '3 packages - plastic',
         subtitle: 'Haram, Giza',
-        state: AppStrings.completed.tr(), createAt: '27 Api 2026 - 07:09',
+        state: AppStrings.completed.tr(), createAt: '27 Api 2026 - 07:09', price: 100,
       ),
       separatorBuilder: (context, index) => sizeBox(),
       itemCount: 20,

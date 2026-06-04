@@ -19,7 +19,9 @@ class BiddingHistoryView extends StatelessWidget {
         if(state.pendingOrders != null && state.pendingOrders!.isNotEmpty) {
           return ListView.separated(
             itemBuilder: (context, index) => BuildItemCard(
-              title: '3 packages - plastic',
+              title:
+              '${state.completedOrders?[index].contentWeight} packages - ${state.completedOrders?[index].contentType}',
+              price: state.completedOrders?[index].price ??0,
               subtitle: state.pendingOrders?[index].address ?? '',
               state: state.pendingOrders?[index].status ?? '',
               createAt: state.pendingOrders?[index].createdAt ?? '',

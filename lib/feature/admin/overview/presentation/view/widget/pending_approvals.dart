@@ -6,10 +6,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../../../../core/widget/empty_screen.dart';
 import '../../../domain/entity/order_entity.dart';
+import '../../cubit/overview_state.dart';
 
 class PendingApprovals extends StatelessWidget {
-  const PendingApprovals({super.key, required this.pendingOrders});
+  const PendingApprovals({super.key, required this.pendingOrders, required this.state});
   final List<OrderEntity> pendingOrders;
+  final OverviewState state;
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +43,15 @@ class PendingApprovals extends StatelessWidget {
 
         pendingOrders.isEmpty
             ? const EmptyScreen(title: 'No order')
-            :  ListView.separated(
+            : state.status == OverviewStates.error? EmptyScreen(
+          title: state.failure?.errMessage ?? '',
+        ):ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: pendingOrders.length,
           separatorBuilder: (_, __) => sizeBox(),
           itemBuilder: (context, index) {
-            return BuildItemPendingApprovals(order: pendingOrders[index]);
+            return BuildItemPendingApprovals(order: pendingOrders[index], state: state,);
           },
         ),
       ],
