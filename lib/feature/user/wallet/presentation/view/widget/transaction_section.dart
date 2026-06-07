@@ -8,10 +8,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TransactionSection extends StatelessWidget {
-  const TransactionSection({super.key, required this.state, required this.condition});
+  const TransactionSection({super.key, required this.state});
 
   final WalletState state;
-  final bool condition;
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +24,13 @@ class TransactionSection extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        sizeBox(),
-       condition? ListView.separated(
+        sizeBox(height: 15),
+       state.withdraw!.isNotEmpty? ListView.separated(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => BuildItemTransaction(
-            name: 'Moaz',
-            createAt: state.transaction!.allTransactions[index].createdAt,
-            price: state.transaction!.allTransactions[index].amount,
-          ),
-          separatorBuilder: (context, index) => sizeBox(),
-          itemCount: 20,
+          itemBuilder: (context, index) => BuildItemTransaction(withdraw: state.withdraw![index],),
+          separatorBuilder: (context, index) => sizeBox(height: 8),
+          itemCount: state.withdraw?.length ??0,
         ) :EmptyScreen(title: AppStrings.noTransaction.tr()),
       ],
     );

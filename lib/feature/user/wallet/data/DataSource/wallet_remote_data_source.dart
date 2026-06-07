@@ -9,9 +9,13 @@ import 'package:canzo_app/feature/user/wallet/domain/entity/wallet_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../domain/entity/withdraw_entity.dart';
+import '../model/withdraw_model.dart';
+
 abstract class WalletRemoteDataSource {
   Future<Either<Failure,TransactionEntity>> getTransaction();
   Future<Either<Failure,WalletEntity>> getWallet();
+  Future<Either<Failure,List<WithdrawUserEntity>>> getWithdraw();
 }
 
 class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
@@ -48,6 +52,25 @@ class WalletRemoteDataSourceImpl implements WalletRemoteDataSource {
 
     return result.fold((failure) => Left(failure), (response) {
       return Right(WalletModel.fromJson(response['wallet']));
+    });
+  }
+
+  @override
+  Future<Either<Failure, List<WithdrawUserEntity>>> getWithdraw() async {
+    var result = await _apiConsumer.get(
+      EndPoints.userWithdraw,
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      final list = (response['withdrawals'] as List)
+          .map((e) => WithdrawUserModel.fromJson(e))
+          .toList();
+      return Right(list);
     });
   }
 }

@@ -6,6 +6,8 @@ import 'package:canzo_app/feature/user/wallet/domain/repository/wallet_repositor
 import 'package:canzo_app/feature/user/wallet/presentation/cubit/wallet_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import '../feature/user/wallet/domain/UseCase/get_withdraw_use_case.dart';
+
 
 class WalletServiceLocator {
   static void execute(GetIt serviceLocator) {
@@ -32,10 +34,16 @@ class WalletServiceLocator {
         serviceLocator(),
       ),
     );
+    serviceLocator.registerLazySingleton<GetWithdrawUseCase>(
+          () => GetWithdrawUseCase(
+        serviceLocator(),
+      ),
+    );
 
     // cubits
     serviceLocator.registerFactory<WalletCubit>(
           () => WalletCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
       )

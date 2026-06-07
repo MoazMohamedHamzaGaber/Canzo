@@ -3,7 +3,10 @@ import 'package:canzo_app/feature/user/wallet/domain/entity/transaction_entity.d
 import 'package:canzo_app/feature/user/wallet/domain/entity/wallet_entity.dart';
 import 'package:dartz/dartz.dart';
 
+import '../entity/withdraw_entity.dart';
+
 abstract class WalletRepository {
   Future<Either<Failure,TransactionEntity>> getTransaction();
   Future<Either<Failure,WalletEntity>> getWallet();
+  Future<Either<Failure,List<WithdrawUserEntity>>> getWithdraw();
 }

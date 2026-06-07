@@ -1,75 +1,89 @@
-import 'package:canzo_app/core/utils/app_strings.dart';
-import 'package:canzo_app/core/utils/color.dart';
-import 'package:canzo_app/core/utils/style.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:canzo_app/feature/user/wallet/domain/entity/withdraw_entity.dart';
 import 'package:flutter/material.dart';
 
 class BuildItemTransaction extends StatelessWidget {
   const BuildItemTransaction({
     super.key,
-    required this.name,
-    required this.createAt,
-    required this.price,
+    required this.withdraw,
   });
 
-  final String name;
-  final String createAt;
-  final int price;
+  final WithdrawUserEntity withdraw;
+
+  Color _statusColor(String status) {
+    switch (status.toLowerCase()) {
+      case 'approved':
+        return Colors.green;
+      case 'rejected':
+        return Colors.red;
+      case 'pending':
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(top: 12, bottom: 20, right: 12, left: 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.black45),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.green.shade50,
-                  shape: BoxShape.circle,
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.account_balance_wallet),
+                const SizedBox(width: 8),
+                Text(
+                  '${withdraw.amount} EGP',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                child: Icon(
-                  Icons.arrow_upward_rounded,
-                  size: 16,
-                  color: AppColors.green,
-                ),
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Transform',
-                          style: StyleText.style19.copyWith(
-                            color: AppColors.green,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(createAt, style: StyleText.style13),
-                      ],
+                const Spacer(),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: _statusColor(withdraw.status)
+                        .withOpacity(.15),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    withdraw.status,
+                    style: TextStyle(
+                      color: _statusColor(withdraw.status),
+                      fontWeight: FontWeight.w600,
                     ),
-                    Spacer(),
-                    Text(
-                      '+${AppStrings.egp.tr()} $price',
-                      style: StyleText.style19,
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                const Icon(
+                  Icons.access_time,
+                  size: 18,
+                  color: Colors.grey,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    withdraw.createdAt,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
