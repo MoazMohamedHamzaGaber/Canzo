@@ -11,8 +11,6 @@ class OrderStatusModel extends OrderStatusEntity {
     required super.plasticCount,
     required super.canzCount,
     required super.price,
-    required super.contentType,
-    required super.contentWeight,
   });
 
   factory OrderStatusModel.fromJson(Map<String, dynamic> json) {
@@ -26,8 +24,6 @@ class OrderStatusModel extends OrderStatusEntity {
       plasticCount: json['plastic_count'] ??0,
       canzCount: json['canz_count'] ??0,
       price: json['price'] ??0,
-      contentType: json['content_type'] ??0,
-      contentWeight: json['content_weight'] ??0,
     );
   }
 }

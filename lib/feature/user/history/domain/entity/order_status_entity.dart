@@ -8,8 +8,6 @@ class OrderStatusEntity {
   final int plasticCount;
   final int canzCount;
   final int price;
-  final String contentType;
-  final int contentWeight;
 
   OrderStatusEntity({
     required this.id,
@@ -21,7 +19,5 @@ class OrderStatusEntity {
     required this.plasticCount,
     required this.canzCount,
     required this.price,
-    required this.contentType,
-    required this.contentWeight,
   });
 }

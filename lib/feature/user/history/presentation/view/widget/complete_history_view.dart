@@ -25,8 +25,8 @@ class CompleteHistoryView extends StatelessWidget {
             state.completedOrders!.isNotEmpty) {
           return ListView.separated(
             itemBuilder: (context, index) => BuildItemCard(
-              title:
-                  '${state.completedOrders?[index].contentWeight} packages - ${state.completedOrders?[index].contentType}',
+              // title:
+              //     '${state.completedOrders?[index].contentWeight} ${AppStrings.packages.tr()} - ${state.completedOrders?[index].contentType}',
               subtitle: state.completedOrders?[index].address ?? '',
               state: state.completedOrders?[index].status ?? '',
               createAt: state.completedOrders?[index].createdAt ?? '',

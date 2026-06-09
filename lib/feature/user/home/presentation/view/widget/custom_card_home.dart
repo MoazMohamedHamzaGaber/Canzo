@@ -77,7 +77,7 @@ class CustomCardHome extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Request Withdraw',
+                          AppStrings.withdrawRequests.tr(),
                           textAlign: TextAlign.center,
                           style: StyleText.style18.copyWith(
                             color: Colors.white,

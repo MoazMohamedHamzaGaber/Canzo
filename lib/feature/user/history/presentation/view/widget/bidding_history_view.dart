@@ -20,8 +20,8 @@ class BiddingHistoryView extends StatelessWidget {
           return ListView.separated(
             itemBuilder: (context, index) => BuildItemCard(
               title:
-              '${state.completedOrders?[index].contentWeight} packages - ${state.completedOrders?[index].contentType}',
-              price: state.completedOrders?[index].price ??0,
+              '${AppStrings.totalWeight.tr()} = ${state.pendingOrders?[index].totalWeight} ${AppStrings.kg.tr()}',
+              price: state.pendingOrders?[index].price ??0,
               subtitle: state.pendingOrders?[index].address ?? '',
               state: state.pendingOrders?[index].status ?? '',
               createAt: state.pendingOrders?[index].createdAt ?? '',

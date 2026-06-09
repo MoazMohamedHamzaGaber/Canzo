@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/utils/app_strings.dart';
 import '../../../domain/entity/withdraw_entity.dart';
 import 'details_pending_approval.dart';
 
@@ -28,7 +30,7 @@ class WithdrawalDetailsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Withdrawal Details'),
+        title:  Text(AppStrings.withdrawalDetails.tr()),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -60,7 +62,7 @@ class WithdrawalDetailsView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '${withdrawal.amount.ceil()} EGP',
+                    '${withdrawal.amount.ceil()} ${AppStrings.egp.tr()}',
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -74,24 +76,24 @@ class WithdrawalDetailsView extends StatelessWidget {
 
             /// USER INFO
             SectionCard(
-              title: 'User Information',
+              title: AppStrings.userInformation.tr(),
               icon: Icons.person,
               children: [
                 InfoTile(
                   icon: Icons.person_outline,
-                  title: 'User Name',
+                  title: AppStrings.userName.tr(),
                   value: withdrawal.userName,
                 ),
                 const Divider(),
                 InfoTile(
                   icon: Icons.phone,
-                  title: 'Phone Number',
+                  title: AppStrings.phoneNumber.tr(),
                   value: withdrawal.phoneNumber,
                 ),
                 const Divider(),
                 InfoTile(
                   icon: Icons.wallet,
-                  title: 'Wallet Number',
+                  title: AppStrings.walletNumber.tr(),
                   value: withdrawal.walletNumber,
                 ),
               ],
@@ -101,13 +103,13 @@ class WithdrawalDetailsView extends StatelessWidget {
 
             /// REQUEST INFO
             SectionCard(
-              title: 'Request Information',
+              title: AppStrings.requestInformation.tr(),
               icon: Icons.receipt_long,
               children: [
                 InfoTile(
                   icon: Icons.attach_money,
-                  title: 'Amount',
-                  value: '${withdrawal.amount.ceil()} EGP',
+                  title: AppStrings.amount.tr(),
+                  value: '${withdrawal.amount.ceil()} ${AppStrings.egp.tr()}',
                 ),
               ],
             ),
@@ -116,18 +118,18 @@ class WithdrawalDetailsView extends StatelessWidget {
 
             /// DATES
             SectionCard(
-              title: 'Dates',
+              title: AppStrings.dates.tr(),
               icon: Icons.calendar_month,
               children: [
                 InfoTile(
                   icon: Icons.access_time,
-                  title: 'Created At',
+                  title: AppStrings.createdAt.tr(),
                   value: withdrawal.createdAt,
                 ),
                 const Divider(),
                 InfoTile(
                   icon: Icons.update,
-                  title: 'Updated At',
+                  title: AppStrings.updatedAt.tr(),
                   value: withdrawal.updatedAt,
                 ),
               ],
@@ -137,7 +139,7 @@ class WithdrawalDetailsView extends StatelessWidget {
                 withdrawal.screenshotPath!.isNotEmpty) ...[
               const SizedBox(height: 16),
               SectionCard(
-                title: 'Transfer Screenshot',
+                title: AppStrings.transferScreenshot.tr(),
                 icon: Icons.image,
                 children: [
                   ClipRRect(

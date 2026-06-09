@@ -60,7 +60,7 @@ class BuildItemPendingApprovals extends StatelessWidget {
                       ),
                       SizedBox(height: 5,),
                       Text(
-                        "Basket Count: ${order.basketsCount} - ${order.address}",
+                        "${AppStrings.basketCount.tr()}: ${order.basketsCount} - ${order.address}",
                         style: StyleText.style13,
                       ),
                       SizedBox(height: 5,),

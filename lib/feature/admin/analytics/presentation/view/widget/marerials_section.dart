@@ -45,7 +45,7 @@ class MaterialsCard extends StatelessWidget {
         MaterialProgressItem(
           title: AppStrings.plastic.tr(),
           value: plasticPercent.toDouble(),
-          amount: "${analytics.plasticWeight} kg",
+          amount: "${analytics.plasticWeight} ${AppStrings.kg.tr()}",
         ),
 
         const SizedBox(height: 12),
@@ -53,7 +53,7 @@ class MaterialsCard extends StatelessWidget {
         MaterialProgressItem(
           title: AppStrings.cans.tr(),
           value: cansPercent.toDouble(),
-          amount: "${analytics.canzWeight} kg",
+          amount: "${analytics.canzWeight} ${AppStrings.kg.tr()}",
         ),
       ],
     );

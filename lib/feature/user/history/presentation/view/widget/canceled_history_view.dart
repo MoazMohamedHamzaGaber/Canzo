@@ -24,9 +24,9 @@ class CanceledHistoryView extends StatelessWidget {
         if(state.cancelledOrders != null && state.cancelledOrders!.isNotEmpty) {
           return ListView.separated(
           itemBuilder: (context, index) => BuildItemCard(
-            title:
-            '${state.completedOrders?[index].contentWeight} packages - ${state.completedOrders?[index].contentType}',
-            price: state.completedOrders?[index].price ??0,
+            // title:
+            // '${state.completedOrders?[index].contentWeight} ${AppStrings.packages.tr()} - ${state.completedOrders?[index].contentType}',
+            price: state.cancelledOrders?[index].price ??0,
             subtitle: state.cancelledOrders?[index].address ?? '',
             state: state.cancelledOrders?[index].status ?? '',
             createAt: state.cancelledOrders?[index].createdAt ?? '',

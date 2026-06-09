@@ -1,8 +1,10 @@
 import 'package:canzo_app/core/service/service_locator.dart';
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/request_withdraw_use_case.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:canzo_app/feature/user/home/presentation/cubit/home_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,11 +25,11 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
 
   String? selectedMethod;
 
-  final methods = const [
-    'Vodafone Cash',
-    'Etisalat Cash',
-    'Orange Cash',
-    'InstaPay',
+  final methods = [
+    AppStrings.vodafoneCash.tr(),
+    AppStrings.etisalatCash.tr(),
+    AppStrings.orangeCash.tr(),
+    AppStrings.instaPay.tr(),
   ];
 
   @override
@@ -43,7 +45,7 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
         selectedMethod == null) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Please fill all fields')));
+      ).showSnackBar( SnackBar(content: Text(AppStrings.pleaseFillAllFields.tr())));
       return;
     }
 
@@ -57,13 +59,13 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Withdraw Request')),
+      appBar: AppBar(title:  Text(AppStrings.withdrawRequests.tr())),
       body: BlocProvider(
         create: (BuildContext context) => serviceLocator<HomeCubit>(),
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (BuildContext context, state) {
             if(state.status == HomeStates.addSuccess){
-              showSnackBar(context: context, message: 'Request withdraw successful');
+              showSnackBar(context: context, message: AppStrings.requestWithdrawSuccessful.tr());
             }
           },
           builder: (BuildContext context, state) {
@@ -72,8 +74,8 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Withdrawal Details',
+                   Text(
+                     AppStrings.withdrawalDetails.tr(),
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
 
@@ -83,8 +85,8 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                     controller: amountController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      labelText: 'Amount',
-                      hintText: 'Enter amount',
+                      labelText: AppStrings.amount.tr(),
+                      hintText: AppStrings.enterAmount.tr(),
                       prefixIcon: const Icon(Icons.attach_money),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -97,7 +99,7 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                   DropdownButtonFormField<String>(
                     initialValue: selectedMethod,
                     decoration: InputDecoration(
-                      labelText: 'Withdrawal Method',
+                      labelText: AppStrings.withdrawalMethod.tr(),
                       prefixIcon: const Icon(Icons.account_balance_wallet),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -124,12 +126,13 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                     controller: walletController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                      labelText: selectedMethod == 'InstaPay'
-                          ? 'InstaPay Number'
-                          : 'Wallet Number',
-                      hintText: selectedMethod == 'InstaPay'
-                          ? 'Enter InstaPay number'
-                          : 'Enter wallet number',
+                      labelText: selectedMethod == AppStrings.instaPay.tr()
+                          ? AppStrings.instapayNumber.tr()
+                          : AppStrings.walletNumber.tr(),
+
+                      hintText: selectedMethod == AppStrings.instaPay.tr()
+                          ? AppStrings.enterInstapayNumber.tr()
+                          : AppStrings.enterWalletNumber.tr(),
                       prefixIcon: const Icon(Icons.phone_android),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -138,7 +141,7 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                   ),
                   sizeBox(),
                   buildMaterialButton(
-                    text: 'Submit Request',
+                    text: AppStrings.submitRequest.tr(),
                     loading: state.status == HomeStates.loading ? true : false,
                     function: () {
                       if (amountController.text.isEmpty ||
@@ -146,7 +149,7 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                           selectedMethod == null) {
                         showSnackBar(
                           context: context,
-                          message: 'Please fill all fields',
+                          message: AppStrings.pleaseFillAllFields.tr(),
                           backgroundColor: Colors.red,
                         );
                         return;

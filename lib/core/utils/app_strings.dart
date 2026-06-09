@@ -199,6 +199,43 @@ class AppStrings {
   static const String updateProfile = "update_profile";
   static const String profileUpdatedSuccessfully = "profile_updated_successfully";
   static const String le = "le";
+  static const withdrawRequests = "withdrawRequests";
+  static const noWithdrawRequests = "noWithdrawRequests";
+  static const walletNumber = "walletNumber";
+  static const reject = "reject";
+  static const approved = "approved";
+  static const basketCount = "basketCount";
+  static const pending = "pending";
+  static const customerInformation = "customerInformation";
+  static const customerName = "customerName";
+  static const collectionInformation = "collectionInformation";
+  static const orderDetails = "orderDetails";
+  static const basketsCount = "basketsCount";
+  static const totalWeight = "totalWeight";
+  static const materialStatistics = "materialStatistics";
+  static const orderInformation = "orderInformation";
+  static const createdAt = "createdAt";
+  static const noOrder = "noOrder";
+  static const withdrawalDetails = "withdrawalDetails";
+  static const requestInformation = "requestInformation";
+  static const amount = "amount";
+  static const dates = "dates";
+  static const updatedAt = "updatedAt";
+  static const transferScreenshot = "transferScreenshot";
+  static const userInformation = "userInformation";
+  static const enterAmount = "enterAmount";
+  static const withdrawalMethod = "withdrawalMethod";
+  static const instapayNumber = "instapayNumber";
+  static const enterInstapayNumber = "enterInstapayNumber";
+  static const enterWalletNumber = "enterWalletNumber";
+  static const submitRequest = "submitRequest";
+  static const pleaseFillAllFields = "pleaseFillAllFields";
+  static const requestWithdrawSuccessful = "requestWithdrawSuccessful";
+
+  static const vodafoneCash = "vodafoneCash";
+  static const etisalatCash = "etisalatCash";
+  static const orangeCash = "orangeCash";
+  static const instaPay = "instaPay";
 
 
 }

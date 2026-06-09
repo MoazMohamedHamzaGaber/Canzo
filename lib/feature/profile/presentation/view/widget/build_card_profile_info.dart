@@ -63,7 +63,7 @@ class BuildCardProfileInfo extends StatelessWidget {
                       border: Border.all(color: Colors.black45),
                     ),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Image.asset(
                           'assets/images/logo.jpg',
@@ -71,37 +71,39 @@ class BuildCardProfileInfo extends StatelessWidget {
                           height: 80,
                         ),
                         const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              profile.userName,
-                              style: StyleText.style19,
-                            ),
-                            Text(
-                              profile.email,
-                              style: StyleText.style13,
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 5,
-                                horizontal: 16,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                profile.userName,
+                                style: StyleText.style19,
                               ),
-                              margin: const EdgeInsets.only(top: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade50,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: Colors.black45),
+                              Text(
+                                profile.email,
+                                style: StyleText.style13,
                               ),
-                              child: Text(
-                                profile.userRole,
-                                style: StyleText.style13.copyWith(
-                                  color: AppColors.green,
-                                  fontWeight: FontWeight.bold,
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 16,
+                                ),
+                                margin: const EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.green.shade50,
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(color: Colors.black45),
+                                ),
+                                child: Text(
+                                  profile.userRole,
+                                  style: StyleText.style13.copyWith(
+                                    color: AppColors.green,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),

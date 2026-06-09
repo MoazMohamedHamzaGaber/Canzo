@@ -42,7 +42,7 @@ class PendingApprovals extends StatelessWidget {
         sizeBox(height: 10),
 
         pendingOrders.isEmpty
-            ? const EmptyScreen(title: 'No order')
+            ?  EmptyScreen(title: AppStrings.noOrder.tr())
             : state.status == OverviewStates.error? EmptyScreen(
           title: state.failure?.errMessage ?? '',
         ):ListView.separated(

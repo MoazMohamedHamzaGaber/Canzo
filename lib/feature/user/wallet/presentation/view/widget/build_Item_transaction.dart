@@ -1,5 +1,8 @@
 import 'package:canzo_app/feature/user/wallet/domain/entity/withdraw_entity.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../../core/utils/app_strings.dart';
 
 class BuildItemTransaction extends StatelessWidget {
   const BuildItemTransaction({
@@ -35,7 +38,7 @@ class BuildItemTransaction extends StatelessWidget {
                 const Icon(Icons.account_balance_wallet),
                 const SizedBox(width: 8),
                 Text(
-                  '${withdraw.amount} EGP',
+                  '${withdraw.amount} ${AppStrings.egp.tr()}',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

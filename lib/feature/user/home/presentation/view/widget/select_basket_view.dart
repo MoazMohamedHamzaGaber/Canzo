@@ -37,28 +37,34 @@ class SelectBasketView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocProvider(
-        create: (BuildContext context) =>serviceLocator<ProfileCubit>()..getProfile(),
-        child: BlocBuilder<ProfileCubit,ProfileState>(
+        create: (BuildContext context) =>
+            serviceLocator<ProfileCubit>()..getProfile(),
+        child: BlocBuilder<ProfileCubit, ProfileState>(
           builder: (BuildContext context, profile) {
-            final activityType =
-                profile.profile?.activityType;
+            final activityType = profile.profile?.activityType;
 
             final isWeddingHall =
                 activityType?.toLowerCase() == 'wedding hall' ||
-                    activityType == 'قاعة أفراح';
+                activityType == 'قاعة أفراح';
 
             final basketPrice = isWeddingHall ? 250 : 200;
             return BlocConsumer<HomeCubit, HomeState>(
               listener: (BuildContext context, HomeState state) async {
                 if (state.status == HomeStates.addSuccess) {
-                  showSnackBar(context: context, message: 'Add baskets successful');
+                  showSnackBar(
+                    context: context,
+                    message: 'Add baskets successful',
+                  );
 
                   context.read<HomeCubit>().resetState();
 
                   await Future.delayed(const Duration(seconds: 1));
 
                   if (context.mounted) {
-                    navigateAndFinish(context, const BottomNavBar(initialIndex: 0));
+                    navigateAndFinish(
+                      context,
+                      const BottomNavBar(initialIndex: 0),
+                    );
                   }
                 }
               },
@@ -86,7 +92,9 @@ class SelectBasketView extends StatelessWidget {
                         ),
                         Text(
                           AppStrings.choseTypeBasket.tr(),
-                          style: StyleText.style18.copyWith(color: AppColors.grey),
+                          style: StyleText.style18.copyWith(
+                            color: AppColors.grey,
+                          ),
                         ),
                         sizeBox(),
                         Column(
@@ -96,9 +104,13 @@ class SelectBasketView extends StatelessWidget {
                             sizeBox(height: 15),
 
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
                               decoration: BoxDecoration(
-                                border: Border.all(color: Colors.green.shade100),
+                                border: Border.all(
+                                  color: Colors.green.shade100,
+                                ),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: DropdownButtonHideUnderline(
@@ -164,34 +176,44 @@ class SelectBasketView extends StatelessWidget {
                         sizeBox(),
                         buildItem(
                           title: state.selectedMaterialType != null
-                              ? state.selectedMaterialType == AppStrings.plastic.tr()
-                              ? 'Soon'
-                              : '${AppStrings.basket.tr()} 4 ${AppStrings.kg.tr()} = '
-                              '$basketPrice ${AppStrings.le.tr()}'
-                              : 'Soon',
+                              ? state.selectedMaterialType ==
+                                        AppStrings.plastic.tr()
+                                    ? '${AppStrings.basket.tr()} 3 ${AppStrings.kg.tr()} = '
+                                          '30 ${AppStrings.le.tr()}'
+                                    : '${AppStrings.basket.tr()} 4 ${AppStrings.kg.tr()} = '
+                                          '$basketPrice ${AppStrings.le.tr()}'
+                              : '${AppStrings.basket.tr()} 3 ${AppStrings.kg.tr()} = '
+                                    '30 ${AppStrings.le.tr()}',
                           keyName: '4kg',
                         ),
                         sizeBox(),
                         buildMaterialButton(
                           text: AppStrings.confirmYourChoice.tr(),
-                          loading: state.status == HomeStates.loading ? true : false,
+                          loading: state.status == HomeStates.loading
+                              ? true
+                              : false,
                           function: () {
                             cubit.addBaskets(
                               context,
                               AddBasketsParams(
-                                contentType: getContentType(state.selectedMaterialType),
-                                contentWeight: state.selectedMaterialType != null
+                                contentType: getContentType(
+                                  state.selectedMaterialType,
+                                ),
+                                contentWeight:
+                                    state.selectedMaterialType != null
                                     ? state.selectedMaterialType ==
-                                    AppStrings.plastic.tr()
-                                    ? 2
-                                    : 4
-                                    : 2, amount: state.counters['4kg'] ?? 1,
+                                              AppStrings.plastic.tr()
+                                          ? 3
+                                          : 4
+                                    : 3,
+                                amount: state.counters['4kg'] ?? 1,
                               ),
                             );
                           },
                           color: AppColors.green,
                         ),
-                      ],              ),
+                      ],
+                    ),
                   ),
                 );
               },

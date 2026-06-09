@@ -1,5 +1,6 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
+import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +10,16 @@ class BuildItemCard extends StatelessWidget {
     super.key,
     this.body = true,
     this.image = true,
-    required this.title,
+    this.title,
     required this.subtitle,
     required this.price,
-    required this.state, required this.createAt,
+    required this.state,
+    required this.createAt,
   });
 
   final bool? body;
   final bool? image;
-  final String title;
+  final String? title;
   final String subtitle;
   final String state;
   final String createAt;
@@ -28,7 +30,7 @@ class BuildItemCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 12,vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.black45),
@@ -42,10 +44,13 @@ class BuildItemCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title, style: StyleText.style19),
-                  Text(subtitle, style: StyleText.style13),
-                  if (body == true)
-                    Text(createAt, style: StyleText.style13),
+                  if (title !=null) Text(title!, style: StyleText.style19),
+                  sizeBox(height: 5),
+                  Text('${AppStrings.address.tr()}: $subtitle', style: StyleText.style19.copyWith(
+                    fontSize: 15
+                  )),
+                  sizeBox(height: 5),
+                  if (body == true) Text(createAt, style: StyleText.style13),
                 ],
               ),
               Spacer(),
@@ -69,7 +74,10 @@ class BuildItemCard extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text('${AppStrings.egp.tr()} $price', style: StyleText.style19),
+                  Text(
+                    '${AppStrings.egp.tr()} $price',
+                    style: StyleText.style19,
+                  ),
                 ],
               ),
             ],

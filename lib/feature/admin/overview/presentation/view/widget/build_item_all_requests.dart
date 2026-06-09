@@ -55,7 +55,7 @@ class BuildItemAllRequests extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        'Wallet number: ${withdraw.walletNumber}',
+                        '${AppStrings.walletNumber.tr()}: ${withdraw.walletNumber}',
                         style: StyleText.style19.copyWith(fontSize: 17),
                       ),
                       SizedBox(height: 5),
@@ -76,7 +76,7 @@ class BuildItemAllRequests extends StatelessWidget {
               children: [
                 Expanded(
                   child: buildMaterialButton(
-                    text: 'Reject',
+                    text: AppStrings.reject.tr(),
                     color: Colors.red,
                     loading:
                     state.loadingWithdrawId == withdraw.id &&
@@ -97,7 +97,7 @@ class BuildItemAllRequests extends StatelessWidget {
 
                 Expanded(
                   child: buildMaterialButton(
-                    text: 'Approved',
+                    text: AppStrings.approved.tr(),
                     color: AppColors.green,
                     loading:
                     state.loadingWithdrawId == withdraw.id &&

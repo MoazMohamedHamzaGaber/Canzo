@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/utils/app_strings.dart';
 import '../../../domain/entity/order_entity.dart';
 
 class OrderDetailsView extends StatelessWidget {
@@ -13,7 +15,7 @@ class OrderDetailsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order Details'),
+        title:  Text(AppStrings.orderDetails.tr()),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -36,9 +38,9 @@ class OrderDetailsView extends StatelessWidget {
                     color: Colors.orange,
                   ),
                   const SizedBox(width: 12),
-                  const Expanded(
+                   Expanded(
                     child: Text(
-                      'Pending',
+                      AppStrings.pending.tr(),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -62,24 +64,24 @@ class OrderDetailsView extends StatelessWidget {
 
             /// CUSTOMER INFO
             SectionCard(
-              title: 'Customer Information',
+              title:AppStrings.customerInformation.tr(),
               icon: Icons.person_outline,
               children:  [
                 InfoTile(
                   icon: Icons.person,
-                  title: 'Customer Name',
+                  title: AppStrings.customerName.tr(),
                   value: order.userName,
                 ),
                 Divider(),
                 InfoTile(
                   icon: Icons.phone,
-                  title: 'Phone Number',
+                  title: AppStrings.phoneNumber.tr(),
                   value: order.phoneNumber,
                 ),
                 Divider(),
                 InfoTile(
                   icon: Icons.location_on_outlined,
-                  title: 'Address',
+                  title: AppStrings.address.tr(),
                   value: order.address,
                 ),
               ],
@@ -89,18 +91,18 @@ class OrderDetailsView extends StatelessWidget {
 
             /// COLLECTION INFO
             SectionCard(
-              title: 'Collection Information',
+              title: AppStrings.collectionInformation.tr(),
               icon: Icons.recycling,
               children:  [
                 InfoTile(
                   icon: Icons.shopping_basket_outlined,
-                  title: 'Baskets Count',
+                  title: AppStrings.basketsCount.tr(),
                   value: '${order.basketsCount}',
                 ),
                 Divider(),
                 InfoTile(
                   icon: Icons.scale_outlined,
-                  title: 'Total Weight',
+                  title: AppStrings.totalWeight.tr(),
                   value: '${order.totalWeight}',
                 ),
               ],
@@ -110,14 +112,14 @@ class OrderDetailsView extends StatelessWidget {
 
             /// STATISTICS
             SectionCard(
-              title: 'Material Statistics',
+              title: AppStrings.materialStatistics.tr(),
               icon: Icons.bar_chart,
               children: [
                 Row(
                   children:  [
                     Expanded(
                       child: _StatCard(
-                        title: 'Waters',
+                        title: AppStrings.plastic.tr(),
                         value: '${order.plasticCount}',
                         icon: Icons.water_drop_outlined,
                       ),
@@ -125,7 +127,7 @@ class OrderDetailsView extends StatelessWidget {
                     SizedBox(width: 12),
                     Expanded(
                       child: _StatCard(
-                        title: 'Cans',
+                        title: AppStrings.cans.tr(),
                         value: '${order.canzCount}',
                         icon: Icons.local_drink_outlined,
                       ),
@@ -139,12 +141,12 @@ class OrderDetailsView extends StatelessWidget {
 
             /// DATE
             SectionCard(
-              title: 'Order Information',
+              title: AppStrings.orderInformation.tr(),
               icon: Icons.calendar_month,
               children:  [
                 InfoTile(
                   icon: Icons.access_time,
-                  title: 'Created At',
+                  title: AppStrings.createdAt.tr(),
                   value: order.createdAt,
                 ),
               ],
