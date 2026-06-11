@@ -242,5 +242,7 @@ class AppStrings {
   static const uploadScreenshotWithdraw = "uploadScreenshotWithdraw";
   static const tapUploadScreenshotWithdraw = "tapUploadScreenshotWithdraw";
   static const confirm = "confirm";
+  static const fill = "fill";
+  static const doWantFill = "doWantFill";
 
 }

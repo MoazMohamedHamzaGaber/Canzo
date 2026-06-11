@@ -213,6 +213,8 @@
   "gallery": "المعرض",
   "uploadScreenshotWithdraw": "تحميل اثبات الدفع",
   "tapUploadScreenshotWithdraw": "انقر لتحميل اثبات السحب",
-  "confirm": "تأكيد"
+  "confirm": "تأكيد",
+  "fill": "ملء",
+  "doWantFill": "هل تريد ملء"
 
 }

@@ -215,5 +215,8 @@
   "gallery": "Gallery",
   "uploadScreenshotWithdraw": "Download proof of payment",
   "tapUploadScreenshotWithdraw": "Click to download proof of withdrawal",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "fill": "Fill",
+  "doWantFill": "Do you want to fill",
+  "basketFor": "basket for"
 }
