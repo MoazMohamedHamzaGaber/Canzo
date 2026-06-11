@@ -115,15 +115,30 @@ class OverviewRemoteDataSourceImpl implements OverviewRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, String>> approveWithdraw(ApproveWithdrawParams params) async {
-    FormData formData = FormData.fromMap({
+  Future<Either<Failure, String>> approveWithdraw(
+      ApproveWithdrawParams params,
+      ) async {
+    final Map<String, dynamic> data = {
       'status': params.status,
-    });
+    };
+
+    if (params.status == 'Approved' && params.screenshot != null) {
+      data['screenshot'] = await MultipartFile.fromFile(
+        params.screenshot!.path,
+        filename: params.screenshot!.path.split('/').last,
+      );
+    }
+
+    FormData formData = FormData.fromMap(data);
 
     final result = await apiConsumer.patch(
       "${EndPoints.approveWithdraw}/${params.withdrawId}",
       formData: formData,
-      options: Options(headers: {'Authorization': 'Bearer $token'}),
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
     );
 
     return result.fold(

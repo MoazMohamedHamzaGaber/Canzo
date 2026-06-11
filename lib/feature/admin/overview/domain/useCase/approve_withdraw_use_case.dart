@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/abstract/use_case.dart';
@@ -18,9 +20,11 @@ class ApproveWithdrawUseCase extends UseCase<String, ApproveWithdrawParams> {
 class ApproveWithdrawParams {
   final int withdrawId;
   final String status;
+  final File? screenshot;
 
   const ApproveWithdrawParams({
     required this.withdrawId,
     required this.status,
+     this.screenshot,
   });
 }

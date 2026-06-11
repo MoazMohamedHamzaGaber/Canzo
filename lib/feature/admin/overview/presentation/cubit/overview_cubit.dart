@@ -47,7 +47,10 @@ class OverviewCubit extends Cubit<OverviewState> {
     );
   }
 
-  Future<void> updateOrder(BuildContext context,UpdateOrderParams params) async {
+  Future<void> updateOrder(
+    BuildContext context,
+    UpdateOrderParams params,
+  ) async {
     emit(
       state.copyWith(
         loadingOrderId: params.orderId,
@@ -56,7 +59,6 @@ class OverviewCubit extends Cubit<OverviewState> {
     );
 
     final result = await updateOrderUseCase(params);
-
 
     result.fold(
       (failure) {
@@ -123,9 +125,9 @@ class OverviewCubit extends Cubit<OverviewState> {
   }
 
   Future<void> approveWithdraw(
-      BuildContext context,
-      ApproveWithdrawParams params,
-      ) async {
+    BuildContext context,
+    ApproveWithdrawParams params,
+  ) async {
     emit(
       state.copyWith(
         loadingWithdrawId: params.withdrawId,
@@ -136,29 +138,24 @@ class OverviewCubit extends Cubit<OverviewState> {
     final result = await approveWithdrawUseCase(params);
 
     result.fold(
-          (failure) {
-        emit(
-          state.copyWith(
-            loadingWithdrawId: null,
-            loadingAction: null,
-          ),
-        );
+      (failure) {
+        emit(state.copyWith(loadingWithdrawId: null, loadingAction: null));
         showSnackBar(
           context: context,
           message: failure.errMessage,
           backgroundColor: Colors.red,
         );
       },
-          (message) async {
-            emit(
-              state.copyWith(
-                loadingWithdrawId: null,
-                loadingAction: null,
-                status: OverviewStates.success,
-              ),
-            );
+      (message) async {
+        emit(
+          state.copyWith(
+            loadingWithdrawId: null,
+            loadingAction: null,
+            status: OverviewStates.success,
+          ),
+        );
 
-
+        if (!context.mounted) return;
         showSnackBar(
           context: context,
           message: params.status == 'Approved'

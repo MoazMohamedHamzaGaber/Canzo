@@ -53,7 +53,7 @@ class SelectBasketView extends StatelessWidget {
                 if (state.status == HomeStates.addSuccess) {
                   showSnackBar(
                     context: context,
-                    message: 'Add baskets successful',
+                    message: AppStrings.addBasketsSuccessful.tr(),
                   );
 
                   context.read<HomeCubit>().resetState();

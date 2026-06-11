@@ -207,6 +207,12 @@
   "vodafoneCash": "فودافون كاش",
   "etisalatCash": "اتصالات كاش",
   "orangeCash": "أورنج كاش",
-  "instaPay": "إنستاباي"
+  "instaPay": "إنستاباي",
+  "addBasketsSuccessful": "تمت إضافة السلات بنجاح",
+  "camera": "الكاميرا",
+  "gallery": "المعرض",
+  "uploadScreenshotWithdraw": "تحميل اثبات الدفع",
+  "tapUploadScreenshotWithdraw": "انقر لتحميل اثبات السحب",
+  "confirm": "تأكيد"
 
 }

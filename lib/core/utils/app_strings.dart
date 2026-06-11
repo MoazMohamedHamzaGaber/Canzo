@@ -236,6 +236,11 @@ class AppStrings {
   static const etisalatCash = "etisalatCash";
   static const orangeCash = "orangeCash";
   static const instaPay = "instaPay";
-
+  static const addBasketsSuccessful = "addBasketsSuccessful";
+  static const camera = "camera";
+  static const gallery = "gallery";
+  static const uploadScreenshotWithdraw = "uploadScreenshotWithdraw";
+  static const tapUploadScreenshotWithdraw = "tapUploadScreenshotWithdraw";
+  static const confirm = "confirm";
 
 }
