@@ -55,7 +55,52 @@ class BuildItemBaskets extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Icon(Icons.delete, color: Colors.red),
+                    GestureDetector(
+                      onTap: () async {
+                        final result = await showDialog<bool>(
+                          context: context,
+                          builder: (dialogContext) {
+                            return AlertDialog(
+                              title: Text(AppStrings.confirm.tr()),
+                              content: Text(
+                                AppStrings.doDeleteBasket.tr(),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(dialogContext, false);
+                                  },
+                                  child: Text(
+                                    AppStrings.cancel.tr(),
+                                    style: TextStyle(color: AppColors.green),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(dialogContext, true);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                  ),
+                                  child: Text(
+                                    AppStrings.delete.tr(),
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+                        if (result == true && context.mounted) {
+                          context.read<HomeCubit>().deleteBaskets(context,id);
+                        }
+                      },
+                      child: const Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                    ),
                     sizeBox(height: 8),
                     Switch(
                       value: value,padding: EdgeInsets.zero,

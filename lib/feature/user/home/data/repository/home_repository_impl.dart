@@ -29,4 +29,9 @@ class HomeRepositoryImpl extends HomeRepository{
   Future<Either<Failure, bool>> requestWithdraw(RequestWithdrawParams params) {
     return _remoteDataSource.requestWithdraw(params);
   }
+
+  @override
+  Future<Either<Failure, bool>> deleteBaskets(int id) {
+   return _remoteDataSource.deleteBaskets(id);
+  }
 }

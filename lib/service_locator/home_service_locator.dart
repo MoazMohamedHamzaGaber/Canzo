@@ -6,6 +6,7 @@ import 'package:canzo_app/feature/user/home/presentation/cubit/home_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import '../feature/user/home/domain/repository/home_repository.dart';
+import '../feature/user/home/domain/usecases/delete_baskets_use_case.dart';
 import '../feature/user/home/domain/usecases/fill_baskets_use_case.dart';
 import '../feature/user/home/domain/usecases/request_withdraw_use_case.dart';
 
@@ -46,9 +47,16 @@ class HomeServiceLocator {
       ),
     );
 
+    serviceLocator.registerLazySingleton<DeleteBasketsUseCase>(
+          () => DeleteBasketsUseCase(
+        serviceLocator(),
+      ),
+    );
+
     // cubits
     serviceLocator.registerFactory<HomeCubit>(
           () => HomeCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

@@ -6,7 +6,7 @@ class SocialAuthService {
   static final GoogleSignIn _googleSignIn =
       GoogleSignIn.instance;
   static const String serverClientId =
-      '891699953456-i3ubf5kgsnn03nkq0trjs57vli5c29to.apps.googleusercontent.com';
+      '891699953456-oqtu60nvudge1iaqef2d5r14cpraceqa.apps.googleusercontent.com';
 
   static Future<String?> signInWithGoogle() async {
     await _googleSignIn.initialize(

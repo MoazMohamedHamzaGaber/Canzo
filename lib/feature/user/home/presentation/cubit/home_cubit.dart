@@ -1,9 +1,12 @@
 import 'package:canzo_app/core/abstract/use_case.dart';
 import 'package:canzo_app/core/api/print_helper.dart';
+import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/add_baskets_use_case.dart';
+import 'package:canzo_app/feature/user/home/domain/usecases/delete_baskets_use_case.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/fill_baskets_use_case.dart';
 import 'package:canzo_app/feature/user/home/domain/usecases/get_baskets_use_case.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,30 +18,26 @@ class HomeCubit extends Cubit<HomeState> {
   final GetBasketsUseCase _getBasketsUseCase;
   final FillBasketsUseCase _fillBasketsUseCase;
   final RequestWithdrawUseCase _requestWithdrawUseCase;
+  final DeleteBasketsUseCase _deleteBasketsUseCase;
 
   HomeCubit(
-      this._addBasketsUseCase,
-      this._getBasketsUseCase,
-      this._fillBasketsUseCase,
-      this._requestWithdrawUseCase,
-      ) : super(const HomeState());
+    this._addBasketsUseCase,
+    this._getBasketsUseCase,
+    this._fillBasketsUseCase,
+    this._requestWithdrawUseCase,
+    this._deleteBasketsUseCase,
+  ) : super(const HomeState());
 
-  void changeCurrentIndex(index)
-  {
-    emit(
-      state.copyWith(currentIndex: index),
-    );
+  void changeCurrentIndex(index) {
+    emit(state.copyWith(currentIndex: index));
   }
 
   void changeSelectedMaterial(value) {
-    emit(
-      state.copyWith(selectedMaterialType: value),
-    );
+    emit(state.copyWith(selectedMaterialType: value));
   }
+
   void changeSelectedActive(value) {
-    emit(
-      state.copyWith(selectedActiveType: value),
-    );
+    emit(state.copyWith(selectedActiveType: value));
   }
 
   void increment(String key) {
@@ -61,13 +60,12 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(counters: newCounters));
   }
 
-
   Future<void> addBaskets(BuildContext context, AddBasketsParams params) async {
     emit(state.copyWith(status: HomeStates.loading));
 
     final response = await _addBasketsUseCase(params);
     response.fold(
-          (l) {
+      (l) {
         emit(state.copyWith(failure: l, status: HomeStates.error));
         showSnackBar(
           context: context,
@@ -75,7 +73,7 @@ class HomeCubit extends Cubit<HomeState> {
           backgroundColor: Colors.red,
         );
       },
-          (data) {
+      (data) {
         emit(state.copyWith(status: HomeStates.addSuccess));
         pr(data);
       },
@@ -87,7 +85,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     final response = await _getBasketsUseCase(NoParams());
     response.fold(
-          (l) {
+      (l) {
         emit(state.copyWith(failure: l, status: HomeStates.error));
         showSnackBar(
           context: context,
@@ -95,29 +93,21 @@ class HomeCubit extends Cubit<HomeState> {
           backgroundColor: Colors.red,
         );
       },
-          (data) {
-        emit(state.copyWith(baskets: data,status: HomeStates.addSuccess));
+      (data) {
+        emit(state.copyWith(baskets: data, status: HomeStates.addSuccess));
         pr(data);
       },
     );
   }
 
-  Future<void> fillBaskets(
-      BuildContext context,
-      int id,
-      ) async {
+  Future<void> fillBaskets(BuildContext context, int id) async {
     //emit(state.copyWith(status: HomeStates.loading));
 
     final response = await _fillBasketsUseCase(id);
 
     response.fold(
-          (l) {
-        emit(
-          state.copyWith(
-            failure: l,
-            status: HomeStates.error,
-          ),
-        );
+      (l) {
+        emit(state.copyWith(failure: l, status: HomeStates.error));
 
         if (context.mounted) {
           showSnackBar(
@@ -127,12 +117,10 @@ class HomeCubit extends Cubit<HomeState> {
           );
         }
       },
-          (data) {
+      (data) {
         final updatedBaskets = state.baskets?.map((basket) {
           if (basket.id == id) {
-            return basket.copyWith(
-              isFull: 1,
-            );
+            return basket.copyWith(isFull: 1);
           }
 
           return basket;
@@ -148,13 +136,13 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  Future<void> requestWithdraw(BuildContext context, RequestWithdrawParams params) async {
-    emit(state.copyWith(status: HomeStates.loading));
+  Future<void> deleteBaskets(BuildContext context, int id) async {
+    final response = await _deleteBasketsUseCase(id);
 
-    final response = await _requestWithdrawUseCase(params);
     response.fold(
           (l) {
         emit(state.copyWith(failure: l, status: HomeStates.error));
+
         showSnackBar(
           context: context,
           message: l.errMessage,
@@ -162,6 +150,39 @@ class HomeCubit extends Cubit<HomeState> {
         );
       },
           (data) {
+        final updatedBaskets = state.baskets!
+            .where((project) => project.id != id)
+            .toList();
+
+        emit(
+          state.copyWith(
+            baskets: updatedBaskets,
+            status: HomeStates.deleteSuccess,
+          ),
+        );
+
+        showSnackBar(context: context, message: AppStrings.basketDeleted.tr());
+      },
+    );
+  }
+
+  Future<void> requestWithdraw(
+    BuildContext context,
+    RequestWithdrawParams params,
+  ) async {
+    emit(state.copyWith(status: HomeStates.loading));
+
+    final response = await _requestWithdrawUseCase(params);
+    response.fold(
+      (l) {
+        emit(state.copyWith(failure: l, status: HomeStates.error));
+        showSnackBar(
+          context: context,
+          message: l.errMessage,
+          backgroundColor: Colors.red,
+        );
+      },
+      (data) {
         emit(state.copyWith(status: HomeStates.addSuccess));
         pr(data);
       },
@@ -169,10 +190,6 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void resetState() {
-    emit(
-      state.copyWith(
-        status: HomeStates.initial,
-      ),
-    );
+    emit(state.copyWith(status: HomeStates.initial));
   }
 }

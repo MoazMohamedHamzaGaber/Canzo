@@ -9,5 +9,6 @@ abstract class HomeRepository {
   Future<Either<Failure,bool>> addBaskets(AddBasketsParams params);
   Future<Either<Failure,List<BasketEntity>>> getBaskets();
   Future<Either<Failure,bool>> fillBaskets(int id);
+  Future<Either<Failure,bool>> deleteBaskets(int id);
   Future<Either<Failure,bool>> requestWithdraw(RequestWithdrawParams params);
 }

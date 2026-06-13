@@ -14,6 +14,7 @@ abstract class HomeRemoteDataSource {
   Future<Either<Failure,bool>> addBaskets(AddBasketsParams params);
   Future<Either<Failure,List<BasketEntity>>> getBaskets();
   Future<Either<Failure,bool>> fillBaskets(int id);
+  Future<Either<Failure,bool>> deleteBaskets(int id);
   Future<Either<Failure,bool>> requestWithdraw(RequestWithdrawParams params);
 }
 
@@ -87,6 +88,22 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
         },
       ),
       data: params.toJson(),
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      return Right(true);
+    });
+  }
+
+  @override
+  Future<Either<Failure, bool>> deleteBaskets(int id) async {
+    var result = await _apiConsumer.patch(
+      EndPoints.deleteBasket(id),
+      options: Options(
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      ),
     );
 
     return result.fold((failure) => Left(failure), (response) {

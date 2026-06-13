@@ -10,6 +10,8 @@ class EndPoints {
   static const analytics = 'api/admin/analytics';
   static String fill(int id) =>
       'api/client/baskets/$id/fill';
+  static String deleteBasket(int id) =>
+      'api/client/basket/$id';
   static String orderStatus(String status) =>
       'api/client/orders/$status';
   static const transaction = 'api/client/transactions';

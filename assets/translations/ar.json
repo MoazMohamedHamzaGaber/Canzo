@@ -215,6 +215,9 @@
   "tapUploadScreenshotWithdraw": "انقر لتحميل اثبات السحب",
   "confirm": "تأكيد",
   "fill": "ملء",
-  "doWantFill": "هل تريد ملء"
+  "doWantFill": "هل تريد ملء",
+  "basketDeleted": "تم حذف الياسكت بنجاح",
+  "doDeleteBasket": "هل  تريد حذف هذا الباسكت؟",
+  "delete": "حذف"
 
 }

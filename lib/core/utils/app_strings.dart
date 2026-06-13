@@ -244,5 +244,8 @@ class AppStrings {
   static const confirm = "confirm";
   static const fill = "fill";
   static const doWantFill = "doWantFill";
+  static const basketDeleted = "basketDeleted";
+  static const doDeleteBasket = "doDeleteBasket";
+  static const delete = "delete";
 
 }
