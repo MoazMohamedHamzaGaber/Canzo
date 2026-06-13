@@ -9,6 +9,8 @@ import 'package:canzo_app/feature/authentication/domain/repository/auth_reposito
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import '../feature/authentication/domain/cases/google_login_use_case.dart';
+
 class AuthServiceLocator {
   static void execute(GetIt serviceLocator) {
     serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
@@ -52,10 +54,16 @@ class AuthServiceLocator {
         serviceLocator(),
       ),
     );
+    serviceLocator.registerLazySingleton<GoogleLoginUseCase>(
+          () => GoogleLoginUseCase(
+        serviceLocator(),
+      ),
+    );
 
     // cubits
     serviceLocator.registerFactory<AuthCubit>(
           () => AuthCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

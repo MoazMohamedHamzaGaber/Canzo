@@ -9,13 +9,22 @@ import 'package:canzo_app/feature/authentication/domain/entity/verify_entity.dar
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../domain/cases/google_login_use_case.dart';
+
 abstract class AuthRemoteDataSource {
   Future<Either<Failure, bool>> signUp(SignUpParams params);
 
   Future<Either<Failure, LoginEntity>> signIn(SignInParams params);
-  Future<Either<Failure,bool>> forgetPassword(ForgetPasswordParams params);
-  Future<Either<Failure,VerifyEntity>> verifyOtp(VerifyOtpParams params);
-  Future<Either<Failure,bool>> resetPasswordPassword(ResetPasswordParams params);
+
+  Future<Either<Failure, bool>> forgetPassword(ForgetPasswordParams params);
+
+  Future<Either<Failure, VerifyEntity>> verifyOtp(VerifyOtpParams params);
+
+  Future<Either<Failure, bool>> resetPasswordPassword(
+    ResetPasswordParams params,
+  );
+
+  Future<Either<Failure, LoginEntity>> googleLogin(GoogleLoginParams params);
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -50,7 +59,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, bool>> forgetPassword(ForgetPasswordParams params) async {
+  Future<Either<Failure, bool>> forgetPassword(
+    ForgetPasswordParams params,
+  ) async {
     var result = await _apiConsumer.post(
       EndPoints.forgetPassword,
       options: Options(),
@@ -63,7 +74,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, bool>> resetPasswordPassword(ResetPasswordParams params) async {
+  Future<Either<Failure, bool>> resetPasswordPassword(
+    ResetPasswordParams params,
+  ) async {
     var result = await _apiConsumer.patch(
       EndPoints.resetPassword,
       options: Options(),
@@ -76,7 +89,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, VerifyEntity>> verifyOtp(VerifyOtpParams params) async {
+  Future<Either<Failure, VerifyEntity>> verifyOtp(
+    VerifyOtpParams params,
+  ) async {
     var result = await _apiConsumer.post(
       EndPoints.verifyOtp,
       options: Options(),
@@ -86,5 +101,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return result.fold((failure) => Left(failure), (response) {
       return Right(VerifyModel.fromJson(response));
     });
+  }
+
+  @override
+  Future<Either<Failure, LoginEntity>> googleLogin(
+    GoogleLoginParams params,
+  ) async {
+    var result = await _apiConsumer.post(
+      EndPoints.googleLogin,
+      options: Options(),
+      data: params.toJson(),
+    );
+
+    return result.fold(
+      (failure) => Left(failure),
+      (response) => Right(LoginModel.fromJson(response)),
+    );
   }
 }

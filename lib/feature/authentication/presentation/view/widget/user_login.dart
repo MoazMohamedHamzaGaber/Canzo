@@ -51,7 +51,7 @@ class _UserLoginState extends State<UserLogin> {
 
           token = state.user!.token;
           role = state.user!.userRole;
-
+          await context.read<ProfileCubit>().getProfile();
           if (context.mounted) {
             navigateAndFinish(
               context,
@@ -120,8 +120,6 @@ class _UserLoginState extends State<UserLogin> {
                         password: passwordController.text,
                       ),
                     );
-
-                    await context.read<ProfileCubit>().getProfile();
                   }
                 },
                 color: AppColors.green,

@@ -10,8 +10,10 @@ import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dar
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/service/social_auth_service.dart';
 import '../../../../core/shared/shared_preference.dart';
 import '../../../../core/utils/const.dart';
+import '../../domain/cases/google_login_use_case.dart';
 import '../view/login_view.dart';
 import 'auth_state.dart';
 
@@ -21,6 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
   final ForgetPasswordUseCase _forgetPasswordUseCase;
   final ResetPasswordUseCase _resetPasswordUseCase;
   final VerifyOtpUseCase _verifyOtpUseCase;
+  final GoogleLoginUseCase _googleLoginUseCase;
 
   AuthCubit(
     this._signUpUseCases,
@@ -28,33 +31,35 @@ class AuthCubit extends Cubit<AuthState> {
     this._resetPasswordUseCase,
     this._verifyOtpUseCase,
     this._forgetPasswordUseCase,
+    this._googleLoginUseCase,
   ) : super(const AuthState());
 
   void changeSelectedActivity(ActivityType value) {
     emit(state.copyWith(selectedActivityType: value));
   }
+
   ActivityType? getActivityTypeFromString(String value) {
     final normalized = value.trim().toLowerCase();
 
     switch (normalized) {
-    // Restaurant
+      // Restaurant
       case 'Restaurant':
       case 'مطعم':
         return ActivityType.restaurant;
 
-    // Cafe
+      // Cafe
       case 'Cafe':
       case 'Café':
       case 'كافيه':
       case 'مقهى':
         return ActivityType.cafe;
 
-    // Wedding Hall
+      // Wedding Hall
       case 'Wedding hall':
       case 'قاعة أفراح':
         return ActivityType.weddingHall;
 
-    // Club
+      // Club
       case 'Club':
       case 'نادي':
         return ActivityType.club;
@@ -126,7 +131,7 @@ class AuthCubit extends Cubit<AuthState> {
           backgroundColor: Colors.red,
         );
       },
-      (data) async{
+      (data) async {
         AppRole role;
 
         switch (data.userRole) {
@@ -142,13 +147,22 @@ class AuthCubit extends Cubit<AuthState> {
             role = AppRole.user;
         }
 
-        emit(state.copyWith(user: data, appRole: role,status: AuthStates.successSignIn));
+        emit(
+          state.copyWith(
+            user: data,
+            appRole: role,
+            status: AuthStates.successSignIn,
+          ),
+        );
         pr(data.message);
       },
     );
   }
 
-  Future<void> forgetPassword(BuildContext context, ForgetPasswordParams params) async {
+  Future<void> forgetPassword(
+    BuildContext context,
+    ForgetPasswordParams params,
+  ) async {
     emit(state.copyWith(status: AuthStates.loading));
 
     final response = await _forgetPasswordUseCase(params);
@@ -168,7 +182,10 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
-  Future<void> resetPassword(BuildContext context, ResetPasswordParams params) async {
+  Future<void> resetPassword(
+    BuildContext context,
+    ResetPasswordParams params,
+  ) async {
     emit(state.copyWith(status: AuthStates.loading));
 
     final response = await _resetPasswordUseCase(params);
@@ -202,18 +219,14 @@ class AuthCubit extends Cubit<AuthState> {
         );
       },
       (data) {
-        emit(state.copyWith(verify: data,status: AuthStates.successVerifyOtp));
+        emit(state.copyWith(verify: data, status: AuthStates.successVerifyOtp));
         pr(data.message);
       },
     );
   }
 
   void resetState() {
-    emit(
-      state.copyWith(
-        status: AuthStates.initial,
-      ),
-    );
+    emit(state.copyWith(status: AuthStates.initial));
   }
 
   void resetAuth() {
@@ -227,12 +240,7 @@ class AuthCubit extends Cubit<AuthState> {
     token = null;
     role = null;
 
-    emit(
-      state.copyWith(
-        user: null,
-        status: AuthStates.initial,
-      ),
-    );
+    emit(state.copyWith(user: null, status: AuthStates.initial));
 
     if (context.mounted) {
       navigateAndFinish(context, const LoginView());
@@ -240,18 +248,12 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> socialLogin(
-      BuildContext context, {
-        required String token,
-        required String provider,
-      }) async {
-
+    BuildContext context, {
+    required String token,
+    required String provider,
+  }) async {
     try {
-
-      emit(
-        state.copyWith(
-          status: AuthStates.loading,
-        ),
-      );
+      emit(state.copyWith(status: AuthStates.loading));
 
       /// هنا هتبعت للباك اند
       ///
@@ -260,20 +262,54 @@ class AuthCubit extends Cubit<AuthState> {
 
       print(token);
       print(provider);
-
     } catch (e) {
-
-      emit(
-        state.copyWith(
-          status: AuthStates.error,
-        ),
-      );
+      emit(state.copyWith(status: AuthStates.error));
 
       showSnackBar(
         context: context,
         message: e.toString(),
         backgroundColor: Colors.red,
       );
+    }
+  }
+
+  Future<void> googleLogin(BuildContext context) async {
+    print('1-googleLogin started');
+
+    emit(state.copyWith(status: AuthStates.loading));
+
+    try {
+      final idToken = await SocialAuthService.signInWithGoogle();
+
+      print('2-idToken: $idToken');
+
+      if (idToken == null) {
+        print('3-idToken is null');
+        emit(state.copyWith(status: AuthStates.initial));
+        return;
+      }
+
+      final response = await _googleLoginUseCase(
+        GoogleLoginParams(idToken: idToken),
+      );
+
+      print('4-api finished');
+
+      response.fold(
+            (failure) {
+          print(failure.errMessage);
+        },
+            (user) {
+          print(user.token);
+          print(user.userRole);
+          print(user);
+        },
+      );
+    } catch (e, s) {
+      print('ERROR => $e');
+      print(s);
+
+      emit(state.copyWith(status: AuthStates.error));
     }
   }
 }

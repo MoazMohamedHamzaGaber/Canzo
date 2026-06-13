@@ -5,26 +5,21 @@ class SocialAuthService {
 
   static final GoogleSignIn _googleSignIn =
       GoogleSignIn.instance;
+  static const String serverClientId =
+      '891699953456-i3ubf5kgsnn03nkq0trjs57vli5c29to.apps.googleusercontent.com';
 
-  /// GOOGLE LOGIN
   static Future<String?> signInWithGoogle() async {
+    await _googleSignIn.initialize(
+      serverClientId: serverClientId,
+    );
 
-    try {
+    final GoogleSignInAccount googleUser =
+    await _googleSignIn.authenticate();
+    print('Google User => ${googleUser.email}');
+    final GoogleSignInAuthentication googleAuth =
+        googleUser.authentication;
 
-      await _googleSignIn.initialize();
-
-      final GoogleSignInAccount googleUser =
-      await _googleSignIn.authenticate();
-
-      final GoogleSignInAuthentication googleAuth =
-          googleUser.authentication;
-
-      /// ده اللي هتبعته للباك اند
-      return googleAuth.idToken;
-
-    } catch (e) {
-      rethrow;
-    }
+    return googleAuth.idToken;
   }
 
   /// FACEBOOK LOGIN

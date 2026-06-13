@@ -5,18 +5,17 @@ import 'package:canzo_app/feature/authentication/domain/entity/verify_entity.dar
 import 'package:canzo_app/feature/authentication/domain/repository/auth_repository.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../domain/cases/google_login_use_case.dart';
 import '../DataSource/auth_remote_data_source.dart';
 
-class AuthRepositoryImpl implements AuthRepository{
-
+class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _remoteDataSource;
 
   AuthRepositoryImpl(this._remoteDataSource);
 
-
   @override
   Future<Either<Failure, bool>> signUp(SignUpParams params) {
-      return _remoteDataSource.signUp(params);
+    return _remoteDataSource.signUp(params);
   }
 
   @override
@@ -30,12 +29,19 @@ class AuthRepositoryImpl implements AuthRepository{
   }
 
   @override
-  Future<Either<Failure, bool>> resetPasswordPassword(ResetPasswordParams params) {
+  Future<Either<Failure, bool>> resetPasswordPassword(
+    ResetPasswordParams params,
+  ) {
     return _remoteDataSource.resetPasswordPassword(params);
   }
 
   @override
   Future<Either<Failure, VerifyEntity>> verifyOtp(VerifyOtpParams params) {
     return _remoteDataSource.verifyOtp(params);
+  }
+
+  @override
+  Future<Either<Failure, LoginEntity>> googleLogin(GoogleLoginParams params) {
+    return _remoteDataSource.googleLogin(params);
   }
 }

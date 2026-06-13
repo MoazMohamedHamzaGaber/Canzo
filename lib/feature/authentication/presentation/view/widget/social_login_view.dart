@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SocialLoginView extends StatelessWidget {
-  const SocialLoginView({super.key});
+  const SocialLoginView({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -45,19 +45,10 @@ class SocialLoginView extends StatelessWidget {
           title: AppStrings.google.tr(),
           image:
           'assets/images/google.png',
-          onTap: () async {
-
-            final token =
-            await SocialAuthService.signInWithGoogle();
-
-            if (token != null && context.mounted) {
-
-              context.read<AuthCubit>().socialLogin(
-                context,
-                token: token,
-                provider: 'google',
-              );
-            }
+          onTap: () {
+            context.read<AuthCubit>().googleLogin(
+              context,
+            );
           },
         ),
         sizeBox(),
