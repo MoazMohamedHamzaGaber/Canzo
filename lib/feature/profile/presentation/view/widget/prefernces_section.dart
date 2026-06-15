@@ -1,10 +1,7 @@
-import 'package:canzo_app/core/service/service_locator.dart';
-import 'package:canzo_app/core/shared/shared_preference.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
-import 'package:canzo_app/feature/authentication/presentation/view/login_view.dart';
 import 'package:canzo_app/feature/profile/presentation/view/widget/language_custom.dart';
 import 'package:canzo_app/feature/profile/presentation/view/widget/open_whats_app.dart';
 import 'package:flutter/material.dart';
