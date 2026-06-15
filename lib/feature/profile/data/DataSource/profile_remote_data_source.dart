@@ -32,6 +32,9 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
     );
 
     return result.fold((failure) => Left(failure), (response) {
+      if (response['profile'] == null) {
+        return Left(ServerFailure('Profile not found'));
+      }
       return Right(ProfileModel.fromJson(response['profile']));
     });
   }

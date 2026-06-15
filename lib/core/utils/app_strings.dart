@@ -247,5 +247,16 @@ class AppStrings {
   static const basketDeleted = "basketDeleted";
   static const doDeleteBasket = "doDeleteBasket";
   static const delete = "delete";
+  static const completeProfile = 'completeProfile';
+  static const phone = 'phone';
+
+  static const loginSuccess = 'loginSuccess';
+
+  static const addressRequired = 'addressRequired';
+  static const phoneRequired = 'phoneRequired';
+  static const activityTypeRequired = 'activityTypeRequired';
+  static const activityNameRequired = 'activityNameRequired';
+  static const accountCreatedSuccessfully = 'accountCreatedSuccessfully';
+  static const pleaseSelectActivityType = 'pleaseSelectActivityType';
 
 }

@@ -221,5 +221,19 @@
   "basketFor": "basket for",
   "basketDeleted": "The basket was successfully deleted",
   "doDeleteBasket": "Do you want to delete this basket?",
-  "delete": "Delete"
+  "delete": "Delete",
+  "completeProfile": "Complete Profile",
+  "phone": "Phone",
+  "activityType": "Activity Type",
+  "activityName": "Activity Name",
+  "weddingHall": "Wedding Hall",
+
+  "loginSuccess": "Profile completed successfully",
+
+  "addressRequired": "Please enter your address",
+  "phoneRequired": "Please enter your phone number",
+  "activityTypeRequired": "Please select an activity type",
+  "activityNameRequired": "Please enter activity name",
+  "accountCreatedSuccessfully": "Account created successfully",
+  "pleaseSelectActivityType": "Please select activity type"
 }

@@ -218,6 +218,20 @@
   "doWantFill": "هل تريد ملء",
   "basketDeleted": "تم حذف الياسكت بنجاح",
   "doDeleteBasket": "هل  تريد حذف هذا الباسكت؟",
-  "delete": "حذف"
+  "delete": "حذف",
+  "completeProfile": "استكمال الملف الشخصي",
+  "phone": "رقم الهاتف",
+  "activityType": "نوع النشاط",
+  "activityName": "اسم النشاط",
+  "weddingHall": "قاعة أفراح",
+
+  "loginSuccess": "تم استكمال الملف الشخصي بنجاح",
+
+  "addressRequired": "يرجى إدخال العنوان",
+  "phoneRequired": "يرجى إدخال رقم الهاتف",
+  "activityTypeRequired": "يرجى اختيار نوع النشاط",
+  "activityNameRequired": "يرجى إدخال اسم النشاط",
+  "accountCreatedSuccessfully": "تم انشاء الحساب بنجاح",
+  "pleaseSelectActivityType": "الرجاء تحديد نوع النشاط"
 
 }

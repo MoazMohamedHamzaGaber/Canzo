@@ -3,18 +3,22 @@ import 'package:canzo_app/core/widget/snake_bar.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/forget_password_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/reset_password_use_case.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/set_up_profile_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/sign_in_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/sign_up_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/verify_otp_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/activity_type.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
+import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../core/service/social_auth_service.dart';
 import '../../../../core/shared/shared_preference.dart';
 import '../../../../core/utils/const.dart';
 import '../../domain/cases/google_login_use_case.dart';
 import '../view/login_view.dart';
+import '../view/widget/complete_profile_view.dart';
 import 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -24,6 +28,7 @@ class AuthCubit extends Cubit<AuthState> {
   final ResetPasswordUseCase _resetPasswordUseCase;
   final VerifyOtpUseCase _verifyOtpUseCase;
   final GoogleLoginUseCase _googleLoginUseCase;
+  final SetupProfileUseCase _profileUseCase;
 
   AuthCubit(
     this._signUpUseCases,
@@ -32,6 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
     this._verifyOtpUseCase,
     this._forgetPasswordUseCase,
     this._googleLoginUseCase,
+    this._profileUseCase,
   ) : super(const AuthState());
 
   void changeSelectedActivity(ActivityType value) {
@@ -234,13 +240,15 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logout(BuildContext context) async {
+    await GoogleSignIn.instance.signOut();
+
     await SharedPreference.removeData(key: 'token');
     await SharedPreference.removeData(key: 'role');
 
     token = null;
     role = null;
 
-    emit(state.copyWith(user: null, status: AuthStates.initial));
+    emit(AuthState.initial());
 
     if (context.mounted) {
       navigateAndFinish(context, const LoginView());
@@ -297,12 +305,44 @@ class AuthCubit extends Cubit<AuthState> {
 
       response.fold(
             (failure) {
-          print(failure.errMessage);
+          emit(state.copyWith(
+            status: AuthStates.error,
+            failure: failure,
+          ));
         },
-            (user) {
-          print(user.token);
-          print(user.userRole);
-          print(user);
+            (user) async {
+          await SharedPreference.saveData(
+            key: 'token',
+            value: user.token,
+          );
+
+          await SharedPreference.saveData(
+            key: 'role',
+            value: user.userRole,
+          );
+
+          token = user.token;
+          role = user.userRole;
+
+          print('TOKEN SAVED => $token');
+
+          if (user.isFirstLogin == true) {
+
+            emit(
+              state.copyWith(
+                status: AuthStates.initial,
+                user: null,
+              ),
+            );
+
+            navigateTo(
+              context,
+              const CompleteProfileView(),
+            );
+          }
+          else{
+            navigateAndFinish(context, BottomNavBar());
+          }
         },
       );
     } catch (e, s) {
@@ -311,5 +351,34 @@ class AuthCubit extends Cubit<AuthState> {
 
       emit(state.copyWith(status: AuthStates.error));
     }
+  }
+  Future<void> setupProfile(
+      BuildContext context,
+      SetupProfileParams params,
+      ) async {
+    emit(state.copyWith(status: AuthStates.loadingProfile));
+
+    final response = await _profileUseCase(params);
+
+    response.fold(
+          (failure) {
+        emit(
+          state.copyWith(
+            failure: failure,
+            status: AuthStates.error,
+          ),
+        );
+        showSnackBar(context: context, message: failure.errMessage);
+        print('SETUP PROFILE ERROR => ${failure.errMessage}');
+      },
+          (_) {
+        emit(
+          state.copyWith(
+            status: AuthStates.successProfile,
+          ),
+        );
+        print('SETUP PROFILE SUCCESS');
+      },
+    );
   }
 }

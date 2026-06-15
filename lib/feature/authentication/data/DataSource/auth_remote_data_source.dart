@@ -9,7 +9,9 @@ import 'package:canzo_app/feature/authentication/domain/entity/verify_entity.dar
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
+import '../../../../core/utils/const.dart';
 import '../../domain/cases/google_login_use_case.dart';
+import '../../domain/cases/set_up_profile_use_case.dart';
 
 abstract class AuthRemoteDataSource {
   Future<Either<Failure, bool>> signUp(SignUpParams params);
@@ -23,7 +25,9 @@ abstract class AuthRemoteDataSource {
   Future<Either<Failure, bool>> resetPasswordPassword(
     ResetPasswordParams params,
   );
-
+  Future<Either<Failure, bool>> setupProfile(
+      SetupProfileParams params,
+      );
   Future<Either<Failure, LoginEntity>> googleLogin(GoogleLoginParams params);
 }
 
@@ -116,6 +120,35 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return result.fold(
       (failure) => Left(failure),
       (response) => Right(LoginModel.fromJson(response)),
+    );
+  }
+
+  @override
+  Future<Either<Failure, bool>> setupProfile(
+      SetupProfileParams params,
+      ) async {
+    print('TOKEN => $token');
+    print('BODY => ${params.toJson()}');
+
+    final result = await _apiConsumer.post(
+      EndPoints.setupProfile,
+      data: params.toJson(),
+      options: Options(
+        headers: {
+          'Authorization': 'Token $token',
+        },
+      ),
+    );
+
+    return result.fold(
+          (failure) {
+        print('SETUP PROFILE FAILED => ${failure.errMessage}');
+        return Left(failure);
+      },
+          (response) {
+        print('SETUP PROFILE RESPONSE => $response');
+        return const Right(true);
+      },
     );
   }
 }

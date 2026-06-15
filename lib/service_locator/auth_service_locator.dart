@@ -2,6 +2,7 @@ import 'package:canzo_app/feature/authentication/data/DataSource/auth_remote_dat
 import 'package:canzo_app/feature/authentication/data/repository/auth_repository_impl.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/forget_password_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/reset_password_use_case.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/set_up_profile_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/sign_in_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/sign_up_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/verify_otp_use_case.dart';
@@ -60,9 +61,16 @@ class AuthServiceLocator {
       ),
     );
 
+    serviceLocator.registerLazySingleton<SetupProfileUseCase>(
+          () => SetupProfileUseCase(
+        serviceLocator(),
+      ),
+    );
+
     // cubits
     serviceLocator.registerFactory<AuthCubit>(
           () => AuthCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

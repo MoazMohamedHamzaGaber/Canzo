@@ -1,5 +1,6 @@
 import 'package:canzo_app/core/error/failure.dart';
 import 'package:canzo_app/feature/authentication/domain/cases/params.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/set_up_profile_use_case.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/login_entity.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/verify_entity.dart';
 import 'package:canzo_app/feature/authentication/domain/repository/auth_repository.dart';
@@ -43,5 +44,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, LoginEntity>> googleLogin(GoogleLoginParams params) {
     return _remoteDataSource.googleLogin(params);
+  }
+
+  @override
+  Future<Either<Failure, bool>> setupProfile(SetupProfileParams params) {
+    return _remoteDataSource.setupProfile(params);
   }
 }

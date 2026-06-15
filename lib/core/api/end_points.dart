@@ -17,7 +17,8 @@ class EndPoints {
   static const transaction = 'api/client/transactions';
   static const wallet = 'api/client/wallet';
   static const profile = 'api/client/profile';
-  static const String googleLogin = '/auth/google';
+  static const setupProfile = 'api/setup-profile';
+  static const  googleLogin = '/auth/google';
   static const adminProfile = 'api/admin/profile';
   static const orders = 'api/admin/orders?status=Pending';
   static const order = 'api/admin/order';

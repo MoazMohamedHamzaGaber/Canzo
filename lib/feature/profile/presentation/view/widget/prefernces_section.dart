@@ -53,24 +53,8 @@ class PreferencesSection extends StatelessWidget {
         ),
         sizeBox(height: 30),
         GestureDetector(
-          onTap: () async {
-            await SharedPreference.removeData(key: 'token');
-            await SharedPreference.removeData(key: 'role');
-
-            token = null;
-            role = null;
-
-            if (context.mounted) {
-              context.read<AuthCubit>().resetAuth();
-
-              navigateAndFinish(
-                context,
-                BlocProvider(
-                  create: (_) => serviceLocator<AuthCubit>(),
-                  child: const LoginView(),
-                ),
-              );
-            }
+          onTap: () {
+            context.read<AuthCubit>().logout(context);
           },
           child: Container(
             width: double.infinity,

@@ -43,7 +43,7 @@ class _UserRegisterState extends State<UserRegister> {
           final authCubit = context.read<AuthCubit>();
           showSnackBar(
             context: context,
-            message: 'Account created successfully',
+            message: AppStrings.accountCreatedSuccessfully.tr(),
           );
           await Future.delayed(const Duration(seconds: 1));
 
@@ -168,7 +168,7 @@ class _UserRegisterState extends State<UserRegister> {
                     if (state.selectedActivityType?.apiValue == null) {
                       showSnackBar(
                         context: context,
-                        message: 'Please select activity type',
+                        message: AppStrings.pleaseSelectActivityType.tr(),
                         backgroundColor: Colors.red,
                       );
                     } else {

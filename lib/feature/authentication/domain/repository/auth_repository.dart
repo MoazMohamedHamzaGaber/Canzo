@@ -5,6 +5,7 @@ import 'package:canzo_app/feature/authentication/domain/entity/verify_entity.dar
 import 'package:dartz/dartz.dart';
 
 import '../cases/google_login_use_case.dart';
+import '../cases/set_up_profile_use_case.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, bool>> signUp(SignUpParams params);
@@ -19,5 +20,8 @@ abstract class AuthRepository {
     ResetPasswordParams params,
   );
 
+  Future<Either<Failure, bool>> setupProfile(
+      SetupProfileParams params,
+      );
   Future<Either<Failure, LoginEntity>> googleLogin(GoogleLoginParams params);
 }
