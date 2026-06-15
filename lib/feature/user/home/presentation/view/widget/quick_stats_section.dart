@@ -38,10 +38,10 @@ class QuickStatsSection extends StatelessWidget {
   }
   Widget buildContainer(String title, int price,String state) => Expanded(
     child: Container(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
       width: double.infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(),
       ),
       child: Column(
@@ -54,7 +54,7 @@ class QuickStatsSection extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          sizeBox(height: 10),
+          sizeBox(height: 8),
           Text(
             '$price',
             style: StyleText.style26.copyWith(
@@ -62,14 +62,6 @@ class QuickStatsSection extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          sizeBox(height: 10),
-          // Text(
-          //   state,
-          //   style: StyleText.style13.copyWith(
-          //     color: Colors.black38,
-          //     fontWeight: FontWeight.w600,
-          //   ),
-        //  ),
         ],
       ),
     ),

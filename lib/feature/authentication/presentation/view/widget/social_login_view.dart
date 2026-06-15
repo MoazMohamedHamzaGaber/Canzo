@@ -1,4 +1,3 @@
-import 'package:canzo_app/core/service/social_auth_service.dart';
 import 'package:canzo_app/core/utils/app_strings.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
@@ -49,26 +48,6 @@ class SocialLoginView extends StatelessWidget {
             context.read<AuthCubit>().googleLogin(
               context,
             );
-          },
-        ),
-        sizeBox(),
-        buildSocialButton(
-          title: AppStrings.facebook.tr(),
-          image:
-          'assets/images/communication.png',
-          onTap: () async {
-
-            final token =
-            await SocialAuthService.signInWithFacebook();
-
-            if (token != null && context.mounted) {
-
-              context.read<AuthCubit>().socialLogin(
-                context,
-                token: token,
-                provider: 'facebook',
-              );
-            }
           },
         ),
       ],

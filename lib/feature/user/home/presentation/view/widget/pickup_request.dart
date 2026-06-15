@@ -16,30 +16,29 @@ class PickupRequestView extends StatelessWidget {
         navigateTo(context, SelectBasketView());
       },
       child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 20,
-          horizontal: 20
+        padding: const EdgeInsets.symmetric(
+          vertical: 40,
+          horizontal: 20,
         ),
         decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.black45),
+          border: Border.all(
+            color: Colors.grey.shade200,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 15,
+              spreadRadius: 2,
+              offset: const Offset(0, 6),
+            ),
+          ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.green,
-               borderRadius: BorderRadius.circular(12),
-               // shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.add,
-                size: 20,
-                color: Colors.white,
-              ),
-            ),
+            Image.asset('assets/images/basket.png',height: 50,width: 50,),
             sizeBox(width: 10),
             Expanded(
               child: Row(
@@ -49,16 +48,15 @@ class PickupRequestView extends StatelessWidget {
                     children: [
                       Text(
                         AppStrings.addBaskets.tr(),
-                        style: StyleText.style19.copyWith(
+                        style: StyleText.style26.copyWith(
                           color: AppColors.green,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                     // Text('100 ${AppStrings.filledPackage.tr()}', style: StyleText.style13),
                     ],
                   ),
                   Spacer(),
-                  Icon(Icons.arrow_right_alt_rounded),
+                  Icon(Icons.arrow_right_alt_rounded,color: AppColors.green,size: 30,),
                 ],
               ),
             ),

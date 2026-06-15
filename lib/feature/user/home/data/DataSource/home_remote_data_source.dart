@@ -97,13 +97,13 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<Either<Failure, bool>> deleteBaskets(int id) async {
-    var result = await _apiConsumer.patch(
+    var result = await _apiConsumer.delete(
       EndPoints.deleteBasket(id),
-      options: Options(
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      ),
+      // options: Options(
+      //   headers: {
+      //     'Authorization': 'Bearer $token',
+      //   },
+      // ),
     );
 
     return result.fold((failure) => Left(failure), (response) {
