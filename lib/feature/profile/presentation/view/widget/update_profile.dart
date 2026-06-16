@@ -48,7 +48,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     activityNameController = TextEditingController(
       text: widget.profile.activityName,
     );
-
+    print(widget.profile.activityType);
+    print(
+      context.read<AuthCubit>().getActivityTypeFromString(
+        widget.profile.activityType,
+      ),
+    );
     context.read<AuthCubit>().changeSelectedActivity(
       context.read<AuthCubit>().getActivityTypeFromString(
             widget.profile.activityType,
@@ -110,7 +115,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         },
         builder: (context, state) {
           var cubit = context.read<ProfileCubit>();
-
+          final selectedActivity =
+          context.read<AuthCubit>().getActivityTypeFromString(
+            widget.profile.activityType,
+          );
           return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Form(
@@ -139,7 +147,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     controller: addressController,
                   ),
                   sizeBox(height: 12),
-                  const DropdownButtonSection(),
+                   DropdownButtonSection(initialValue: selectedActivity,),
                   sizeBox(),
 
                   buildTextField(

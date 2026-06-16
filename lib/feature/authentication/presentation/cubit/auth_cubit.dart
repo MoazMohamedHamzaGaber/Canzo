@@ -12,7 +12,6 @@ import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../core/service/social_auth_service.dart';
 import '../../../../core/shared/shared_preference.dart';
 import '../../../../core/utils/const.dart';
@@ -47,32 +46,23 @@ class AuthCubit extends Cubit<AuthState> {
   ActivityType? getActivityTypeFromString(String value) {
     final normalized = value.trim().toLowerCase();
 
-    switch (normalized) {
-      // Restaurant
-      case 'Restaurant':
-      case 'مطعم':
-        return ActivityType.restaurant;
-
-      // Cafe
-      case 'Cafe':
-      case 'Café':
-      case 'كافيه':
-      case 'مقهى':
-        return ActivityType.cafe;
-
-      // Wedding Hall
-      case 'Wedding hall':
-      case 'قاعة أفراح':
-        return ActivityType.weddingHall;
-
-      // Club
-      case 'Club':
-      case 'نادي':
-        return ActivityType.club;
-
-      default:
-        return null;
+    if (normalized == ActivityType.restaurant.apiValue.toLowerCase()) {
+      return ActivityType.restaurant;
     }
+
+    if (normalized == ActivityType.cafe.apiValue.toLowerCase()) {
+      return ActivityType.cafe;
+    }
+
+    if (normalized == ActivityType.weddingHall.apiValue.toLowerCase()) {
+      return ActivityType.weddingHall;
+    }
+
+    if (normalized == ActivityType.club.apiValue.toLowerCase()) {
+      return ActivityType.club;
+    }
+
+    return null;
   }
 
   void selectRole(AppRole role) {
@@ -240,7 +230,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logout(BuildContext context) async {
-    await GoogleSignIn.instance.signOut();
+   // await GoogleSignIn.instance.signOut();
 
     await SharedPreference.removeData(key: 'token');
     await SharedPreference.removeData(key: 'role');

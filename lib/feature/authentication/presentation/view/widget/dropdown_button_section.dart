@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class DropdownButtonSection extends StatelessWidget {
-  const DropdownButtonSection({super.key});
-
+  const DropdownButtonSection({super.key, this.initialValue});
+  final ActivityType? initialValue;
 
 
   @override
@@ -50,7 +50,7 @@ class DropdownButtonSection extends StatelessWidget {
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                 ),
-                initialValue: cubit.state.selectedActivityType,
+                initialValue: state.selectedActivityType ?? initialValue,
                 items:  [
                   DropdownMenuItem(
                     value:ActivityType.restaurant,

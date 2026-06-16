@@ -7,6 +7,7 @@ import 'package:canzo_app/feature/profile/presentation/view/widget/open_whats_ap
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../authentication/presentation/cubit/auth_cubit.dart';
 
@@ -41,12 +42,15 @@ class PreferencesSection extends StatelessWidget {
           ),
         ),
         sizeBox(),
-        buildItemPreference(
-          icon: Icons.privacy_tip_outlined,
-          title: AppStrings.terms.tr(),
-          subtitle: AppStrings.view.tr(),
-          color: Colors.grey,
-          isArrow: false,
+        GestureDetector(
+          onTap: openPrivacyPolicy,
+          child: buildItemPreference(
+            icon: Icons.privacy_tip_outlined,
+            title: AppStrings.terms.tr(),
+            subtitle: AppStrings.view.tr(),
+            color: Colors.grey,
+            isArrow: false,
+          ),
         ),
         sizeBox(height: 30),
         GestureDetector(
@@ -125,4 +129,17 @@ class PreferencesSection extends StatelessWidget {
       ],
     ),
   );
+
+  Future<void> openPrivacyPolicy() async {
+    final uri = Uri.parse(
+      'https://canzo-privacy.moaz68860.workers.dev/',
+    );
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+    }
+  }
 }
