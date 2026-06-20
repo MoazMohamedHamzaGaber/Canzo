@@ -1,18 +1,13 @@
 import 'package:canzo_app/core/abstract/use_case.dart';
-import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
-import 'package:canzo_app/feature/authentication/presentation/view/login_view.dart';
-import 'package:canzo_app/feature/authentication/domain/cases/delete_account_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/get_admin_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/get_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/update_admin_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/update_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_state.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utils/app_strings.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final GetProfileUseCase _getProfileUseCase;
