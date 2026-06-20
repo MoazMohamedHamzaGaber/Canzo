@@ -1,12 +1,18 @@
 import 'package:canzo_app/core/abstract/use_case.dart';
+import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/widget/snake_bar.dart';
+import 'package:canzo_app/feature/authentication/presentation/view/login_view.dart';
+import 'package:canzo_app/feature/authentication/domain/cases/delete_account_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/get_admin_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/get_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/update_admin_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/domain/UseCase/update_profile_use_case.dart';
 import 'package:canzo_app/feature/profile/presentation/cubit/profile_state.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../core/utils/app_strings.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final GetProfileUseCase _getProfileUseCase;
@@ -14,8 +20,12 @@ class ProfileCubit extends Cubit<ProfileState> {
   final GetAdminProfileUseCase _adminProfileUseCase;
   final UpdateAdminProfileUseCase _updateAdminProfileUseCase;
 
-  ProfileCubit(this._getProfileUseCase, this._updateProfileUseCase,this._adminProfileUseCase,this._updateAdminProfileUseCase)
-    : super(const ProfileState());
+  ProfileCubit(
+    this._getProfileUseCase,
+    this._updateProfileUseCase,
+    this._adminProfileUseCase,
+    this._updateAdminProfileUseCase,
+  ) : super(const ProfileState());
 
   Future<void> getProfile() async {
     emit(state.copyWith(status: ProfileStates.loading));
@@ -36,11 +46,13 @@ class ProfileCubit extends Cubit<ProfileState> {
 
     final response = await _adminProfileUseCase(NoParams());
     response.fold(
-          (l) {
+      (l) {
         emit(state.copyWith(failure: l, status: ProfileStates.error));
       },
-          (profile) {
-        emit(state.copyWith(adminProfile: profile, status: ProfileStates.success));
+      (profile) {
+        emit(
+          state.copyWith(adminProfile: profile, status: ProfileStates.success),
+        );
       },
     );
   }
@@ -61,22 +73,22 @@ class ProfileCubit extends Cubit<ProfileState> {
           backgroundColor: Colors.red,
         );
       },
-      (profile) async{
+      (profile) async {
         emit(state.copyWith(status: ProfileStates.updateSuccess));
-       await getProfile();
+        await getProfile();
       },
     );
   }
 
   Future<void> updateAdminProfile(
-      BuildContext context,
-      UpdateProfileParams params,
-      ) async {
+    BuildContext context,
+    UpdateProfileParams params,
+  ) async {
     emit(state.copyWith(status: ProfileStates.loading));
 
     final response = await _updateAdminProfileUseCase(params);
     response.fold(
-          (l) {
+      (l) {
         emit(state.copyWith(failure: l, status: ProfileStates.error));
         showSnackBar(
           context: context,
@@ -84,7 +96,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           backgroundColor: Colors.red,
         );
       },
-          (profile) async{
+      (profile) async {
         emit(state.copyWith(status: ProfileStates.updateSuccess));
         await getAdminProfile();
       },

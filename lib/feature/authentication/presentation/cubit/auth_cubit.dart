@@ -12,9 +12,11 @@ import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:canzo_app/feature/user/home/presentation/view/widget/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/abstract/use_case.dart';
 import '../../../../core/service/social_auth_service.dart';
 import '../../../../core/shared/shared_preference.dart';
 import '../../../../core/utils/const.dart';
+import '../../domain/cases/delete_account_use_case.dart';
 import '../../domain/cases/google_login_use_case.dart';
 import '../view/login_view.dart';
 import '../view/widget/complete_profile_view.dart';
@@ -28,6 +30,7 @@ class AuthCubit extends Cubit<AuthState> {
   final VerifyOtpUseCase _verifyOtpUseCase;
   final GoogleLoginUseCase _googleLoginUseCase;
   final SetupProfileUseCase _profileUseCase;
+  final DeleteAccountUseCase _deleteAccountUseCase;
 
   AuthCubit(
     this._signUpUseCases,
@@ -37,6 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
     this._forgetPasswordUseCase,
     this._googleLoginUseCase,
     this._profileUseCase,
+    this._deleteAccountUseCase,
   ) : super(const AuthState());
 
   void changeSelectedActivity(ActivityType value) {
@@ -368,6 +372,29 @@ class AuthCubit extends Cubit<AuthState> {
           ),
         );
         print('SETUP PROFILE SUCCESS');
+      },
+    );
+  }
+
+
+  Future<void> deleteAccount(BuildContext context) async {
+    final response = await _deleteAccountUseCase(NoParams());
+
+    response.fold(
+          (l) {
+        emit(state.copyWith(failure: l, status: AuthStates.error));
+
+        showSnackBar(
+          context: context,
+          message: l.errMessage,
+          backgroundColor: Colors.red,
+        );
+      },
+          (data) async {
+        emit(state.copyWith(status: AuthStates.deleteSuccess));
+        logout(context);
+        navigateAndFinish(context, const LoginView());
+
       },
     );
   }

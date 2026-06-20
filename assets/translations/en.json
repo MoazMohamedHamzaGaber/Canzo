@@ -217,7 +217,7 @@
   "tapUploadScreenshotWithdraw": "Click to download proof of withdrawal",
   "confirm": "Confirm",
   "fill": "Fill",
-  "doWantFill": "Do you want to fill",
+  "doWantFill": "Do you want to fill this basket?",
   "basketFor": "basket for",
   "basketDeleted": "The basket was successfully deleted",
   "doDeleteBasket": "Do you want to delete this basket?",
@@ -227,6 +227,8 @@
   "activityType": "Activity Type",
   "activityName": "Activity Name",
   "weddingHall": "Wedding Hall",
+  "deleteAccount": "Delete Account",
+  "deleteAccountSuccessfully": "Delete Account Successfully",
 
   "loginSuccess": "Profile completed successfully",
 

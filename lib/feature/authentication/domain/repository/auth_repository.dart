@@ -19,7 +19,7 @@ abstract class AuthRepository {
   Future<Either<Failure, bool>> resetPasswordPassword(
     ResetPasswordParams params,
   );
-
+  Future<Either<Failure,bool>> deleteAccount();
   Future<Either<Failure, bool>> setupProfile(
       SetupProfileParams params,
       );

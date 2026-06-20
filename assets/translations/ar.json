@@ -214,8 +214,8 @@
   "uploadScreenshotWithdraw": "تحميل اثبات الدفع",
   "tapUploadScreenshotWithdraw": "انقر لتحميل اثبات السحب",
   "confirm": "تأكيد",
-  "fill": "ملء",
-  "doWantFill": "هل تريد ملء",
+  "fill": "امتلاء",
+  "doWantFill": "هل تريد امتلاء هذا الباسكت؟",
   "basketDeleted": "تم حذف الياسكت بنجاح",
   "doDeleteBasket": "هل  تريد حذف هذا الباسكت؟",
   "delete": "حذف",
@@ -224,6 +224,8 @@
   "activityType": "نوع النشاط",
   "activityName": "اسم النشاط",
   "weddingHall": "قاعة أفراح",
+  "deleteAccount": "حذف الحساب",
+  "deleteAccountSuccessfully": "تم حذف الحساب بنجاح",
 
   "loginSuccess": "تم استكمال الملف الشخصي بنجاح",
 

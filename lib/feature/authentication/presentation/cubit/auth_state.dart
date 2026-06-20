@@ -4,7 +4,7 @@ import 'package:canzo_app/feature/authentication/domain/entity/app_role.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/login_entity.dart';
 import 'package:canzo_app/feature/authentication/domain/entity/verify_entity.dart';
 
-enum AuthStates { loading,loadingProfile, initial, error, success , successSignIn, successSignUp,successProfile, successVerifyOtp,successForgetPassword}
+enum AuthStates { loading,loadingProfile, initial, error, success , successSignIn, deleteSuccess,successSignUp,successProfile, successVerifyOtp,successForgetPassword}
 
 class AuthState {
   final AuthStates status;

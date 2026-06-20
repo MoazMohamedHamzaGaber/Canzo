@@ -1,7 +1,7 @@
 import 'package:canzo_app/core/error/failure.dart';
 import 'package:canzo_app/feature/profile/domain/entity/profile_entity.dart';
 
-enum ProfileStates { loading, initial, error, success ,updateSuccess}
+enum ProfileStates { loading, initial, error, success ,updateSuccess, deleteSuccess}
 
 class ProfileState {
   final ProfileStates status;

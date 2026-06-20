@@ -10,6 +10,7 @@ import 'package:canzo_app/feature/authentication/domain/repository/auth_reposito
 import 'package:canzo_app/feature/authentication/presentation/cubit/auth_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import '../feature/authentication/domain/cases/delete_account_use_case.dart';
 import '../feature/authentication/domain/cases/google_login_use_case.dart';
 
 class AuthServiceLocator {
@@ -66,10 +67,15 @@ class AuthServiceLocator {
         serviceLocator(),
       ),
     );
-
+    serviceLocator.registerLazySingleton<DeleteAccountUseCase>(
+          () => DeleteAccountUseCase(
+        serviceLocator(),
+      ),
+    );
     // cubits
     serviceLocator.registerFactory<AuthCubit>(
           () => AuthCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

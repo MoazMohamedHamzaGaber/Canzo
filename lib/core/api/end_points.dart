@@ -20,6 +20,7 @@ class EndPoints {
   static const setupProfile = 'api/setup-profile';
   static const  googleLogin = '/auth/google';
   static const adminProfile = 'api/admin/profile';
+  static const deleteAccount = 'api/client/account';
   static const orders = 'api/admin/orders?status=Pending';
   static const order = 'api/admin/order';
   static const requestWithdraw = 'api/client/withdraw';

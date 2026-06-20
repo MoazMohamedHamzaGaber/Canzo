@@ -75,6 +75,29 @@ class PreferencesSection extends StatelessWidget {
             ),
           ),
         ),
+        sizeBox(),
+        GestureDetector(
+          onTap: () {
+            context.read<AuthCubit>().deleteAccount(context);
+          },
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.black45),
+            ),
+            child: Center(
+              child: Text(
+                AppStrings.deleteAccount.tr(),
+                style: StyleText.style26.copyWith(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 22,
+                ),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

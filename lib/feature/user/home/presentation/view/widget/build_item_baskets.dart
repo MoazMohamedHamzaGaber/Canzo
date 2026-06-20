@@ -113,7 +113,7 @@ class BuildItemBaskets extends StatelessWidget {
                               return AlertDialog(
                                 title: Text(AppStrings.confirm.tr()),
                                 content: Text(
-                                  '${AppStrings.doWantFill.tr()} $title $price ${AppStrings.le.tr()}?',
+                                  AppStrings.doWantFill.tr(),
                                 ),
                                 actions: [
                                   TextButton(

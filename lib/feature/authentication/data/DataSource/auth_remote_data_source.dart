@@ -21,7 +21,7 @@ abstract class AuthRemoteDataSource {
   Future<Either<Failure, bool>> forgetPassword(ForgetPasswordParams params);
 
   Future<Either<Failure, VerifyEntity>> verifyOtp(VerifyOtpParams params);
-
+  Future<Either<Failure, bool>> deleteAccount();
   Future<Either<Failure, bool>> resetPasswordPassword(
     ResetPasswordParams params,
   );
@@ -150,5 +150,16 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         return const Right(true);
       },
     );
+  }
+
+  @override
+  Future<Either<Failure, bool>> deleteAccount() async {
+    var result = await _apiConsumer.delete(
+      EndPoints.deleteAccount,
+    );
+
+    return result.fold((failure) => Left(failure), (response) {
+      return Right(true);
+    });
   }
 }

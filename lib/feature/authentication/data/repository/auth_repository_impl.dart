@@ -50,4 +50,8 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, bool>> setupProfile(SetupProfileParams params) {
     return _remoteDataSource.setupProfile(params);
   }
+  @override
+  Future<Either<Failure, bool>> deleteAccount() {
+    return _remoteDataSource.deleteAccount();
+  }
 }

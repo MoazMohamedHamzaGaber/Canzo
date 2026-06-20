@@ -258,5 +258,7 @@ class AppStrings {
   static const activityNameRequired = 'activityNameRequired';
   static const accountCreatedSuccessfully = 'accountCreatedSuccessfully';
   static const pleaseSelectActivityType = 'pleaseSelectActivityType';
+  static const deleteAccount = 'deleteAccount';
+  static const deleteAccountSuccessfully = 'deleteAccountSuccessfully';
 
 }
