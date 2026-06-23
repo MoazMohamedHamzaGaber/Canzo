@@ -1,5 +1,4 @@
 import 'package:canzo_app/core/utils/app_strings.dart';
-import 'package:canzo_app/core/utils/color.dart';
 import 'package:canzo_app/core/utils/const.dart';
 import 'package:canzo_app/core/utils/style.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,8 +19,8 @@ class LogoAndNameApp extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: 70,
+                  height: 70,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -39,14 +38,11 @@ class LogoAndNameApp extends StatelessWidget {
                     sizeBox(height: 8),
                     Text(
                       AppStrings.canzo.tr(),
-                      style: StyleText.style18.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.green,
-                      ),
+                      style: StyleText.style19,
                     ),
                     Text(
                       AppStrings.recycle.tr(),
-                      style: StyleText.style13,
+                      style: StyleText.style16,
                     ),
                   ],
                 ),

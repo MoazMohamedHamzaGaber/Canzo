@@ -20,16 +20,16 @@ class CounterField extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: onIncrement,
-            child: Icon(Icons.add,size: 18)),
+            child: Icon(Icons.add,size: 22)),
         SizedBox(width: 8,),
         Text(
           value.toString(),
-          style:  TextStyle(fontSize: 18,color: AppColors.green),
+          style:  TextStyle(fontSize: 22,color: AppColors.green),
         ),
         SizedBox(width: 8,),
         GestureDetector(
           onTap: onDecrement,
-            child: Icon(Icons.remove,size: 18)),
+            child: Icon(Icons.remove,size: 22)),
       ],
     );
   }

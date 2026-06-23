@@ -53,7 +53,6 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
     debugPrint('Wallet: ${walletController.text}');
     debugPrint('Method: $selectedMethod');
 
-    // Call API / Cubit here
   }
 
   @override
@@ -140,6 +139,13 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                     ),
                   ),
                   sizeBox(),
+                  Text('*${AppStrings.moneyTransfer.tr()}',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.red
+                  ),
+                  ),
+                  sizeBox(height: 5),
                   buildMaterialButton(
                     text: AppStrings.submitRequest.tr(),
                     loading: state.status == HomeStates.loading ? true : false,

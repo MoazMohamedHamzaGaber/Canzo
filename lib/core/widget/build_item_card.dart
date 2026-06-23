@@ -41,19 +41,20 @@ class BuildItemCard extends StatelessWidget {
               if (image == true)
                 Image.asset('assets/images/logo.jpg', width: 50, height: 50),
               SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (title !=null) Text(title!, style: StyleText.style19),
-                  sizeBox(height: 5),
-                  Text('${AppStrings.address.tr()}: $subtitle', style: StyleText.style19.copyWith(
-                    fontSize: 15
-                  )),
-                  sizeBox(height: 5),
-                  if (body == true) Text(createAt, style: StyleText.style13),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (title !=null) Text(title!, style: StyleText.style19),
+                    sizeBox(height: 5),
+                    Text('${AppStrings.address.tr()}: $subtitle', style: StyleText.style19.copyWith(
+                      fontSize: 15
+                    )),
+                    sizeBox(height: 5),
+                    if (body == true) Text(createAt, style: StyleText.style13),
+                  ],
+                ),
               ),
-              Spacer(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [

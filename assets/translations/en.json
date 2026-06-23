@@ -159,6 +159,7 @@
   "or": "OR",
   "basket_filled_successfully": "Basket filled successfully",
   "basket": "Basket",
+  "medium": "Medium",
   "kg": "Kg",
   "full": "Full",
   "canceled": "Canceled",
@@ -237,5 +238,7 @@
   "activityTypeRequired": "Please select an activity type",
   "activityNameRequired": "Please enter activity name",
   "accountCreatedSuccessfully": "Account created successfully",
-  "pleaseSelectActivityType": "Please select activity type"
+  "pleaseSelectActivityType": "Please select activity type",
+  "moneyTransfer": "The money will be transferred within 24 hours."
+
 }

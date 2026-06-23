@@ -156,6 +156,7 @@
   "or": "او",
   "basket_filled_successfully": "تم ملء السلة بنجاح",
   "basket": "سلة",
+  "medium": "وسط",
   "kg": "كيلو",
   "full": "ممتلئ",
   "canceled": "تم الالغاء",
@@ -234,6 +235,7 @@
   "activityTypeRequired": "يرجى اختيار نوع النشاط",
   "activityNameRequired": "يرجى إدخال اسم النشاط",
   "accountCreatedSuccessfully": "تم انشاء الحساب بنجاح",
-  "pleaseSelectActivityType": "الرجاء تحديد نوع النشاط"
+  "pleaseSelectActivityType": "الرجاء تحديد نوع النشاط",
+  "moneyTransfer": "سيتم تحويل الأموال خلال 24 ساعة."
 
 }

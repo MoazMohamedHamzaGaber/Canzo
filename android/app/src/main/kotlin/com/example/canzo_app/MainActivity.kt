@@ -1,4 +1,4 @@
-package com.example.canzo_app
+package com.portsaid.canzo
 
 import io.flutter.embedding.android.FlutterActivity
 

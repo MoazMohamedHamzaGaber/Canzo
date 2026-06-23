@@ -28,13 +28,15 @@ class BasketsSection extends StatelessWidget {
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) => BuildItemBaskets(
-            title:
-                '${AppStrings.basket.tr()} ${state.baskets![index].contentWeight} ${AppStrings.kg.tr()} - ${state.baskets![index].contentType}',
+            title: state.baskets![index].contentType == 'Canz'
+                ? '${AppStrings.basket.tr()} ${AppStrings.medium.tr()} - ${state.baskets![index].contentType}'
+                : '${AppStrings.basket.tr()} - ${state.baskets![index].contentType}',
             value: state.baskets![index].isFull == 0 ? false : true,
             id: state.baskets![index].id,
             subTitle: state.baskets![index].isFull == 0
                 ? AppStrings.empty.tr()
-                : AppStrings.full.tr(), price: state.baskets![index].price,
+                : AppStrings.full.tr(),
+            price: state.baskets![index].price,
           ),
           separatorBuilder: (context, index) => sizeBox(),
           itemCount: state.baskets?.length ?? 0,

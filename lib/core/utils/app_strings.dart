@@ -260,5 +260,7 @@ class AppStrings {
   static const pleaseSelectActivityType = 'pleaseSelectActivityType';
   static const deleteAccount = 'deleteAccount';
   static const deleteAccountSuccessfully = 'deleteAccountSuccessfully';
+  static const medium = 'medium';
+  static const moneyTransfer = 'moneyTransfer';
 
 }

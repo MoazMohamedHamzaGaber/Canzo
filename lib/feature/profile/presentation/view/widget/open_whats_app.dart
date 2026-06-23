@@ -1,13 +1,26 @@
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> openWhatsApp() async {
-  final phone = "201200892242"; // رقمك بدون +
+  final phone = "201200892242";
 
-  final url = Uri.parse("https://wa.me/$phone");
+  final Uri url = Uri.parse("whatsapp://send?phone=$phone");
 
   if (await canLaunchUrl(url)) {
-    await launchUrl(url, mode: LaunchMode.externalApplication);
+    await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    );
   } else {
-    throw "Could not launch WhatsApp";
+    // fallback لو WhatsApp مش موجود
+    final webUrl = Uri.parse("https://wa.me/$phone");
+
+    if (await canLaunchUrl(webUrl)) {
+      await launchUrl(
+        webUrl,
+        mode: LaunchMode.externalApplication,
+      );
+    } else {
+      throw "WhatsApp not installed";
+    }
   }
 }
