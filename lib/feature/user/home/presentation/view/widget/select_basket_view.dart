@@ -173,14 +173,14 @@ class SelectBasketView extends StatelessWidget {
                                           children: [
                                             Image.asset(
                                               item.image,
-                                              width: 28,
-                                              height: 28,
+                                              width: 32,
+                                              height: 32,
                                               fit: BoxFit.contain,
                                             ),
                                             const SizedBox(width: 10),
                                             Text(
                                               item.title,
-                                              style: StyleText.style16,
+                                              style: StyleText.style26,
                                             ),
                                           ],
                                         ),

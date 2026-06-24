@@ -14,14 +14,20 @@ class RequestWithdrawUseCase extends UseCase<bool, RequestWithdrawParams> {
   }
 }
 
-class RequestWithdrawParams{
+class RequestWithdrawParams {
   final int amount;
   final String number;
+  final String walletType;
 
-  RequestWithdrawParams({required this.amount, required this.number,});
+  RequestWithdrawParams({
+    required this.amount,
+    required this.number,
+    required this.walletType,
+  });
 
-  Map<String,dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
     'amount': amount,
     'wallet_number': number,
+    'wallet_type': walletType,
   };
 }

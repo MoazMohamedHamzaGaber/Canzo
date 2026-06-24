@@ -188,6 +188,7 @@ class AppStrings {
   static const String full = "full";
   static const String canceled = "canceled";
   static const String cancel = "cancel";
+  static const String cancels = "cancels";
   static const String noBinding = "no_binding";
   static const String noCanceled = "no_canceled";
   static const String noComplete = "no_complete";

@@ -164,6 +164,7 @@
   "full": "Full",
   "canceled": "Canceled",
   "cancel": "Cancel",
+  "cancels": "Cancel",
   "no_binding": "No binding orders yet",
   "no_canceled": "No canceled orders yet",
   "no_complete": "No complete orders yet",

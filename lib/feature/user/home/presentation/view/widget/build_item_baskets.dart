@@ -71,7 +71,7 @@ class BuildItemBaskets extends StatelessWidget {
                                     Navigator.pop(dialogContext, false);
                                   },
                                   child: Text(
-                                    AppStrings.cancel.tr(),
+                                    AppStrings.cancels.tr(),
                                     style: TextStyle(color: AppColors.green),
                                   ),
                                 ),
@@ -121,7 +121,7 @@ class BuildItemBaskets extends StatelessWidget {
                                       Navigator.pop(dialogContext, false);
                                     },
                                     child: Text(
-                                      AppStrings.cancel.tr(),
+                                      AppStrings.cancels.tr(),
                                       style: TextStyle(color: AppColors.green),
                                     ),
                                   ),
@@ -130,7 +130,7 @@ class BuildItemBaskets extends StatelessWidget {
                                       Navigator.pop(dialogContext, true);
                                     },
                                     child: Text(
-                                      AppStrings.fill.tr(),
+                                      AppStrings.confirm.tr(),
                                       style: TextStyle(color: AppColors.green),
                                     ),
                                   ),

@@ -23,14 +23,14 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
   final amountController = TextEditingController();
   final walletController = TextEditingController();
 
-  String? selectedMethod;
+  final Map<String, String> methods = {
+    AppStrings.vodafoneCash.tr(): ' Vodafone Cash',
+    AppStrings.etisalatCash.tr(): 'Etisalat Cash',
+    AppStrings.orangeCash.tr(): 'Orange Cash',
+    AppStrings.instaPay.tr(): 'InstaPay',
+  };
 
-  final methods = [
-    AppStrings.vodafoneCash.tr(),
-    AppStrings.etisalatCash.tr(),
-    AppStrings.orangeCash.tr(),
-    AppStrings.instaPay.tr(),
-  ];
+  String? selectedMethod;
 
   @override
   void dispose() {
@@ -43,28 +43,30 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
     if (amountController.text.isEmpty ||
         walletController.text.isEmpty ||
         selectedMethod == null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar( SnackBar(content: Text(AppStrings.pleaseFillAllFields.tr())));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppStrings.pleaseFillAllFields.tr())),
+      );
       return;
     }
 
     debugPrint('Amount: ${amountController.text}');
     debugPrint('Wallet: ${walletController.text}');
     debugPrint('Method: $selectedMethod');
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:  Text(AppStrings.withdrawRequests.tr())),
+      appBar: AppBar(title: Text(AppStrings.withdrawRequests.tr())),
       body: BlocProvider(
         create: (BuildContext context) => serviceLocator<HomeCubit>(),
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (BuildContext context, state) {
-            if(state.status == HomeStates.addSuccess){
-              showSnackBar(context: context, message: AppStrings.requestWithdrawSuccessful.tr());
+            if (state.status == HomeStates.addSuccess) {
+              showSnackBar(
+                context: context,
+                message: AppStrings.requestWithdrawSuccessful.tr(),
+              );
             }
           },
           builder: (BuildContext context, state) {
@@ -73,8 +75,8 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Text(
-                     AppStrings.withdrawalDetails.tr(),
+                  Text(
+                    AppStrings.withdrawalDetails.tr(),
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
 
@@ -96,7 +98,7 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                   const SizedBox(height: 16),
 
                   DropdownButtonFormField<String>(
-                    initialValue: selectedMethod,
+                    value: selectedMethod,
                     decoration: InputDecoration(
                       labelText: AppStrings.withdrawalMethod.tr(),
                       prefixIcon: const Icon(Icons.account_balance_wallet),
@@ -104,14 +106,12 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    items: methods
-                        .map(
-                          (method) => DropdownMenuItem(
-                            value: method,
-                            child: Text(method),
-                          ),
-                        )
-                        .toList(),
+                    items: methods.keys.map((method) {
+                      return DropdownMenuItem(
+                        value: method,
+                        child: Text(method),
+                      );
+                    }).toList(),
                     onChanged: (value) {
                       setState(() {
                         selectedMethod = value;
@@ -139,11 +139,9 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                     ),
                   ),
                   sizeBox(),
-                  Text('*${AppStrings.moneyTransfer.tr()}',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.red
-                  ),
+                  Text(
+                    '*${AppStrings.moneyTransfer.tr()}',
+                    style: TextStyle(fontSize: 16, color: Colors.red),
                   ),
                   sizeBox(height: 5),
                   buildMaterialButton(
@@ -170,6 +168,7 @@ class _WithdrawRequestViewState extends State<WithdrawRequestView> {
                         RequestWithdrawParams(
                           amount: int.parse(amountController.text),
                           number: walletController.text,
+                          walletType: methods[selectedMethod]!,
                         ),
                       );
                     },
