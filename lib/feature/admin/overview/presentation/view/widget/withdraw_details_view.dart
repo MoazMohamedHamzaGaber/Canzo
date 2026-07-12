@@ -96,6 +96,12 @@ class WithdrawalDetailsView extends StatelessWidget {
                   title: AppStrings.walletNumber.tr(),
                   value: withdrawal.walletNumber,
                 ),
+                const Divider(),
+                InfoTile(
+                  icon: Icons.wallet,
+                  title: AppStrings.walletType.tr(),
+                  value: withdrawal.walletType,
+                ),
               ],
             ),
 
