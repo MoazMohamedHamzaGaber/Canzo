@@ -176,6 +176,7 @@
   "withdrawRequests": "طلبات السحب",
   "noWithdrawRequests": "لا توجد طلبات سحب",
   "walletNumber": "رقم المحفظة",
+  "walletType": "نوع المحفظة",
   "reject": "رفض",
   "approved": "مقبول",
   "basketCount": "عدد السلال",

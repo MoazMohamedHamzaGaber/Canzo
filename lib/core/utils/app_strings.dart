@@ -203,6 +203,7 @@ class AppStrings {
   static const withdrawRequests = "withdrawRequests";
   static const noWithdrawRequests = "noWithdrawRequests";
   static const walletNumber = "walletNumber";
+  static const walletType = "walletType";
   static const reject = "reject";
   static const approved = "approved";
   static const basketCount = "basketCount";

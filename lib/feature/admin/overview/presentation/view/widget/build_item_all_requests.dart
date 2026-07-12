@@ -63,6 +63,11 @@ class BuildItemAllRequests extends StatelessWidget {
                         style: StyleText.style19.copyWith(fontSize: 17),
                       ),
                       SizedBox(height: 5),
+                      Text(
+                        '${AppStrings.walletType.tr()}: ${withdraw.walletType}',
+                        style: StyleText.style19.copyWith(fontSize: 17),
+                      ),
+                      SizedBox(height: 5),
                       Text(withdraw.createdAt, style: StyleText.style13),
                     ],
                   ),
@@ -243,7 +248,7 @@ class BuildItemAllRequests extends StatelessWidget {
                       parentContext,
                       ApproveWithdrawParams(
                         withdrawId: withdraw.id,
-                        status: AppStrings.approved.tr(),
+                        status: 'Approved',
                         screenshot: selectedImage,
                       ),
                     );

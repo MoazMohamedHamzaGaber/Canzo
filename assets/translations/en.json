@@ -179,6 +179,7 @@
   "withdrawRequests": "Withdraw Requests",
   "noWithdrawRequests": "No withdraw requests",
   "walletNumber": "Wallet number",
+  "walletType": "Wallet type",
   "reject": "Reject",
   "approved": "Approved",
   "basketCount": "Basket Count",

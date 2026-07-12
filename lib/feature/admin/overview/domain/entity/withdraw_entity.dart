@@ -6,6 +6,7 @@ class WithdrawalEntity {
   final int? adminId;
   final String? screenshotPath;
   final String walletNumber;
+  final String walletType;
   final String createdAt;
   final String updatedAt;
   final String userName;
@@ -19,6 +20,7 @@ class WithdrawalEntity {
     this.adminId,
     this.screenshotPath,
     required this.walletNumber,
+    required this.walletType,
     required this.createdAt,
     required this.updatedAt,
     required this.userName,
