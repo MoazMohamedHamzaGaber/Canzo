@@ -264,5 +264,6 @@ class AppStrings {
   static const deleteAccountSuccessfully = 'deleteAccountSuccessfully';
   static const medium = 'medium';
   static const moneyTransfer = 'moneyTransfer';
+  static const String rateBasket = 'rateBasket';
 
 }

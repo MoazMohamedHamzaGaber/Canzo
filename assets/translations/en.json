@@ -241,6 +241,7 @@
   "activityNameRequired": "Please enter activity name",
   "accountCreatedSuccessfully": "Account created successfully",
   "pleaseSelectActivityType": "Please select activity type",
-  "moneyTransfer": "The money will be transferred within 24 hours."
+  "moneyTransfer": "The money will be transferred within 24 hours.",
+  "rateBasket": "Rate Basket"
 
 }

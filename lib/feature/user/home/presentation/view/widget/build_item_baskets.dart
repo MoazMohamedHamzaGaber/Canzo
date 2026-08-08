@@ -24,6 +24,62 @@ class BuildItemBaskets extends StatelessWidget {
   final int id;
   final int price;
 
+  Future<void> _showRatingDialog(BuildContext context) async {
+    int selectedRating = 0;
+
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text(AppStrings.rateBasket.tr()),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(5, (index) {
+                      final starIndex = index + 1;
+                      return IconButton(
+                        onPressed: () {
+                          setState(() {
+                            selectedRating = starIndex;
+                          });
+                        },
+                        icon: Icon(
+                          selectedRating >= starIndex
+                              ? Icons.star
+                              : Icons.star_border,
+                          color: Colors.amber,
+                          size: 32,
+                        ),
+                      );
+                    }),
+                  ),
+                ],
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(dialogContext);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.green,
+                  ),
+                  child: Text(
+                    AppStrings.confirm.tr(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,7 +149,7 @@ class BuildItemBaskets extends StatelessWidget {
                         );
 
                         if (result == true && context.mounted) {
-                          context.read<HomeCubit>().deleteBaskets(context,id);
+                          context.read<HomeCubit>().deleteBaskets(context, id);
                         }
                       },
                       child: const Icon(
@@ -103,7 +159,8 @@ class BuildItemBaskets extends StatelessWidget {
                     ),
                     sizeBox(height: 8),
                     Switch(
-                      value: value,padding: EdgeInsets.zero,
+                      value: value,
+                      padding: EdgeInsets.zero,
                       activeThumbColor: Colors.green,
                       onChanged: (newValue) async {
                         if (!this.value) {
@@ -139,8 +196,9 @@ class BuildItemBaskets extends StatelessWidget {
                             },
                           );
 
-                          if (result == true) {
+                          if (result == true && context.mounted) {
                             context.read<HomeCubit>().fillBaskets(context, id);
+                            await _showRatingDialog(context);
                           }
                         }
                       },

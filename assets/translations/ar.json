@@ -238,6 +238,6 @@
   "activityNameRequired": "يرجى إدخال اسم النشاط",
   "accountCreatedSuccessfully": "تم انشاء الحساب بنجاح",
   "pleaseSelectActivityType": "الرجاء تحديد نوع النشاط",
-  "moneyTransfer": "سيتم تحويل الأموال خلال 24 ساعة."
-
+  "moneyTransfer": "سيتم تحويل الأموال خلال 24 ساعة.",
+  "rateBasket": "تقييم السلة"
 }
